@@ -1,0 +1,141 @@
+/* SECTION GLOBALE */
+.why {
+  width: 100%;
+  background: #ffffff;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+/* BANDEAU ROUGE */
+.why-top {
+  background: #dc2626;
+  color: #fff;
+  padding: 40px 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.why-top h3 {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.why-top__contact {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.phone-icon {
+  background: #0f172a;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+}
+
+.phone-text span {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.phone-text strong {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* CONTENU PRINCIPAL */
+.why-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 520px;
+}
+
+/* BLOC GAUCHE BLEU */
+.why-left {
+  background: #0b1d36;
+  color: #ffffff;
+  padding: 80px;
+}
+
+.why-left h2 {
+  font-size: 42px;
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.why-left p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #cbd5e1;
+  max-width: 520px;
+  margin-bottom: 48px;
+}
+
+.why-features {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.feature {
+  display: flex;
+  gap: 20px;
+}
+
+.feature-icon {
+  background: #dc2626;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.feature h4 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.feature p {
+  font-size: 14px;
+  color: #cbd5e1;
+}
+
+/* ZONE VIDÉO DROITE */
+.why-video {
+  position: relative;
+  background-image: url("/video-placeholder.jpg"); /* image ou poster vidéo */
+  background-size: cover;
+  background-position: center;
+}
+
+/* BOUTON PLAY */
+.play-button {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 90px;
+  height: 90px;
+  background: #ffffff;
+  color: #dc2626;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 36px;
+  cursor: pointer;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.play-button:hover {
+  background: #2563eb;      /* BLEU AU SURVOL */
+  color: #ffffff;
+  transform: scale(1.1);
+}

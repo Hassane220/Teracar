@@ -1,0 +1,31 @@
+@import '../../styles/variables.css';
+
+.car-list {
+  padding: var(--spacing-2xl) 0;
+  background: var(--light-color);
+}
+
+.section__header {
+  text-align: center;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.section__title {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+  color: var(--dark-color);
+}
+
+.section__subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--secondary-color);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.car-list__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-xl);
+}
