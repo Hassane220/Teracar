@@ -123,68 +123,192 @@
 }
 
 /* Responsive */
-@media (max-width: 1200px) {
-  .nav {
-    padding: 1.5rem 1.5rem; /* Ajouter du padding latéral sur écran plus petit */
-  }
-}
+/* ===== ADAPTATIONS MOBILE DU HEADER ===== */
 
-@media (max-width: 1024px) {
+/* Mobile général (< 768px) */
+@media (max-width: 768px) {
+  .header {
+    height: 60px; /* Hauteur fixe pour éviter le débordement */
+  }
+  
+  .nav {
+    padding: 0.75rem 1rem; /* Réduit le padding */
+  }
+  
+  .logo__image {
+    height: 30px; /* Logo plus petit */
+  }
+  
+  /* Contact - Version mobile compacte */
   .nav__contact {
-    gap: var(--spacing-xl);
+    display: flex; /* Garde visible sur mobile */
+    gap: 0.75rem;
+    padding: 0.25rem 0;
+    justify-content: flex-end;
+    overflow-x: auto; /* Scroll horizontal si nécessaire */
+    scrollbar-width: none; /* Cache la scrollbar Firefox */
+    -ms-overflow-style: none; /* Cache la scrollbar IE/Edge */
+  }
+  
+  .nav__contact::-webkit-scrollbar {
+    display: none; /* Cache la scrollbar Chrome/Safari */
   }
   
   .contact__item {
-    font-size: var(--font-size-xs);
+    gap: 0.375rem;
+    padding: 0.375rem 0.5rem;
+    font-size: 0.7rem;
+    flex-shrink: 0; /* Empêche la réduction */
+    white-space: nowrap;
+  }
+  
+  .contact__text {
+    font-size: 0.7rem;
+  }
+  
+  .contact__icon {
+    width: 14px;
+    height: 14px;
+  }
+  
+  /* Cacher le menu burger existant */
+  .nav__toggle,
+  .nav__mobile-menu {
+    display: none !important;
   }
 }
 
-@media (max-width: 768px) {
+/* Petit mobile (< 576px) */
+@media (max-width: 576px) {
+  .header {
+    height: 55px;
+  }
+  
+  .nav {
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .logo__image {
+    height: 28px;
+  }
+  
   .nav__contact {
+    gap: 0.5rem;
+  }
+  
+  .contact__item {
+    padding: 0.25rem 0.375rem;
+    font-size: 0.65rem;
+  }
+  
+  .contact__text {
+    font-size: 0.65rem;
+  }
+  
+  .contact__icon {
+    width: 12px;
+    height: 12px;
+  }
+  
+  /* Priorité au téléphone - mettre en évidence */
+  .contact__item:nth-child(3) { /* Le téléphone (3ème élément) */
+    background: rgba(37, 99, 235, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    border-radius: 6px;
+    font-weight: 600;
+  }
+}
+
+/* Très petit mobile (< 480px) */
+@media (max-width: 200px) {
+  .header {
+    height: 50px;
+  }
+  
+  .nav {
+    padding: 0.5rem;
+  }
+  
+  .logo__image {
+    height: 25px;
+  }
+  
+  .nav__contact {
+    gap: 0.375rem;
+  }
+  
+  .contact__item {
+    padding: 0.25rem;
+    font-size: 0.6rem;
+  }
+  
+  .contact__text {
+    font-size: 0.6rem;
+  }
+  
+  .contact__icon {
+    width: 11px;
+    height: 11px;
+  }
+  
+  /* Cacher l'adresse sur très petit écran */
+  .contact__item:first-child {
     display: none;
   }
   
-  .logo__image {
-    height: 35px;
+  /* Version ultra compacte du téléphone */
+  .contact__item:nth-child(3) {
+    padding: 0.25rem 0.5rem;
   }
   
-  .nav__mobile-menu {
-    display: block;
-    padding: 1.5rem;
-    border-top: 1px solid var(--border-color);
-  }
-  
-  .nav__toggle {
-    display: flex;
-  }
-  
-  .mobile__contact {
-    gap: var(--spacing-md);
-  }
-  
-  .contact__item {
-    font-size: var(--font-size-sm);
+  .contact__item:nth-child(3) .contact__icon {
+    display: none; /* Cache l'icône pour gagner de la place */
   }
 }
 
-@media (max-width: 480px) {
+/* Orientation paysage mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .header {
+    height: 50px;
+  }
+  
   .nav {
-    padding: 1rem 1rem;
+    padding: 0.5rem 1rem;
   }
   
   .logo__image {
-    height: 30px;
+    height: 28px;
   }
   
-  .nav__mobile-menu {
-    padding: 1rem;
-  }
-  
-  .mobile__contact {
-    gap: var(--spacing-sm);
+  .nav__contact {
+    gap: 1rem;
   }
   
   .contact__item {
-    font-size: var(--font-size-xs);
+    padding: 0.375rem 0.5rem;
+    font-size: 0.7rem;
+  }
+  
+  .contact__text {
+    font-size: 0.7rem;
+  }
+}
+
+/* =============================== */
+/* TABLETTE (768px → 1024px) */
+/* ESPACE ENTRE LOGO ET CONTACT */
+/* =============================== */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .nav {
+    gap: 2.5rem; /* ✅ ESPACE GLOBAL entre logo et infos */
+  }
+
+  .nav__logo {
+    margin-right: 6rem; /* ✅ ESPACE FORCÉ après le logo */
+  }
+
+  .nav__contact {
+    gap: 1.5rem; /* ✅ ESPACE ENTRE LES INFOS */
   }
 }

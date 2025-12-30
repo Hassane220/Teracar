@@ -351,157 +351,141 @@
 /* =========== RESPONSIVE BREAKPOINTS =========== */
 
 /* === TABLETTE (768px - 1024px) === */
-@media (max-width: 1024px) {
-  .hero__slide-content {
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    padding-top: 60px;
-    padding-left: 3rem;
-    padding-right: 3rem;
-  }
-  
-  .slide__text {
-    max-width: 90%;
-    margin-bottom: 40px;
-    padding-right: 0;
-  }
-  
-  .hero__description {
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .slide__image {
-    justify-content: center;
-    width: 100%;
-    padding-right: 2rem;
-  }
-  
-  .image__container {
-    width: min(600px, 80vw); /* Ajusté pour tablette */
-    height: min(400px, 50vh); /* Ajusté pour tablette */
-    transform: perspective(1000px) rotateY(0deg);
-  }
-  
-  .btn--catalog {
-    padding: 10px 20px;
-    font-size: 0.875rem;
-  }
-  
-  .hero__actions {
-    justify-content: center;
-  }
-  
-  .hero__controls {
-    padding: 0 clamp(30px, 6vw, 80px);
-  }
-}
-
-/* === GRANDE MOBILE (576px - 768px) === */
-@media (max-width: 768px) {
-  .hero__catalog-button {
-    display: none;
-  }
-  
-  .hero__slide-content {
-    padding: 80px 2rem 120px;
-  }
-  
-  .text__wrapper {
-    padding: 1rem 0;
-  }
-  
-  .hero__title {
-    font-size: 2.25rem;
-    margin-bottom: 1rem;
-  }
-  
-  .hero__description {
-    font-size: 1.125rem;
-    margin-bottom: 2rem;
-  }
-  
-  .image__container {
-    width: min(450px, 90vw); /* Ajusté pour mobile */
-    height: min(300px, 40vh); /* Ajusté pour mobile */
-  }
-  
-  .hero__controls {
-    top: 50%; /* Toujours centré verticalement */
-    bottom: auto; /* Supprimé bottom */
-    padding: 0 2rem;
-  }
-  
-  .hero__actions {
-    flex-direction: column;
-    gap: 15px;
-    width: 100%;
-  }
-  
-  .btn--primary, .btn--outline {
-    width: 100%;
-    max-width: 350px;
-    margin: 0 auto;
-  }
-}
-
-/* === PETITE MOBILE (< 576px) === */
-@media (max-width: 576px) {
+/* === TABLETTE (768px - 1024px) — COMPORTEMENT IDENTIQUE AU MOBILE === */
+/* === TABLETTE : image plein hero (sans toucher au desktop) === */
+/* === TABLETTE (769px - 1024px) === */
+@media (min-width: 769px) and (max-width: 1024px) {
   .hero {
-    min-height: 90vh;
-    margin-top: 70px;
+    margin-top: 0;
+    min-height: 100vh;
   }
   
   .hero__slides {
-    height: calc(90vh - 0px);
+    height: 100vh;
   }
   
-  .hero__slide-content {
-    padding: 60px 1.5rem 140px;
-  }
-  
-  .hero__title {
-    font-size: 1.75rem;
-    line-height: 1.2;
-  }
-  
-  .hero__description {
-    font-size: 1rem;
-    line-height: 1.5;
-  }
-  
-  .image__container {
+  .hero__slide {
+    height: 100vh;
     width: 100%;
-    max-width: 320px;
-    height: 200px;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
   }
   
-  .hero__controls {
-    padding: 0 1.5rem;
+  /* Overlay sombre */
+  .hero__mobile-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1;
   }
   
-  .hero__indicators {
-    bottom: 20px; /* Ajusté pour mobile */
+  /* Contenu AU-DESSUS de l'image */
+  .hero__slide-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2rem;
   }
   
-  .hero__indicator {
-    width: 8px;
-    height: 8px;
+  .slide__text {
+    max-width: 100%;
+    text-align: center;
+    padding: 0;
   }
   
-  .mobile__quick-actions {
-    bottom: 15px;
-    left: 15px;
-    right: 15px;
+  .text__wrapper {
+    padding: 0;
+    max-width: 80%;
   }
   
-  .mobile__action-btn {
-    padding: 12px;
-    font-size: 0.875rem;
+  .hero__actions {
+    justify-content: center;
+  }
+  
+  /* Cacher l'image desktop */
+  .slide__image {
+    display: none !important;
+  }
+  
+  /* Cacher le bouton catalogue sur tablette aussi */
+  .hero__catalog-button {
+    display: none;
+  }
+  .hero__control{
+    visibility: hidden;
+  }
+  .hero__indicators{
+    visibility: hidden;
+  }
+  .stat__item {
+    padding: 1.5rem 0rem;
   }
 }
+
+
+/* === MOBILE (< 768px) === */
+@media (max-width: 768px) {
+
+  .hero {
+    margin-top: 0;
+    min-height: 100vh;
+  }
+
+  .hero__slides {
+    height: 100vh;
+  }
+
+  .hero__slide {
+    height: 100vh;
+    width: 100%;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+  }
+
+  /* Overlay sombre */
+  .hero__mobile-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1;
+  }
+
+  /* Contenu AU-DESSUS de l'image */
+  .hero__slide-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.5rem;
+  }
+
+  .slide__text {
+    max-width: 100%;
+    text-align: center;
+    padding: 0;
+  }
+
+  .text__wrapper {
+    padding: 0;
+  }
+
+  .hero__actions {
+    justify-content: center;
+  }
+
+  /* Image desktop totalement désactivée */
+  .slide__image {
+    display: none !important;
+  }
+}
+
 
 /* === TRÈS PETIT MOBILE (< 375px) === */
 @media (max-width: 375px) {

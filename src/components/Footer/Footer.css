@@ -146,11 +146,24 @@
   .footer__container {
     grid-template-columns: repeat(2, 1fr);
   }
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+    max-width: 900px;
+  }
+  .btn--primary {
+    visibility: hidden;
+  }
+  .btn--outline {
+    visibility: hidden;
+  }
 }
 
 @media (max-width: 600px) {
   .footer__container {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    padding-left: 4rem;
+    padding-right: 4rem;
   }
 
   .footer__bottom {

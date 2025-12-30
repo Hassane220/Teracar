@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./featuredCars.css";
 
 import car1 from "../../assets/images/car1.avif";
@@ -7,6 +8,7 @@ import car3 from "../../assets/images/car3.jpeg";
 
 const FeaturedCars = () => {
   const [activeFilter, setActiveFilter] = useState("all");
+  const navigate = useNavigate();
 
   const cars = [
     {
@@ -100,12 +102,21 @@ const FeaturedCars = () => {
               <div className="car-card__image">
                 <img src={car.image} alt={car.title} />
 
+                {/* OVERLAY ACTIONS */}
                 <div className="car-card__overlay">
-                  <button title="Voir détails">🔍</button>
+                  <button
+                    className="details-button"
+                    title="Voir détails"
+                    onClick={() => navigate(`/cars/${car.id}`)}
+                  >
+                    🔍
+                  </button>
+
                   <button title="Comparer">✔</button>
                   <button title="Agrandir">⤢</button>
                 </div>
 
+                {/* PRICE */}
                 <div className="car-card__price">
                   <span className="old-price">
                     ${car.oldPrice.toLocaleString()}

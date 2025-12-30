@@ -404,7 +404,7 @@
   }
   
   .services__list {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
   
   .gallery__grid {
@@ -544,6 +544,13 @@
   
   .stat__item {
     padding: 1.25rem;
+  }
+  .service__item {
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    padding-left: 6rem;
+    padding-right: 4rem;
   }
 }
 
