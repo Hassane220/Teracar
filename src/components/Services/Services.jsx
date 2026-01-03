@@ -103,7 +103,7 @@ const Services = () => {
                     aria-label={`Véhicule premium ${index + 1}`}
                   >
                     <div className="image__overlay">
-                      <span className="overlay__text">Voir plus</span>
+                      {/* <span className="overlay__text">Voir plus</span> */}
                     </div>
                   </div>
                 </div>

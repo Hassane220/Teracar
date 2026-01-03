@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./RecentNews.css";
 
 import mainImg from "../../assets/images/car4.jpg";
@@ -6,7 +7,26 @@ import img1 from "../../assets/images/car1.avif";
 import img2 from "../../assets/images/car2.avif";
 import img3 from "../../assets/images/car3.jpeg";
 
+const newsCars = [
+  {
+    img: img1,
+    title: "Votre quotidien manque-t-il de sens ?",
+    carId: 1,
+  },
+  {
+    img: img2,
+    title: "De A à Z : la motivation automobile",
+    carId: 2,
+  },
+  {
+    img: img3,
+    title: "La motivation dans la vie",
+    carId: 3,
+  },
+];
+
 const RecentNews = () => {
+  const navigate = useNavigate();
   return (
     <section className="news">
       <div className="news__header">
@@ -27,35 +47,32 @@ const RecentNews = () => {
           <span className="date">17 Mai 2021</span>
           <h3>Achetez la voiture de vos rêves</h3>
 
-          <a href="#" className="read-more">
+          <button
+            className="read-more"
+            onClick={() => navigate('/cars/4')}
+            style={{background:'none',border:'none',padding:0,margin:0,cursor:'pointer'}}
+          >
             Lire plus <span>→</span>
-          </a>
+          </button>
         </article>
 
         {/* RIGHT LIST */}
         <div className="news__list">
-          {[{
-            img: img1,
-            title: "Votre quotidien manque-t-il de sens ?"
-          }, {
-            img: img2,
-            title: "De A à Z : la motivation automobile"
-          }, {
-            img: img3,
-            title: "La motivation dans la vie"
-          }].map((item, index) => (
+          {newsCars.map((item, index) => (
             <article className="news__item" key={index}>
               <div className="thumb">
                 <img src={item.img} alt="" />
               </div>
-
               <div className="content">
                 <span className="date">17 Mai 2021</span>
                 <h4>{item.title}</h4>
-
-                <a href="#" className="read-more small">
+                <button
+                  className="read-more small"
+                  onClick={() => navigate(`/cars/${item.carId}`)}
+                  style={{background:'none',border:'none',padding:0,margin:0,cursor:'pointer'}}
+                >
                   Lire plus <span>→</span>
-                </a>
+                </button>
               </div>
             </article>
           ))}

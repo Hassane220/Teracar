@@ -1,5 +1,5 @@
 .container {
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin: 0 auto;
   padding-left: 40px;
   padding-right: 40px;
@@ -7,7 +7,9 @@
 .footer {
   position: relative;
   background: url("../../assets/images/car2.avif") center/cover no-repeat;
+  /* background: #181818;  */
   color: #cfcfcf;
+  box-shadow: 0 -2px 16px rgba(0,0,0,0.7); /* optionnel : effet d’ombre */
   padding: 100px 0 40px;
   overflow: hidden;
   text-align: left;

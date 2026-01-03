@@ -1,3 +1,60 @@
+/* Modale d’agrandissement d’image */
+.image-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+/* Modale d’agrandissement d’image améliorée */
+.image-modal {
+  position: relative;
+  background: #fff;
+  padding: 0;
+  border-radius: 10px;
+  box-shadow: 0 2px 32px rgba(0,0,0,0.3);
+  max-width: 900px;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.image-modal img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 900px;
+  max-height: 90vh;
+  object-fit: contain;
+  background: #222;
+}
+.image-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: background 0.2s;
+}
+.image-modal-close:hover {
+  background: #e74c3c;
+}
 .featured-cars {
   padding: 80px 0;
   background: #f5f7fa;

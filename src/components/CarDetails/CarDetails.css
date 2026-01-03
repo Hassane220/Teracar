@@ -1,15 +1,26 @@
+
+
 .car-details {
   background: white;
-  border-radius: 12px;
-  padding: 30px;
+  width: 100vw;
+  min-height: 100vh;
   position: relative;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 90px 60px 30px 60px;
+  /* Add horizontal padding for spacing */
+  box-sizing: border-box;
+  box-shadow: none;
+  border-radius: 0;
+  z-index: 1;
 }
 
 .car-details-close {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 30px;
+  left: 33px;
   background: none;
   border: none;
   font-size: 24px;
@@ -35,7 +46,7 @@
 
 .main-image img {
   width: 100%;
-  height: 400px;
+  height: 550px;
   object-fit: cover;
 }
 
@@ -337,17 +348,14 @@
 
 @media (max-width: 768px) {
   .car-details {
-    padding: 20px;
+    padding: 20px 10px 20px 10px;
   }
-  
   .car-details-actions .btn {
     min-width: 100%;
   }
-  
   .specs-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
   .features-list {
     grid-template-columns: 1fr;
   }

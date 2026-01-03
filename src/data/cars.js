@@ -1,6 +1,7 @@
 import car1 from "../assets/images/car1.avif";
 import car2 from "../assets/images/car2.avif";
 import car3 from "../assets/images/car3.jpeg";
+import car4 from "../assets/images/car4.jpg";
 
 export const cars = [
   {
@@ -65,6 +66,30 @@ export const cars = [
       "4x4",
       "Caméra 360°",
       "Aide au stationnement",
+    ],
+  },
+  // --- Ajout Range Rover ---
+  {
+    id: 4,
+    brand: "Land Rover",
+    model: "Range Rover Vogue",
+    title: "Range Rover Vogue 2020",
+    year: 2020,
+    price: 89900,
+    mileage: 25000,
+    fuel: "Diesel",
+    transmission: "Automatique",
+    color: "Noir",
+    category: "suv",
+    image: car4,
+    images: [car4],
+    description: "Range Rover Vogue 2020, luxe et puissance, toutes options, état impeccable.",
+    features: [
+      "Toit panoramique",
+      "Intérieur cuir premium",
+      "Suspension pneumatique",
+      "Caméras 360°",
+      "GPS Europe",
     ],
   },
 ];

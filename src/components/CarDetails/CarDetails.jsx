@@ -51,8 +51,10 @@ const CarDetails = ({ car, onClose }) => {
     <div className="car-details">
       {/* Bouton fermer pour modal */}
       {onClose && (
-        <button className="car-details-close" onClick={onClose}>
-          ×
+        <button className="car-details-close" onClick={onClose} aria-label="Retour">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 5L8 12L15 19" stroke="#666" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
         </button>
       )}
 
@@ -63,12 +65,12 @@ const CarDetails = ({ car, onClose }) => {
             src={car.images[selectedImage]} 
             alt={`${car.brand} ${car.model}`}
           />
-          <button 
+          {/* <button 
             className="favorite-button"
             onClick={() => setIsFavorite(!isFavorite)}
           >
             {isFavorite ? '❤️' : '🤍'}
-          </button>
+          </button> */}
         </div>
         
         <div className="image-thumbnails">

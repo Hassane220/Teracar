@@ -8,6 +8,7 @@ import car3 from "../../assets/images/car3.jpeg";
 
 const FeaturedCars = () => {
   const [activeFilter, setActiveFilter] = useState("all");
+  const [modalImage, setModalImage] = useState(null);
   const navigate = useNavigate();
 
   const cars = [
@@ -66,6 +67,15 @@ const FeaturedCars = () => {
   return (
     <section className="featured-cars">
       <div className="featured-cars__container">
+        {/* MODAL IMAGE */}
+        {modalImage && (
+          <div className="image-modal-overlay" onClick={() => setModalImage(null)}>
+            <div className="image-modal" onClick={e => e.stopPropagation()}>
+              <button className="image-modal-close" onClick={() => setModalImage(null)}>×</button>
+              <img src={modalImage} alt="Agrandissement véhicule" />
+            </div>
+          </div>
+        )}
         {/* HEADER */}
         <div className="featured-cars__header">
           <div>
@@ -113,7 +123,7 @@ const FeaturedCars = () => {
                   </button>
 
                   <button title="Comparer">✔</button>
-                  <button title="Agrandir">⤢</button>
+                  <button title="Agrandir" onClick={() => setModalImage(car.image)}>⤢</button>
                 </div>
 
                 {/* PRICE */}
