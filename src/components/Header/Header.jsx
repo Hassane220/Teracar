@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './header.css';
-import logo from '../../assets/images/logo.webp'; // Chemin vers votre logo
+import logo from '../../assets/images/teracar.png'; // Chemin vers votre logo
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

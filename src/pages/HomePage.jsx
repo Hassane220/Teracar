@@ -17,7 +17,7 @@ function HomePage() {
       <FeaturedCars />
       <WhyChooseUs />
       <GetUpdates />
-      <RecentNews />
+      {/* <RecentNews /> */}
       <ScrollToTop />
     </>
   );

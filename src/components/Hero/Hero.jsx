@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './hero.css';
+import { useNavigate } from 'react-router-dom';
 import car1 from '../../assets/images/car1.avif';
 import car2 from '../../assets/images/car2.avif';
 import car3 from '../../assets/images/car3.jpeg';
 
 const Hero = () => {
+  const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // ✅ MODIFICATION ICI UNIQUEMENT
@@ -27,7 +29,7 @@ const Hero = () => {
       highlighted: "voiture parfaite",
       subtitle: "pour votre style de vie",
       description: "Découvrez notre sélection exclusive de véhicules d'occasion certifiés et neufs avec les meilleures garanties du marché.",
-      background: "linear-gradient(135deg, #1a365d 0%, #2d3748 100%)",
+      background: "linear-gradient(135deg, #6b2316ff 0%, #982404ff 100%)",
       image: car1,
     },
     {
@@ -35,7 +37,7 @@ const Hero = () => {
       highlighted: "l'excellence",
       subtitle: "sur toutes les routes",
       description: "Des véhicules premium rigoureusement inspectés pour des performances et une sécurité optimales.",
-      background: "linear-gradient(135deg, #2c5282 0%, #4a5568 100%)",
+      background: "linear-gradient(135deg, #ac2b0aff 0%, #781204ff 100%)",
       image: car2,
     },
     {
@@ -43,7 +45,7 @@ const Hero = () => {
       highlighted: "automobile",
       subtitle: "à portée de main",
       description: "Un service personnalisé pour vous accompagner dans l'acquisition de votre véhicule de rêve.",
-      background: "linear-gradient(135deg, #3182ce 0%, #63b3ed 100%)",
+      background: "linear-gradient(135deg, #c71c09ff 0%, #e73b14ff 100%)",
       image: car3,
     }
   ];
@@ -64,7 +66,7 @@ const Hero = () => {
     <section id="accueil" className="hero">
 
       <div className="hero__catalog-button">
-        <button className="btn btn--catalog">
+        <button className="btn btn--catalog" onClick={() => navigate('/catalogue')}>
           <span className="catalog-icon">🚗</span>
           <span className="catalog-text">Voir le catalogue complet</span>
         </button>

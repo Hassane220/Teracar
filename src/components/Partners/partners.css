@@ -249,7 +249,7 @@
 
 .btn--primary {
   padding: 0.875rem 2rem;
-  background: var(--primary-color);
+  background: #b24c4c;
   color: white;
   border: none;
   border-radius: 50px;
@@ -263,7 +263,7 @@
 .btn--primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(37, 99, 235, 0.4);
-  background: linear-gradient(135deg, var(--primary-color), #4f46e5);
+  background: linear-gradient(135deg, var(--primary-color), #edbfb1);
 }
 
 /* =========== RESPONSIVE =========== */
