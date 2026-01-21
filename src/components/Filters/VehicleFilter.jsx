@@ -10,7 +10,6 @@ const VehicleFilter = () => {
     year: '',
     make: '',
     model: '',
-    location: '',
     minPrice: '',
     maxPrice: ''
   });
@@ -22,7 +21,7 @@ const VehicleFilter = () => {
   const yearOptions = ['1998', '2002', '2004', '2007', '2010', '2015', '2020', '2023'];
   const makeOptions = ['Toyota', 'Honda', 'Ford', 'BMW', 'Mercedes', 'Audi'];
   const modelOptions = ['Model S', 'Civic', 'F-150', '3 Series', 'C-Class', 'A4'];
-  const locationOptions = ['Abidjan', 'Bouaké', 'Yamoussoukro', 'San Pedro', 'Korhogo'];
+  // ...existing code...
 
   const handleFilterChange = (filterName, value) => {
     setFilters(prev => ({
@@ -50,6 +49,9 @@ const VehicleFilter = () => {
       minPrice: '',
       maxPrice: ''
     });
+    if (window.onVehicleFilterReset) {
+      window.onVehicleFilterReset();
+    }
   };
 
   return (
@@ -163,16 +165,7 @@ const VehicleFilter = () => {
                 ))}
               </select>
 
-              <select 
-                className="filter-dropdown"
-                value={filters.location}
-                onChange={(e) => handleFilterChange('location', e.target.value)}
-              >
-                <option value="">Localisation</option>
-                {locationOptions.map(location => (
-                  <option key={location} value={location}>{location}</option>
-                ))}
-              </select>
+              {/* Localisation supprimée */}
             </div>
           </div>
         </div>

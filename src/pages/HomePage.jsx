@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Hero from '../components/Hero/Hero';
 import Filters from '../components/Filters/VehicleFilter';
-import CarList from '../components/CarList/CarList';
+import { CatalogueList, CatalogueCarCard } from '../components/Catalogue';
 import { cars as allCars } from '../data/cars';
 import Services from '../components/Services/Services';
 import Partners from '../components/Partners/Partners';
@@ -12,7 +12,8 @@ import GetUpdates from '../components/GetUpdates/GetUpdates';
 import ScrollToTop from '../components/ScrollToTop/ScrollToTop';
 
 function HomePage() {
-  const [filteredCars, setFilteredCars] = useState(allCars);
+  const [filteredCars, setFilteredCars] = useState([]);
+  const [hasSearched, setHasSearched] = useState(false);
 
   useEffect(() => {
     window.onVehicleFilter = (filters) => {
@@ -43,15 +44,28 @@ function HomePage() {
         return true;
       });
       setFilteredCars(result);
+      setHasSearched(true);
     };
-    return () => { window.onVehicleFilter = null; };
+    window.onVehicleFilterReset = () => {
+      setHasSearched(false);
+      setFilteredCars([]);
+    };
+    return () => { window.onVehicleFilter = null; window.onVehicleFilterReset = null; };
   }, []);
 
   return (
     <>
       <Hero />
       <Filters />
-      <CarList cars={filteredCars} title={null} />
+      {hasSearched && (
+        <div className="catalogue-main-container" style={{marginTop:'2rem', marginBottom:'2rem'}}>
+          <CatalogueList>
+            {filteredCars.map(car => (
+              <CatalogueCarCard key={car.id} car={car} />
+            ))}
+          </CatalogueList>
+        </div>
+      )}
       <Services />
       <Partners />
       <FeaturedCars />
