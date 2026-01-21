@@ -9,11 +9,13 @@ const CarDetails = ({ car, onClose }) => {
   return (
     <div className="car-details">
       {onClose && (
-        <button className="car-details-close" onClick={onClose} aria-label="Retour">
+        <button className="car-details-close" onClick={() => setSelectedBrand(null)} aria-label="Retour">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M15 5L8 12L15 19" stroke="#666" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
+        // <button className="catalogue-back-btn" onClick={() => window.history.back()}>&larr; Retour</button>
+
       )}
 
       <div className="car-details-gallery">
@@ -37,9 +39,7 @@ const CarDetails = ({ car, onClose }) => {
       <div className="car-details-info">
         <div className="car-details-header">
           <h1>{car.brand} {car.model} {car.year}</h1>
-          <div className="car-details-price">
-            <span className="price">{car.price.toLocaleString()} €</span>
-          </div>
+          {/* Le prix est disponible dans l'objet car, mais n'est pas affiché. Utilisé uniquement pour le filtrage. */}
         </div>
 
         <div className="car-details-specs">

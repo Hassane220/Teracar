@@ -91,7 +91,7 @@ const CarDetails = ({ car, onClose }) => {
         <div className="car-details-header">
           <h1>{car.brand} {car.model} {car.year}</h1>
           <div className="car-details-price">
-            <span className="price">{car.price.toLocaleString()} €</span>
+            <span className="price">{car.price.toLocaleString()} FCFA</span>
             <span className="vat">TTC</span>
           </div>
         </div>

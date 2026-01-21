@@ -2,10 +2,14 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import CatalogueImageSlider from './CatalogueImageSlider';
 
-const CatalogueCarCard = ({ car }) => {
+const CatalogueCarCard = ({ car, onClick }) => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate(`/cars/${car.id}`);
+    if (onClick) {
+      onClick();
+    } else {
+      navigate(`/cars/${car.id}`);
+    }
   };
   return (
     <div className="catalogue-car-card" onClick={handleClick}>

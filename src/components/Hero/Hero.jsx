@@ -66,7 +66,7 @@ const Hero = () => {
     <section id="accueil" className="hero">
 
       <div className="hero__catalog-button">
-        <button className="btn btn--catalog" onClick={() => navigate('/catalogue')}>
+        <button className="btn btn--catalog" onClick={() => navigate('/catalogue-complet')}>
           <span className="catalog-icon">🚗</span>
           <span className="catalog-text">Voir le catalogue complet</span>
         </button>

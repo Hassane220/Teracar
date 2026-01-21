@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import CarDetails from '../components/CarDetails/CarDetails';
 import { cars as carsData } from '../data/cars';
 
 const CarDetailsPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const [car, setCar] = useState(null);
 
   useEffect(() => {
@@ -26,6 +27,12 @@ const CarDetailsPage = () => {
   }, [id, navigate]);
 
   const handleBack = () => {
+    // Si on a la marque et le modèle dans le state, on retourne explicitement à la page série
+    if (location.state && location.state.brand && location.state.model) {
+      navigate('/catalogue-complet', { state: { brand: location.state.brand }, replace: true });
+      return;
+    }
+    // Sinon, retour normal
     navigate(-1);
   };
 

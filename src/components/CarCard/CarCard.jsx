@@ -43,13 +43,8 @@ const CarCard = ({ car }) => {
       {/* Contenu */}
       <div className="car-card__content">
         <div className="car-card__header">
-          <h3 className="car-card__title">{car.name}</h3>
-          <div className="car-card__price">
-            <span className="price__current">${car.price.current.toLocaleString()}</span>
-            {car.price.original && (
-              <span className="price__original">${car.price.original.toLocaleString()}</span>
-            )}
-          </div>
+          <h3 className="car-card__title">{car.title || car.name}</h3>
+          {/* Le prix est disponible dans l'objet car, mais n'est pas affiché. Utilisé uniquement pour le filtrage. */}
         </div>
 
         <div className="car-card__specs">
@@ -84,7 +79,6 @@ const CarCard = ({ car }) => {
         {/* CTA */}
         <div className="car-card__footer">
           <button className="btn btn--primary btn--full">Détails du Véhicule</button>
-          <button className="btn btn--outline btn--full">Demander un Essai</button>
         </div>
       </div>
     </div>
