@@ -1,3 +1,8 @@
+/* Supprime le contour bleu (focus) sur tous les boutons */
+button:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
 @import './variables.css';
 
 /* Styles de débogage */

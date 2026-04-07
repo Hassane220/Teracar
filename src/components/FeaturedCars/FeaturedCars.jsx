@@ -121,20 +121,18 @@ const FeaturedCars = () => {
                   >
                     🔍
                   </button>
-
-                  <button title="Comparer">✔</button>
                   <button title="Agrandir" onClick={() => setModalImage(car.image)}>⤢</button>
                 </div>
 
                 {/* PRICE */}
-                <div className="car-card__price">
+                {/* <div className="car-card__price">
                   <span className="old-price">
                     ${car.oldPrice.toLocaleString()}
                   </span>
                   <span className="new-price">
                     ${car.price.toLocaleString()}
                   </span>
-                </div>
+                </div> */}
               </div>
 
               {/* CONTENT */}

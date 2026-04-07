@@ -1,12 +1,12 @@
 :root {
   /* Couleurs */
-  --primary-color: #2563eb;
-  --primary-dark: #1d4ed8;
-  --secondary-color: #64748b;
-  --accent-color: #f6c700; /* doré élégant */
-  --dark-color: #1a237e; /* bleu foncé moderne */
-  --light-color: #f8fafc;
-  --white: #ffffff;
+  --primary-color: #D90429; /* rouge principal dynamique */
+  --primary-dark: #B71C1C; /* rouge foncé pour hover, accents */
+  --secondary-color: #F44336; /* rouge clair pour backgrounds légers */
+  --accent-color: #F6C700; /* doré élégant */
+  --dark-color: #222; /* gris foncé moderne */
+  --light-color: #fff3f3; /* rouge très clair */
+  --white: #fff;
   --gray-100: #f1f5f9;
   --gray-200: #e2e8f0;
   --gray-300: #cbd5e1;

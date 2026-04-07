@@ -1,0 +1,51 @@
+/* Styles spécifiques à CatalogueModel */
+.catalogue-main-container {
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 8px 32px rgba(30,41,59,0.10);
+  padding: 2.5rem 2.5rem 2.5rem 2.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  border: 1px solid #e5e7eb;
+}
+
+.catalogue-back-btn {
+  position: absolute;
+  left: 7rem;
+  background: var(--primary-color);
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  font-size: 1.1rem;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s cubic-bezier(0.4,0,0.2,1), color 0.25s;
+  box-shadow: 0 1px 4px rgba(217,4,41,0.07);
+  outline: none !important;
+}
+
+.catalogue-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.vehicle-type-btn {
+  background: #f1f5f9;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1.2rem 2.5rem;
+  font-size: 1.2rem;
+  color: #1e293b;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.vehicle-type-btn:hover {
+  background: var(--primary-color);
+  color: #fff;
+}

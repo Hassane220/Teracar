@@ -3,6 +3,7 @@ import './VehicleFilter.css';
 
 const VehicleFilter = () => {
   // État pour les filtres
+  const MAX_PRICE = 100000000;
   const [filters, setFilters] = useState({
     vehicleType: 'Tous les véhicules',
     certification: '',
@@ -11,7 +12,7 @@ const VehicleFilter = () => {
     make: '',
     model: '',
     minPrice: '',
-    maxPrice: ''
+    maxPrice: 0
   });
 
   // Options pour les menus déroulants
@@ -33,7 +34,12 @@ const VehicleFilter = () => {
   // Ajout d'une prop pour transmettre le filtre au parent
   const handleSearch = () => {
     if (window.onVehicleFilter) {
-      window.onVehicleFilter(filters);
+      // Si maxPrice vaut 0, on considère qu'il n'y a pas de limite supérieure
+      const searchFilters = {
+        ...filters,
+        maxPrice: filters.maxPrice === 0 ? MAX_PRICE : filters.maxPrice
+      };
+      window.onVehicleFilter(searchFilters);
     }
   };
 
@@ -47,7 +53,7 @@ const VehicleFilter = () => {
       model: '',
       location: '',
       minPrice: '',
-      maxPrice: ''
+      maxPrice: 0
     });
     if (window.onVehicleFilterReset) {
       window.onVehicleFilterReset();
@@ -60,33 +66,11 @@ const VehicleFilter = () => {
       {/* En-tête du filtre, sans image ni affichage de voitures */}
 
       <div className="filter-grid">
-        {/* Filtre par intervalle de prix */}
-        <div className="filter-section">
-          <h3 className="filter-label">Prix (FCFA)</h3>
-          <div className="price-range-fields">
-            <input
-              type="number"
-              placeholder="Min"
-              value={filters.minPrice}
-              onChange={e => handleFilterChange('minPrice', e.target.value)}
-              className="price-input"
-              min={0}
-            />
-            <span style={{margin: '0 8px'}}>—</span>
-            <input
-              type="number"
-              placeholder="Max"
-              value={filters.maxPrice}
-              onChange={e => handleFilterChange('maxPrice', e.target.value)}
-              className="price-input"
-              min={0}
-            />
-          </div>
-        </div>
 
-        {/* Ligne unique pour Type, Certification, État */}
+        {/*
+        Ligne unique pour Type, Certification, État
         <div className="filter-row-inline">
-          {/* Type de véhicule */}
+          Type de véhicule
           <div className="filter-inline-group">
             <span className="filter-label-inline">Type :</span>
             {vehicleTypes.map(type => (
@@ -99,7 +83,7 @@ const VehicleFilter = () => {
               </button>
             ))}
           </div>
-          {/* Certification */}
+          Certification
           <div className="filter-inline-group">
             <span className="filter-label-inline">Certification :</span>
             {certificationOptions.map(cert => (
@@ -112,7 +96,7 @@ const VehicleFilter = () => {
               </button>
             ))}
           </div>
-          {/* État */}
+          État
           <div className="filter-inline-group">
             <span className="filter-label-inline">État :</span>
             {conditionOptions.map(condition => (
@@ -126,12 +110,36 @@ const VehicleFilter = () => {
             ))}
           </div>
         </div>
+        */}
 
-        {/* Filtres avancés - Menu déroulant */}
+        {/* Filtres avancés - Menu déroulant + slider prix */}
         <div className="advanced-filters">
           <h3 className="filter-label">Filtres avancés</h3>
           <div className="dropdown-filters">
             <div className="dropdown-group">
+              {/* Slider de prix */}
+              <div className="slider-price-group">
+                <label htmlFor="price-slider" className="filter-label">Prix (FCFA)</label>
+                <input
+                  id="price-slider"
+                  type="range"
+                  min={0}
+                  max={MAX_PRICE}
+                  step={100000}
+                  value={filters.maxPrice}
+                  onChange={e => handleFilterChange('maxPrice', Number(e.target.value))}
+                  className="price-slider"
+                />
+                <div style={{display: 'flex', justifyContent: 'space-between', fontSize: '0.95em'}}>
+                  <span>0</span>
+                  <span>
+                    {filters.maxPrice === 0
+                      ? 'Aucune limite'
+                      : Number(filters.maxPrice).toLocaleString() + ' FCFA'}
+                  </span>
+                </div>
+              </div>
+              {/* Menus déroulants */}
               <select 
                 className="filter-dropdown"
                 value={filters.year}
@@ -164,8 +172,6 @@ const VehicleFilter = () => {
                   <option key={model} value={model}>{model}</option>
                 ))}
               </select>
-
-              {/* Localisation supprimée */}
             </div>
           </div>
         </div>

@@ -1,3 +1,8 @@
+/* Supprime le contour bleu (focus) sur les boutons de filtre */
+.search-btn:focus, .reset-btn:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
 /* Ligne de filtres alignés */
 .filter-row-inline {
   display: flex;

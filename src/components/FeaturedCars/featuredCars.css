@@ -27,11 +27,11 @@
 }
 .image-modal img {
   display: block;
-  width: 100%;
-  height: auto;
-  max-width: 900px;
-  max-height: 90vh;
-  object-fit: contain;
+  width: 700px;
+  height: 450px;
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: cover;
   background: #222;
 }
 .image-modal-close {
@@ -41,7 +41,6 @@
   background: rgba(0,0,0,0.7);
   color: #fff;
   border: none;
-  border-radius: 50%;
   width: 30px;
   height: 30px;
   font-size: 2rem;
@@ -86,7 +85,7 @@
 }
 
 .btn-primary {
-  background: #2563eb;
+  background: var(--primary-color);
   color: #fff;
   padding: 14px 26px;
   border: none;
@@ -106,13 +105,14 @@
   background: white;
   cursor: pointer;
   font-weight: 600;
-  color: #374151;
+  color: var(--primary-color);
+  outline: none !important;
 }
 
 .filter.active {
-  background: #2563eb;
-  color: white;
-  border-color: #2563eb;
+  background: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
 }
 
 /* GRID */
@@ -192,27 +192,27 @@
 }
 
 .car-card__overlay .details-button,
-.car-card__overlay button {
-  width: 40px;
-  height: 40px;
-  background: white;
-  border: none;
-  border-radius: 50%;
-  font-size: 16px;
-  cursor: pointer;
-  color: #2563eb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  transition: all 0.3s ease;
+  .car-card__overlay button, .car-card__overlay .details-button {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--primary-color) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
 }
 
 .car-card__overlay .details-button:hover,
-.car-card__overlay button:hover {
-  background: #2563eb;
-  color: white;
-  transform: scale(1.1);
+  .car-card__overlay button:hover, .car-card__overlay .details-button:hover {
+    background: var(--primary-color) !important;
+    color: #fff !important;
+    transform: scale(1.1);
 }
 
 
@@ -222,8 +222,8 @@
   position: absolute;
   bottom: 16px;
   left: 16px;
-  background: #2563eb;
-  color: white;
+  background: var(--primary-color) !important;
+  color: #fff !important;
   padding: 10px 14px;
   display: flex;
   gap: 8px;
@@ -247,7 +247,7 @@
 }
 
 .car-card__badge {
-  color: #2563eb;
+  color: var(--primary-color) !important;
   font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
@@ -269,5 +269,5 @@
 .car-card__meta strong {
   display: block;
   margin-bottom: 4px;
-  color: #111827;
+  color: var(--primary-dark);
 }

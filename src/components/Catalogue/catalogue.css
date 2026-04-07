@@ -26,19 +26,23 @@
 .catalogue-back-btn {
   position: absolute;
   left: 7rem;
-  background: #f1f5f9;
+  background: var(--primary-color);
   border: none;
   border-radius: 8px;
   padding: 0.6rem 1.2rem;
   font-size: 1.1rem;
-  color: #334155;
+  color: #fff;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.18s;
-  box-shadow: 0 1px 4px rgba(30,41,59,0.07);
+  transition: background 0.25s cubic-bezier(0.4,0,0.2,1), color 0.25s;
+  box-shadow: 0 1px 4px rgba(217,4,41,0.07);
+  outline: none !important;
 }
 .catalogue-back-btn:hover {
-  background: #e2e8f0;
+  background: var(--primary-dark);
+  color: #fff;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 16px rgba(217,4,41,0.12);
 }
 /* Espace pour éviter que le header ne recouvre le catalogue */
 .catalogue-page {
@@ -71,14 +75,18 @@
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  transition: box-shadow 0.22s, transform 0.16s;
-  border: 1px solid #e5e7eb;
   position: relative;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
 }
 .catalogue-car-card:hover {
-  box-shadow: 0 10px 32px rgba(30,41,59,0.13);
+  box-shadow: 0 12px 36px rgba(30,41,59,0.18);
   transform: translateY(-4px) scale(1.02);
-  border-color: #cbd5e1;
+  border-color: #2563eb;
+}
+.catalogue-car-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(30,41,59,0.10);
 }
 .catalogue-car-card__slider {
   width: 100%;
@@ -94,19 +102,22 @@
   padding: 0.7rem 0.7rem 0.9rem 0.7rem;
 }
 .catalogue-image-slider button {
-  background: #f1f5f9;
+  background: var(--primary-color);
   border: none;
   border-radius: 50%;
   width: 32px;
   height: 32px;
   font-size: 1.2rem;
-  color: #64748b;
+  color: #fff;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.25s cubic-bezier(0.4,0,0.2,1), color 0.25s;
+  outline: none !important;
 }
 .catalogue-image-slider button:hover {
-  background: #e2e8f0;
-  color: #1e293b;
+  background: var(--primary-dark);
+  color: #fff;
+  transform: scale(1.12) rotate(-8deg);
+  box-shadow: 0 4px 16px rgba(217,4,41,0.12);
 }
 .catalogue-image-slider__img {
   width: 100%;
@@ -150,4 +161,19 @@
   color: #334155;
   font-size: 1.1rem;
   margin-bottom: 0.7rem;
+}
+.catalogue-car-card__slider img,
+.catalogue-image-slider__img {
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), box-shadow 0.25s;
+}
+.catalogue-car-card:hover .catalogue-car-card__slider img,
+.catalogue-car-card:hover .catalogue-image-slider__img {
+  transform: scale(1.08) rotate(-2deg);
+  box-shadow: 0 8px 32px rgba(30,41,59,0.16);
+  z-index: 2;
+}
+.catalogue-car-card:focus-within {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
 }

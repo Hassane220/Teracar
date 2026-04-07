@@ -20,7 +20,8 @@ function HomePage() {
       let result = allCars.filter(car => {
         // Filtrage par intervalle de prix
         const min = filters.minPrice ? parseInt(filters.minPrice, 10) : 0;
-        const max = filters.maxPrice ? parseInt(filters.maxPrice, 10) : Infinity;
+        // Si maxPrice est 0 ou absent, on considère qu'il n'y a pas de limite supérieure
+        const max = (!filters.maxPrice || filters.maxPrice === 0) ? Infinity : parseInt(filters.maxPrice, 10);
         if (car.price < min || car.price > max) return false;
 
         // Filtrage par certification

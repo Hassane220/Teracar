@@ -52,9 +52,12 @@ const CarDetails = ({ car, onClose }) => {
       {/* Bouton fermer pour modal */}
       {onClose && (
         <button className="car-details-close" onClick={onClose} aria-label="Retour">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M15 5L8 12L15 19" stroke="#666" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
+          <span className="car-details-back-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 5L8 12L15 19" stroke="#D90429" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </span>
+          <span className="car-details-back-text">Retour</span>
         </button>
       )}
 
@@ -90,10 +93,10 @@ const CarDetails = ({ car, onClose }) => {
       <div className="car-details-info">
         <div className="car-details-header">
           <h1>{car.brand} {car.model} {car.year}</h1>
-          <div className="car-details-price">
+          {/* <div className="car-details-price"> 
             <span className="price">{car.price.toLocaleString()} FCFA</span>
             <span className="vat">TTC</span>
-          </div>
+          </div> */}
         </div>
 
         {/* Caractéristiques */}
@@ -161,9 +164,6 @@ const CarDetails = ({ car, onClose }) => {
           </button>
           <button className="btn btn-outline" onClick={handleTestDrive}>
             Essai gratuit
-          </button>
-          <button className="btn btn-secondary" onClick={handleShare}>
-            Partager
           </button>
         </div>
       </div>

@@ -25,9 +25,33 @@
   border: none;
   font-size: 24px;
   cursor: pointer;
-  color: #666;
+  color: #D90429;
   z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.2s;
+  outline: none !important;
 }
+.car-details-back-icon svg {
+  display: inline-block;
+  vertical-align: middle;
+}
+.car-details-back-text {
+  color: #D90429;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: color 0.2s, transform 0.2s;
+}
+.car-details-close:hover .car-details-back-text {
+  color: #B71C1C;
+  transform: translateX(-2px) scale(1.08);
+}
+.car-details-close:focus {
+  outline: none !important;
+}
+
 
 .car-details-close:hover {
   color: #000;
@@ -83,9 +107,17 @@
 }
 
 .thumbnail.active {
-  border-color: #3182ce;
+  border-color: #D90429;
+  box-shadow: 0 0 0 2px rgba(217,4,41,0.15);
 }
 
+.thumbnail:focus {
+  outline: none;
+  border-color: #D90429;
+  box-shadow: 0 0 0 2px rgba(217,4,41,0.25);
+  z-index: 2;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
 .thumbnail img {
   width: 100%;
   height: 100%;
@@ -232,12 +264,12 @@
 }
 
 .btn-primary {
-  background: #3182ce;
+  background: var(--primary-color);
   color: white;
 }
 
 .btn-primary:hover {
-  background: #2c5282;
+  background: rgb(234, 76, 76);
 }
 
 .btn-outline {

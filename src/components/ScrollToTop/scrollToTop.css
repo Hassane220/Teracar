@@ -1,6 +1,7 @@
 @import '../../styles/variables.css';
 
 .scroll-to-top {
+    outline: none !important;
   position: fixed;
   bottom: 30px;
   right: 30px;
@@ -23,9 +24,10 @@
 }
 
 .scroll-to-top:hover {
-  background: #2563eb;
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.4);
+  background: var(--primary-color);
+  transform: translateY(-5px) scale(1.08) rotate(-12deg);
+  box-shadow: 0 8px 30px rgba(217, 4, 41, 0.18);
+  transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), box-shadow 0.25s, background 0.25s;
 }
 
 .scroll-to-top:active {
@@ -93,6 +95,6 @@
   }
   
   .scroll-to-top:hover {
-    background: #3b82f6;
+    background: var(--primary-color);
   }
 }

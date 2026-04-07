@@ -4,15 +4,28 @@ import CatalogueImageSlider from './CatalogueImageSlider';
 
 const CatalogueCarCard = ({ car, onClick }) => {
   const navigate = useNavigate();
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.stopPropagation();
     if (onClick) {
       onClick();
     } else {
       navigate(`/cars/${car.id}`);
     }
   };
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      handleClick(e);
+    }
+  };
   return (
-    <div className="catalogue-car-card" onClick={handleClick}>
+    <div
+      className="catalogue-car-card"
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="button"
+      aria-label={`Voir détails de ${car.title || car.name}`}
+    >
       <div className="catalogue-car-card__slider">
         <CatalogueImageSlider images={car.images} />
       </div>

@@ -1,0 +1,32 @@
+/* Effet de zoom sur les images des cards Ford */
+.ford-section .card .zoomable-image {
+  transition: transform 0.32s cubic-bezier(0.4,0,0.2,1), box-shadow 0.22s;
+}
+.ford-section .card:hover .zoomable-image,
+.ford-section .card:focus-within .zoomable-image {
+  transform: scale(1.07) rotate(-1deg);
+  box-shadow: 0 8px 32px rgba(30,41,59,0.13);
+  z-index: 2;
+}
+
+/* Effet de zoom sur l'image isolée à droite (expeditionBig) */
+.ford-section .expedition .right .zoomable-image {
+  transition: transform 0.32s cubic-bezier(0.4,0,0.2,1), box-shadow 0.22s;
+}
+.ford-section .expedition .right:hover .zoomable-image,
+.ford-section .expedition .right:focus-within .zoomable-image {
+  transform: scale(1.07) rotate(-1deg);
+  box-shadow: 0 8px 32px rgba(30,41,59,0.13);
+  z-index: 2;
+}
+/* Style spécifique à la section Ford. Tu peux personnaliser ici si besoin, ou laisser vide pour hériter du style global. */
+
+.ford-section .catalogue-header img {
+  height: 90px;
+}
+
+.ford-section .explorer,
+.ford-section .grid,
+.ford-section .expedition {
+  /* Hérite du style global, ou ajoute des overrides ici si besoin */
+}

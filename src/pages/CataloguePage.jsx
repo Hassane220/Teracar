@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CatalogueList, CatalogueCarCard, CatalogueDetails, CatalogueModel } from '../components/Catalogue';
+import { CatalogueList, CatalogueCarCard, CatalogueDetails } from '../components/Catalogue';
+import CatalogueModelVoiture from '../components/Catalogue/CataloguePages/CatalogueModelVoiture';
 import { cars } from '../data/cars';
 import '../components/Catalogue/catalogue.css';
 
@@ -27,7 +28,7 @@ const CataloguePage = () => {
           )}
         </div>
         {showModelCatalogue ? (
-          <CatalogueModel />
+          <CatalogueModelVoiture />
         ) : (
           <CatalogueList>
             {cars.map((car) => (

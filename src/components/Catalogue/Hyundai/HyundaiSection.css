@@ -1,0 +1,94 @@
+.hyundai-section {
+  padding: 20px;
+  background: #fff;
+}
+
+/* même style que ford */
+.hyundai-section .catalogue-header img {
+  height: 90px;
+}
+
+/* optionnel si tu veux différencier */
+.hyundai-section h1 {
+  color: #c40000;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  margin: 2rem 0;
+}
+
+.hyundai-section .expedition {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  align-items: stretch;
+  margin: 2rem 0;
+}
+
+.hyundai-section .expedition .left {
+  display: contents;
+}
+
+.hyundai-section .expedition .right {
+  grid-column: 3;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  padding: 0;
+  margin: 0;
+}
+
+.hyundai-section .expedition .right img {
+  width: 135%;
+  height: 115%;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: none;
+  display: block;
+  margin: 0;
+  padding: 0;
+  transition: transform 0.32s cubic-bezier(0.4,0,0.2,1), box-shadow 0.22s;
+}
+.hyundai-section .expedition .right img:hover,
+.hyundai-section .expedition .right img:focus {
+  transform: scale(1.07) rotate(-1deg);
+  box-shadow: 0 8px 32px rgba(30,41,59,0.13);
+  z-index: 2;
+}
+
+.hyundai-section .expedition .card {
+  height: 100%;
+}
+
+.card .image-box img {
+  transition: transform 0.32s cubic-bezier(0.4,0,0.2,1), box-shadow 0.22s;
+}
+.card:hover .image-box img,
+.card:focus-within .image-box img {
+  transform: scale(1.07) rotate(-1deg);
+  box-shadow: 0 8px 32px rgba(30,41,59,0.13);
+  z-index: 2;
+}
+
+.palisade-image-box img.zoomable-image {
+  transition: transform 0.32s cubic-bezier(0.4,0,0.2,1), box-shadow 0.22s;
+}
+.palisade-image-box:hover img.zoomable-image,
+.palisade-image-box:focus-within img.zoomable-image {
+  transform: scale(1.07) rotate(-1deg);
+  box-shadow: 0 8px 32px rgba(30,41,59,0.13);
+  z-index: 2;
+}
+
+.clickable-image.zoomable-image {
+  transition: transform 0.32s cubic-bezier(0.4,0,0.2,1), box-shadow 0.22s;
+}
+.clickable-image.zoomable-image:hover,
+.clickable-image.zoomable-image:focus {
+  transform: scale(1.07) rotate(-1deg);
+  box-shadow: 0 8px 32px rgba(30,41,59,0.13);
+  z-index: 2;
+}
