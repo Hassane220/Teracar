@@ -1,0 +1,160 @@
+/* Effet de zoom sur les images Toyota */
+.toyota .card .zoomable-image {
+  transition: transform 0.32s cubic-bezier(0.4,0,0.2,1), box-shadow 0.22s;
+}
+.toyota .card:hover .zoomable-image,
+.toyota .card:focus-within .zoomable-image {
+  transform: scale(1.07) rotate(-1deg);
+  box-shadow: 0 8px 32px rgba(30,41,59,0.13);
+  z-index: 2;
+}
+.toyota .hero.card .zoomable-image {
+  transition: transform 0.32s cubic-bezier(0.4,0,0.2,1), box-shadow 0.22s;
+}
+.toyota .hero.card:hover .zoomable-image,
+.toyota .hero.card:focus-within .zoomable-image {
+  transform: scale(1.07) rotate(-1deg);
+  box-shadow: 0 8px 32px rgba(30,41,59,0.13);
+  z-index: 2;
+}
+.toyota {
+  padding: 20px;
+  background: #fff;
+  font-family: Arial, sans-serif;
+}
+
+/* ===== HEADER ===== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header img {
+  height: 80px;
+}
+
+/* ===== HERO ===== */
+.hero {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.hero img {
+  width: 100%;
+}
+
+.hero-info {
+  width: 50%;
+}
+
+.hero-info h1 {
+  color: #c40000;
+  font-size: 32px;
+  margin-bottom: 20px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.hero-info h1::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 8px;
+  height: 100%;
+  background: #c40000;
+}
+
+/* ===== TABLE ===== */
+.specs {
+  border: 2px solid #000;
+}
+
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #000;
+  padding: 10px;
+  background: #f2f2f2;
+}
+
+.spec-row:last-child {
+  border-bottom: none;
+}
+
+.label {
+  color: #c40000;
+  font-weight: bold;
+}
+
+.value {
+  color: #000;
+}
+
+/* ===== GRID ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.card {
+  border: 2px solid #000;
+  padding: 10px;
+}
+
+.card h3 {
+  color: #c40000;
+  margin-bottom: 10px;
+  padding-left: 15px;
+  position: relative;
+}
+
+.card h3::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background: #c40000;
+}
+
+.image-box img {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* ===== SEPARATOR ===== */
+.separator {
+  height: 4px;
+  background: #c40000;
+  margin: 40px 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .hero {
+    flex-direction: column;
+  }
+
+  .hero img,
+  .hero-info {
+    width: 100%;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-info h1 {
+    font-size: 24px;
+  }
+}

@@ -1,16 +1,19 @@
 @import '../../styles/variables.css';
 
+/* Suppression du fond blanc sur la card */
 .car-card {
-  background: var(--white);
+  background: none;
   border-radius: var(--border-radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow);
   transition: var(--transition);
 }
 
+/* Suppression du fond blanc au hover */
 .car-card:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-lg);
+  background: none !important;
 }
 
 .car-card__image {
@@ -26,8 +29,10 @@
   transition: var(--transition);
 }
 
+
 .car-card:hover .car-card__image img {
   transform: scale(1.05);
+  background: none !important;
 }
 
 .car-card__badge {

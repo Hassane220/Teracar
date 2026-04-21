@@ -5,6 +5,7 @@ import CarDetailsPage from './pages/CarDetailsPage';
 import CataloguePage from './pages/CataloguePage';
 import Catalogue from './pages/Catalogue';
 import VehicleCatalogue from './components/Catalogue/CataloguePages/VehicleCatalogue';
+import HyundaiSection2 from './components/Catalogue/Hyundai2/HyundaiSection2';
 import SearchResults from './pages/SearchResults';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
@@ -22,6 +23,7 @@ function App() {
           <Route path="/cars/:id" element={<CarDetailsPage />} />
           <Route path="/search" element={<SearchResults />} />
           <Route path="/catalogue-model-voiture" element={<VehicleCatalogue />} />
+          <Route path="/hyundai2" element={<HyundaiSection2 />} />
         </Routes>
         <Footer />
       </div>

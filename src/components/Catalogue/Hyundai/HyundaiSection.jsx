@@ -3,6 +3,7 @@ import './HyundaiSection.css';
 import { useNavigate } from 'react-router-dom';
 // ===== IMAGES =====
 import tmLogo from '../../../assets/images/TM_catalogue.png';
+import teracarMotors from '../../../assets/images/Teracar_motors.png';
 import hyundaiLogo from '../../../assets/images/hyundai/HYUNDAI.png';
 import palisade from '../../../assets/images/hyundai/palisade.png';
 import grandI10 from '../../../assets/images/hyundai/grand_I10_sedan.png';
@@ -152,6 +153,10 @@ const HyundaiSection = () => {
         <div className="right">
           <img src={interior} alt="Interior" />
         </div>
+      </div>
+      {/* Image Teracar Motors à la fin de la section */}
+      <div style={{ width: '100%', textAlign: 'center', marginTop: 40 }}>
+        <img src={teracarMotors} alt="Teracar Motors" style={{ maxWidth: '300px', width: '100%', height: 'auto', display: 'inline-block' }} />
       </div>
     </section>
   );

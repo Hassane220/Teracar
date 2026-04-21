@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { CatalogueList, CatalogueCarCard, CatalogueDetails } from '../components/Catalogue';
 import CatalogueModelVoiture from '../components/Catalogue/CataloguePages/CatalogueModelVoiture';
 import { cars } from '../data/cars';
+import SuzukiSection2 from '../components/Catalogue/Suzuki2/SuzukiSection2';
+
 import '../components/Catalogue/catalogue.css';
 
 const CataloguePage = () => {
@@ -30,13 +32,17 @@ const CataloguePage = () => {
         {showModelCatalogue ? (
           <CatalogueModelVoiture />
         ) : (
-          <CatalogueList>
-            {cars.map((car) => (
-              <CatalogueCarCard key={car.id} car={car} />
-            ))}
-          </CatalogueList>
+          <>
+            <SuzukiSection2 />
+            <CatalogueList>
+              {cars.map((car) => (
+                <CatalogueCarCard key={car.id} car={car} />
+              ))}
+            </CatalogueList>
+          </>
         )}
       </div>
+      <ScrollToTop />
     </div>
   );
 };

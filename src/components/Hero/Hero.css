@@ -1,9 +1,10 @@
+
+@import '../../styles/variables.css';
 /* Supprime le contour bleu (focus) sur les indicateurs du Hero */
 .hero__indicator:focus {
   outline: none !important;
   box-shadow: none !important;
 }
-@import '../../styles/variables.css';
 
 .hero {
   position: relative;
@@ -11,13 +12,28 @@
   height: 80vh;
   margin-top: 80px;
   overflow: hidden;
-  background: var(--dark-color);
+  background: var(--primary-color); /* Rouge pro */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.hero__bottom-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.35);
+  padding: 2rem 0 2.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
 }
 
 /* ===== BOUTON CATALOGUE ===== */
 .hero__catalog-button {
   position: absolute;
-  top: 30px;
+  top: 80px;
   right: 30px;
   z-index: 20;
 }
@@ -142,7 +158,7 @@
   display: flex;
   justify-content: flex-end;
   animation: slideInRight 1s ease-out;
-  padding-left: 2rem; /* Réduit pour agrandir l'image */
+  padding-left: 6rem; /* Décale l'image plus à droite */
 }
 
 .image__container {

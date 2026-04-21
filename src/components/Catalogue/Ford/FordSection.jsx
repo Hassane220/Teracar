@@ -8,6 +8,7 @@ import edge from '../../../assets/images/ford/edge.png';
 import expedition from '../../../assets/images/ford/expedition.png';
 import expeditionBig from '../../../assets/images/ford/expeditin_G.png';
 import tmLogo from '../../../assets/images/TM_catalogue.png';
+import teracarMotors from '../../../assets/images/Teracar_motors.png';
 import './FordSection.css';
 
 const SpecTable = ({ specs }) => (
@@ -49,12 +50,14 @@ const FordSection = () => {
         <img src={tmLogo} alt="TM Catalogue" />
         <img src={fordLogo} alt="Ford" />
       </div>
-      {/* Explorer Ford n'existe pas dans cars.js, on désactive la navigation */}
+      {/* Explorer Ford - redirection dynamique */}
       <div
         className="explorer card"
-        // style={{ cursor: 'not-allowed', opacity: 0.6 }}
-        tabIndex={-1}
+        style={{ cursor: 'pointer' }}
+        tabIndex={0}
         role="button"
+        onClick={() => navigate('/cars/30')}
+        onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && navigate('/cars/30')}
       >
         <div className="image-box">
           <img src={explorer} alt="Explorer" className="zoomable-image" />
@@ -71,23 +74,23 @@ const FordSection = () => {
         </div>
       </div>
       <div className="separator"></div>
-      {/* Aucun modèle Ford n'existe dans cars.js, on désactive la navigation sur ces cards */}
+      {/* Redirection dynamique sur chaque modèle Ford */}
       <div className="grid">
-        <VehicleCard id={11} title="RANGER" image={ranger} specs={[
+        <VehicleCard id={31} title="RANGER" image={ranger} specs={[
           { label: 'MOTORISATION', value: '4 CYLINDRES 2,0L' },
           { label: 'CARBURANT', value: 'DIESEL' },
           { label: 'PUISSANCE DIN', value: '170 ch' },
           { label: 'ASSISES', value: '05' },
           { label: 'PUISSANCE FISCALE', value: '10 CV' },
         ]} />
-        <VehicleCard id={12} title="RAPTOR" image={raptor} specs={[
+        <VehicleCard id={32} title="RAPTOR" image={raptor} specs={[
           { label: 'MOTORISATION', value: '8 CYLINDRES 5,2L' },
           { label: 'CARBURANT', value: 'ESSENCE' },
           { label: 'PUISSANCE DIN', value: '210 ch' },
           { label: 'ASSISES', value: '05' },
           { label: 'PUISSANCE FISCALE', value: '24 CV' },
         ]} />
-        <VehicleCard id={13} title="EDGE" image={edge} specs={[
+        <VehicleCard id={33} title="EDGE" image={edge} specs={[
           { label: 'MOTORISATION', value: '4 CYLINDRES 2,3L' },
           { label: 'CARBURANT', value: 'ESSENCE' },
           { label: 'PUISSANCE DIN', value: '250 ch' },
@@ -96,12 +99,14 @@ const FordSection = () => {
         ]} />
       </div>
       <div className="separator"></div>
-      {/* Expedition Ford n'existe pas dans cars.js, on désactive la navigation */}
+      {/* Expedition Ford - redirection dynamique */}
       <div className="expedition">
         <div className="left card"
-          // style={{ cursor: 'not-allowed', opacity: 0.6 }}
-          tabIndex={-1}
+          style={{ cursor: 'pointer' }}
+          tabIndex={0}
           role="button"
+          onClick={() => navigate('/cars/34')}
+          onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && navigate('/cars/34')}
         >
           <h3>EXPEDITION</h3>
           <img src={expedition} alt="Expedition" className="zoomable-image" />
@@ -116,6 +121,10 @@ const FordSection = () => {
         <div className="right">
           <img src={expeditionBig} alt="Expedition large" className="zoomable-image" />
         </div>
+      </div>
+      {/* Image Teracar Motors à la fin de la section */}
+      <div style={{ width: '100%', textAlign: 'center', marginTop: 40 }}>
+        <img src={teracarMotors} alt="Teracar Motors" style={{ maxWidth: '300px', width: '100%', height: 'auto', display: 'inline-block' }} />
       </div>
     </section>
   );

@@ -1,122 +1,35 @@
-.catalogue-page{
-background:#f4f4f4;
-padding:40px;
-font-family:Arial, Helvetica, sans-serif;
+.catalogue-page {
+  padding: 32px;
 }
 
-/* HERO */
-
-.catalogue-hero{
-text-align:center;
-margin-bottom:80px;
+.catalogue-hero {
+  margin-bottom: 32px;
 }
 
-.catalogue-title{
-font-size:70px;
-color:#d1001f;
-font-weight:900;
-letter-spacing:4px;
+.catalogue-title {
+  font-size: 2.2rem;
+  color: #c40000;
+  margin-bottom: 16px;
 }
 
-.hero-car{
-width:650px;
-margin:40px auto;
-display:block;
+.model-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
 }
 
-.catalogue-subtitle{
-font-size:55px;
-color:#d1001f;
-font-weight:800;
+.model-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  min-width: 220px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(30,41,59,0.07);
 }
 
-.catalogue-desc{
-font-size:32px;
-font-weight:800;
-margin-bottom:40px;
-}
-
-/* BRANDS */
-
-.brands{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:30px;
-border:3px solid #d1001f;
-padding:30px;
-width:70%;
-margin:auto;
-}
-
-.brands img{
-height:50px;
-}
-
-/* MAIN MODEL */
-
-.model-main{
-display:flex;
-align-items:center;
-justify-content:center;
-gap:80px;
-margin-bottom:60px;
-}
-
-.model-image img{
-width:420px;
-}
-
-.model-title{
-font-size:36px;
-color:#b60018;
-font-weight:800;
-margin-bottom:20px;
-}
-
-.model-specs table{
-border-collapse:collapse;
-}
-
-.model-specs td{
-border:2px solid #444;
-padding:10px 20px;
-font-weight:700;
-}
-
-/* GRID */
-
-.models-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:40px;
-margin-top:60px;
-}
-
-.model-card{
-background:white;
-padding:20px;
-border:2px solid #ccc;
-}
-
-.model-card h3{
-color:#b60018;
-font-size:26px;
-margin-bottom:10px;
-}
-
-.model-card img{
-width:100%;
-margin-bottom:10px;
-}
-
-.model-card table{
-border-collapse:collapse;
-width:100%;
-}
-
-.model-card td{
-border:2px solid #444;
-padding:8px;
-font-weight:600;
+.model-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  margin-bottom: 8px;
 }

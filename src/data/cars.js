@@ -1,7 +1,42 @@
+import cx9 from "../assets/images/mazda/mazdacx9.png";
+import mazda3 from "../assets/images/mazda/mazda3.png";
+import mazda6 from "../assets/images/mazda/mazda6.png";
+import cx3 from "../assets/images/mazda/madzacx3.png";
+import cx5 from "../assets/images/mazda/mazdacx5.png";
+import bt50 from "../assets/images/mazda/mazdabt50.png";
+import cx60 from "../assets/images/mazda/mazdacx60.png";
+import ciaz from "../assets/images/suzuki2/ciaz.png";
+import ertiga from "../assets/images/suzuki2/ertiga.png";
+import grandVitara from "../assets/images/suzuki2/grand_vitara.png";
+import jimny from "../assets/images/suzuki2/jimny.png";
+import superCarry from "../assets/images/suzuki2/super_carry.png";
+import suzuki1 from "../assets/images/suzuki2/suzuki1.png";
+import suzuki2 from "../assets/images/suzuki2/suzuki2.png";
+import suzukiG from "../assets/images/suzuki2/suzuki_G.png";
+import hiace from "../assets/images/toyota2/hiace.png";
+import coaster from "../assets/images/toyota2/coaster.png";
+import urbancruiser from "../assets/images/toyota2/urbancruiser.png";
+import pradoFirst from "../assets/images/toyota2/prado_first_edition.png";
+import pradoLimited from "../assets/images/toyota2/prado_limited.png";
+import starletCross from "../assets/images/toyota/starlet_cross.png";
+import corollaCross from "../assets/images/toyota/corolla_cross.png";
+import fortuner from "../assets/images/toyota/fortuner.png";
+import rav from "../assets/images/toyota/rav.png";
+import rush from "../assets/images/toyota/rush.png";
+import camry from "../assets/images/toyota/camry.png";
+import alto from "../assets/images/suzuki/alto.png";
+import swift from "../assets/images/suzuki/swift.png";
+import baleno from "../assets/images/suzuki/baleno.png";
+import celerio from "../assets/images/suzuki/celerio.png";
+import dzire from "../assets/images/suzuki/dzire.png";
+import landcruiser79 from "../assets/images/toyota2/landcruiser79.png";
+import landcruiser300 from "../assets/images/toyota/landcruiser300.png";
+import hilux from "../assets/images/toyota2/hilux.png";
 import car1 from "../assets/images/car1.avif";
 import car2 from "../assets/images/car2.avif";
 import car3 from "../assets/images/car3.jpeg";
 import car4 from "../assets/images/car4.jpg";
+
 // Imports Hyundai
 import palisade from "../assets/images/hyundai/palisade.png";
 import grandI10 from "../assets/images/hyundai/grand_I10_sedan.png";
@@ -10,7 +45,158 @@ import elantra from "../assets/images/hyundai/elantra.png";
 import tucsonImg from "../assets/images/hyundai/tucson.png";
 import venue from "../assets/images/hyundai/venue.png";
 
+// Imports Ford
+import explorer from "../assets/images/ford/explorer.png";
+import ranger from "../assets/images/ford/ranger.png";
+import raptor from "../assets/images/ford/raptor.png";
+import edge from "../assets/images/ford/edge.png";
+import expedition from "../assets/images/ford/expedition.png";
+
+// Imports Hyundai2
+import santaFe2 from "../assets/images/hyundai2/hyundai_santafe.png";
+import creta from "../assets/images/hyundai2/creta.png";
+import county from "../assets/images/hyundai2/county.png";
+import hd72 from "../assets/images/hyundai2/hd72.png";
+
 export const cars = [
+        // --- MAZDA SECTION (ids 200-205) ---
+        {
+          id: 200,
+          brand: "Mazda",
+          model: "CX9",
+          title: "Mazda CX9",
+          year: 2023,
+          price: 35000000,
+          mileage: 0,
+          fuel: "Essence",
+          transmission: "Automatique",
+          color: "Gris",
+          category: "suv",
+          image: cx9,
+          images: [cx9],
+          description: "Mazda CX9, SUV 7 places, 6 cylindres 2,5L, 242 ch.",
+          features: ["6 CYLINDRES 2,5L", "ESSENCE", "242 ch", "07 places", "12 CV"]
+        },
+        {
+          id: 201,
+          brand: "Mazda",
+          model: "Mazda 6",
+          title: "Mazda 6",
+          year: 2023,
+          price: 22000000,
+          mileage: 0,
+          fuel: "Essence",
+          transmission: "Automatique",
+          color: "Noir",
+          category: "berline",
+          image: mazda6,
+          images: [mazda6],
+          description: "Mazda 6, berline élégante, 4 cylindres 2,0L/2,5L, 165/192 ch.",
+          features: ["4 CYLINDRES 2,0L / 2,5L", "ESSENCE", "165 / 192 ch", "05 places", "11 / 12 CV"]
+        },
+        {
+          id: 202,
+          brand: "Mazda",
+          model: "CX3",
+          title: "Mazda CX3",
+          year: 2023,
+          price: 18000000,
+          mileage: 0,
+          fuel: "Essence",
+          transmission: "Automatique",
+          color: "Blanc",
+          category: "suv",
+          image: cx3,
+          images: [cx3],
+          description: "Mazda CX3, SUV compact, 4 cylindres 2,3L, 121 ch.",
+          features: ["4 CYLINDRES 2,3L", "ESSENCE", "121 ch", "05 places", "11 CV"]
+        },
+        {
+          id: 203,
+          brand: "Mazda",
+          model: "CX5",
+          title: "Mazda CX5",
+          year: 2023,
+          price: 25000000,
+          mileage: 0,
+          fuel: "Essence",
+          transmission: "Automatique",
+          color: "Rouge",
+          category: "suv",
+          image: cx5,
+          images: [cx5],
+          description: "Mazda CX5, SUV familial, 4 cylindres 2,0L/2,5L, 165/192 ch.",
+          features: ["4 CYLINDRES 2,0L / 2,5L", "ESSENCE", "165 / 192 ch", "05 places", "11 / 12 CV"]
+        },
+        {
+          id: 204,
+          brand: "Mazda",
+          model: "BT 50",
+          title: "Mazda BT 50",
+          year: 2023,
+          price: 21000000,
+          mileage: 0,
+          fuel: "Diesel",
+          transmission: "Manuelle",
+          color: "Gris foncé",
+          category: "pickup",
+          image: bt50,
+          images: [bt50],
+          description: "Mazda BT 50, pickup robuste, 4 cylindres 1,9L, 148 ch.",
+          features: ["4 CYLINDRES 1,9L", "DIESEL", "148 ch", "05 places", "10 CV"]
+        },
+        {
+          id: 205,
+          brand: "Mazda",
+          model: "CX60",
+          title: "Mazda CX60",
+          year: 2023,
+          price: 27000000,
+          mileage: 0,
+          fuel: "Essence",
+          transmission: "Automatique",
+          color: "Bleu",
+          category: "suv",
+          image: cx60,
+          images: [cx60],
+          description: "Mazda CX60, SUV premium, 4 cylindres 2,5L, 191 ch.",
+          features: ["4 CYLINDRES 2,5L", "ESSENCE", "191 ch", "05 places", "10 CV"]
+        },
+    // --- Toyota2 ---
+    {
+      id: 50,
+      brand: "Toyota",
+      model: "Land Cruiser 79",
+      title: "Toyota Land Cruiser 79",
+      year: 2023,
+      price: 55000000,
+      mileage: 0,
+      fuel: "Diesel",
+      transmission: "Manuelle",
+      color: "Beige",
+      category: "pickup",
+      image: landcruiser79,
+      images: [landcruiser79],
+      description: "Le pick-up légendaire pour les terrains difficiles.",
+      features: ["4x4", "4.2L Diesel", "130 ch", "5 places", "Robustesse"]
+    },
+    {
+      id: 53,
+      brand: "Toyota",
+      model: "Hilux",
+      title: "Toyota Hilux",
+      year: 2023,
+      price: 42000000,
+      mileage: 0,
+      fuel: "Diesel",
+      transmission: "Manuelle",
+      color: "Blanc",
+      category: "pickup",
+      image: hilux,
+      images: [hilux],
+      description: "Le pick-up fiable et polyvalent, prêt pour tous les usages.",
+      features: ["4x4", "2.4L Diesel", "150 ch", "5 places", "Polyvalence"]
+    },
   {
     id: 1,
     brand: "Audi",
@@ -102,20 +288,209 @@ export const cars = [
   {
     id: 5,
     brand: "Toyota",
-    model: "Land Cruiser",
-    title: "Toyota Land Cruiser VX",
-    year: 2019,
-    price: 65000000,
-    mileage: 32000,
-    fuel: "Diesel",
+    model: "Land Cruiser 300",
+    title: "Toyota Land Cruiser 300",
+    year: 2023,
+    price: 95000000,
+    mileage: 0,
+    fuel: "Essence",
     transmission: "Automatique",
     color: "Blanc",
     category: "suv",
-    image: car1,
-    images: [car1, car2, car3],
-    description: "Land Cruiser robuste, parfait pour tous les terrains.",
-    features: ["4x4", "Navigation", "Caméra de recul", "Climatisation"]
+    image: landcruiser300,
+    images: [landcruiser300],
+    description: "Le nouveau Land Cruiser 300, 6 cylindres 3.5L V6 Bi-Turbo, 300 ch, 7 places.",
+    features: ["6 CYLINDRES 3.5L V6 Bi-Turbo", "ESSENCE", "300 ch", "07 places", "17 CV"]
   },
+    // --- TOYOTA SECTION (ids 10-15) ---
+    {
+      id: 10,
+      brand: "Toyota",
+      model: "Camry",
+      title: "Toyota Camry",
+      year: 2023,
+      price: 32000000,
+      mileage: 0,
+      fuel: "Essence",
+      transmission: "Automatique",
+      color: "Gris",
+      category: "berline",
+      image: camry,
+      images: [camry],
+      description: "Camry 2.5L BVA, 167 ch, 5 places.",
+      features: ["4 CYLINDRES 2,5L BVA", "ESSENCE", "167 ch", "05 places", "14 CV"]
+    },
+    {
+      id: 11,
+      brand: "Toyota",
+      model: "Rush",
+      title: "Toyota Rush",
+      year: 2023,
+      price: 18000000,
+      mileage: 0,
+      fuel: "Essence",
+      transmission: "Automatique",
+      color: "Blanc",
+      category: "suv",
+      image: rush,
+      images: [rush],
+      description: "Rush 1.5L, 110 ch, 5 places.",
+      features: ["4 CYLINDRES 1,5L", "ESSENCE", "110 ch", "05 places", "09 CV"]
+    },
+    {
+      id: 12,
+      brand: "Toyota",
+      model: "RAV",
+      title: "Toyota RAV",
+      year: 2023,
+      price: 26000000,
+      mileage: 0,
+      fuel: "Essence",
+      transmission: "Automatique",
+      color: "Gris",
+      category: "suv",
+      image: rav,
+      images: [rav],
+      description: "RAV 2.4L, 157 ch, 5 places.",
+      features: ["4 CYLINDRES 2,4L", "ESSENCE", "157 ch", "05 places", "12 CV"]
+    },
+    {
+      id: 13,
+      brand: "Toyota",
+      model: "Fortuner",
+      title: "Toyota Fortuner",
+      year: 2023,
+      price: 35000000,
+      mileage: 0,
+      fuel: "Essence",
+      transmission: "Automatique",
+      color: "Blanc",
+      category: "suv",
+      image: fortuner,
+      images: [fortuner],
+      description: "Fortuner 2.7L, 164 ch, 7 places.",
+      features: ["4 CYLINDRES 2,7L", "ESSENCE", "164 ch", "07 places", "15 CV"]
+    },
+    {
+      id: 14,
+      brand: "Toyota",
+      model: "Corolla Cross",
+      title: "Toyota Corolla Cross",
+      year: 2023,
+      price: 24000000,
+      mileage: 0,
+      fuel: "Essence",
+      transmission: "Automatique",
+      color: "Gris",
+      category: "suv",
+      image: corollaCross,
+      images: [corollaCross],
+      description: "Corolla Cross 2.0L, 169 ch, 7 places.",
+      features: ["4 CYLINDRES 2,0L", "ESSENCE", "169 ch", "07 places", "10 CV"]
+    },
+    {
+      id: 15,
+      brand: "Toyota",
+      model: "Starlet Cross",
+      title: "Toyota Starlet Cross",
+      year: 2023,
+      price: 15000000,
+      mileage: 0,
+      fuel: "Essence",
+      transmission: "Automatique",
+      color: "Rouge",
+      category: "suv",
+      image: starletCross,
+      images: [starletCross],
+      description: "Starlet Cross 1.5L, 110 ch, 5 places.",
+      features: ["4 CYLINDRES 1,5L", "ESSENCE", "110 ch", "05 places", "07 CV"]
+    },
+    // --- TOYOTA2 autres modèles (ids 51-56) ---
+    {
+      id: 51,
+      brand: "Toyota",
+      model: "Prado First Edition",
+      title: "Toyota Prado First Edition",
+      year: 2023,
+      price: 60000000,
+      mileage: 0,
+      fuel: "Diesel",
+      transmission: "Automatique",
+      color: "Noir",
+      category: "suv",
+      image: pradoFirst,
+      images: [pradoFirst],
+      description: "Prado First Edition 2.8L, 204 ch, 7 places.",
+      features: ["4 CYLINDRES 2,8L", "DIESEL", "204 ch", "07 places", "13 CV"]
+    },
+    {
+      id: 52,
+      brand: "Toyota",
+      model: "Prado Limited",
+      title: "Toyota Prado Limited",
+      year: 2023,
+      price: 65000000,
+      mileage: 0,
+      fuel: "Diesel",
+      transmission: "Automatique",
+      color: "Gris",
+      category: "suv",
+      image: pradoLimited,
+      images: [pradoLimited],
+      description: "Prado Limited 2.8L, 204 ch, 7 places.",
+      features: ["4 CYLINDRES 2,8L", "DIESEL", "204 ch", "07 places", "13 CV"]
+    },
+    {
+      id: 54,
+      brand: "Toyota",
+      model: "Hiace",
+      title: "Toyota Hiace",
+      year: 2023,
+      price: 22000000,
+      mileage: 0,
+      fuel: "Diesel",
+      transmission: "Manuelle",
+      color: "Blanc",
+      category: "minibus",
+      image: hiace,
+      images: [hiace],
+      description: "Hiace 2.5L, 102 ch, 15 places.",
+      features: ["4 CYLINDRES 2,5L", "DIESEL", "102 ch", "15 places", "08 CV"]
+    },
+    {
+      id: 55,
+      brand: "Toyota",
+      model: "Coaster",
+      title: "Toyota Coaster",
+      year: 2023,
+      price: 35000000,
+      mileage: 0,
+      fuel: "Diesel",
+      transmission: "Manuelle",
+      color: "Blanc",
+      category: "bus",
+      image: coaster,
+      images: [coaster],
+      description: "Coaster 4.0L, 130 ch, 30 places.",
+      features: ["4 CYLINDRES 4,0L", "DIESEL", "130 ch", "30 places", "15 CV"]
+    },
+    {
+      id: 56,
+      brand: "Toyota",
+      model: "Urban Cruiser",
+      title: "Toyota Urban Cruiser",
+      year: 2023,
+      price: 17000000,
+      mileage: 0,
+      fuel: "Essence",
+      transmission: "Automatique",
+      color: "Bleu",
+      category: "suv",
+      image: urbancruiser,
+      images: [urbancruiser],
+      description: "Urban Cruiser 1.5L, 103 ch, 5 places.",
+      features: ["4 CYLINDRES 1,5L", "ESSENCE", "103 ch", "05 places", "07 CV"]
+    },
   {
     id: 6,
     brand: "Mercedes",
@@ -320,5 +695,383 @@ export const cars = [
     images: [car4, car1, car2],
     description: "Kia Sportage, SUV moderne, très bien équipé.",
     features: ["Toit ouvrant", "Caméra de recul", "Aide au stationnement"]
+  },
+  // FORD
+  {
+    id: 30,
+    brand: "Ford",
+    model: "Explorer",
+    title: "Ford Explorer",
+    year: 2023,
+    price: 42000000,
+    mileage: 0,
+    fuel: "Essence",
+    transmission: "Automatique",
+    color: "Gris",
+    category: "suv",
+    image: explorer,
+    images: [explorer],
+    description: "SUV familial puissant et spacieux.",
+    features: ["6 cylindres 2,3L", "280 ch", "5 places", "Caméra 360°"]
+  },
+  {
+    id: 31,
+    brand: "Ford",
+    model: "Ranger",
+    title: "Ford Ranger",
+    year: 2023,
+    price: 35000000,
+    mileage: 0,
+    fuel: "Diesel",
+    transmission: "Automatique",
+    color: "Noir",
+    category: "pickup",
+    image: ranger,
+    images: [ranger],
+    description: "Pick-up robuste, idéal pour tous les terrains.",
+    features: ["4 cylindres 2,0L", "170 ch", "5 places", "4x4"]
+  },
+  {
+    id: 32,
+    brand: "Ford",
+    model: "Raptor",
+    title: "Ford Raptor",
+    year: 2023,
+    price: 52000000,
+    mileage: 0,
+    fuel: "Essence",
+    transmission: "Automatique",
+    color: "Bleu",
+    category: "pickup",
+    image: raptor,
+    images: [raptor],
+    description: "Pick-up sportif et extrême.",
+    features: ["8 cylindres 5,2L", "210 ch", "5 places", "Suspension renforcée"]
+  },
+  {
+    id: 33,
+    brand: "Ford",
+    model: "Edge",
+    title: "Ford Edge",
+    year: 2023,
+    price: 39000000,
+    mileage: 0,
+    fuel: "Essence",
+    transmission: "Automatique",
+    color: "Blanc",
+    category: "suv",
+    image: edge,
+    images: [edge],
+    description: "SUV moderne et confortable.",
+    features: ["4 cylindres 2,3L", "250 ch", "5 places", "Toit panoramique"]
+  },
+  {
+    id: 34,
+    brand: "Ford",
+    model: "Expedition",
+    title: "Ford Expedition",
+    year: 2023,
+    price: 60000000,
+    mileage: 0,
+    fuel: "Essence",
+    transmission: "Automatique",
+    color: "Gris foncé",
+    category: "suv",
+    image: expedition,
+    images: [expedition],
+    description: "SUV très grand format, 7 places.",
+    features: ["6 cylindres 3,5L", "300 ch", "7 places", "Confort premium"]
+  },
+  // HYUNDAI2
+  {
+    id: 40,
+    brand: "Hyundai",
+    model: "Santa Fe",
+    title: "Hyundai Santa Fe",
+    year: 2023,
+    price: 35000000,
+    mileage: 0,
+    fuel: "Essence",
+    transmission: "Automatique",
+    color: "Gris",
+    category: "suv",
+    image: santaFe2,
+    images: [santaFe2],
+    description: "SUV familial 7 places, motorisation 2,2L, 277 ch.",
+    features: ["4 cylindres 2,2L", "277 ch", "7 places", "14 CV"]
+  },
+  {
+    id: 41,
+    brand: "Hyundai",
+    model: "Creta",
+    title: "Hyundai Creta",
+    year: 2023,
+    price: 18000000,
+    mileage: 0,
+    fuel: "Essence",
+    transmission: "Automatique",
+    color: "Blanc",
+    category: "suv",
+    image: creta,
+    images: [creta],
+    description: "SUV compact, motorisation 1,6L, 123 ch.",
+    features: ["4 cylindres 1,6L", "123 ch", "7 places", "9 CV"]
+  },
+  {
+    id: 42,
+    brand: "Hyundai",
+    model: "County",
+    title: "Hyundai County",
+    year: 2023,
+    price: 32000000,
+    mileage: 0,
+    fuel: "Diesel",
+    transmission: "Manuelle",
+    color: "Jaune",
+    category: "bus",
+    image: county,
+    images: [county],
+    description: "Minibus 30 places, motorisation 3,9L, 118 ch.",
+    features: ["4 cylindres 3,9L", "118 ch", "30 places", "14 CV"]
+  },
+  {
+    id: 43,
+    brand: "Hyundai",
+    model: "HD72",
+    title: "Hyundai HD72",
+    year: 2023,
+    price: 28000000,
+    mileage: 0,
+    fuel: "Diesel",
+    transmission: "Manuelle",
+    color: "Blanc",
+    category: "camion",
+    image: hd72,
+    images: [hd72],
+    description: "Camion 3 places, motorisation 3,9L, 120 ch.",
+    features: ["4 cylindres 3,9L", "120 ch", "3 places", "13 CV / 4,5T"]
+  },
+  // SUZUKI
+  {
+    id: 60,
+    brand: "Suzuki",
+    model: "Alto",
+    title: "Suzuki Alto",
+    year: 2023,
+    price: 6500000,
+    mileage: 0,
+    fuel: "Essence",
+    transmission: "Manuelle",
+    color: "Blanc",
+    category: "citadine",
+      image: alto,
+      images: [alto],
+    description: "La citadine économique et compacte.",
+    features: ["3 cylindres 1,0L", "50 ch", "5 places", "5 CV"]
+  },
+  {
+    id: 61,
+    brand: "Suzuki",
+    model: "Swift",
+    title: "Suzuki Swift",
+    year: 2023,
+    price: 8500000,
+    mileage: 0,
+    fuel: "Essence",
+    transmission: "Manuelle",
+    color: "Rouge",
+    category: "citadine",
+      image: swift,
+      images: [swift],
+    description: "La citadine polyvalente et dynamique.",
+    features: ["4 cylindres 1,2L", "85 ch", "5 places", "5 CV"]
+  },
+  {
+    id: 62,
+    brand: "Suzuki",
+    model: "Baleno",
+    title: "Suzuki Baleno",
+    year: 2023,
+    price: 9500000,
+    mileage: 0,
+    fuel: "Essence",
+    transmission: "Manuelle",
+    color: "Gris",
+    category: "compacte",
+      image: baleno,
+      images: [baleno],
+    description: "La compacte spacieuse et moderne.",
+    features: ["4 cylindres 1,4L", "95 ch", "5 places", "9 CV"]
+  },
+  {
+    id: 63,
+    brand: "Suzuki",
+    model: "Celerio",
+    title: "Suzuki Celerio",
+    year: 2023,
+    price: 7000000,
+    mileage: 0,
+    fuel: "Essence",
+    transmission: "Automatique",
+    color: "Bleu",
+    category: "citadine",
+      image: celerio,
+      images: [celerio],
+    description: "La citadine automatique et pratique.",
+    features: ["3 cylindres 1,0L", "87 ch", "5 places", "6 CV"]
+  },
+  {
+    id: 64,
+    brand: "Suzuki",
+    model: "Dzire",
+    title: "Suzuki Dzire",
+    year: 2023,
+    price: 9000000,
+    mileage: 0,
+    fuel: "Essence",
+    transmission: "Automatique",
+    color: "Gris foncé",
+    category: "berline",
+      image: dzire,
+      images: [dzire],
+    description: "La berline compacte et élégante.",
+    features: ["4 cylindres 1,2L", "87 ch", "5 places", "7 CV"]
+  },
+  // SUZUKI2
+  {
+    id: 70,
+    brand: "Suzuki",
+    model: "Ciaz",
+    title: "Suzuki Ciaz",
+    year: 2023,
+    price: 11000000,
+    mileage: 0,
+    fuel: "Essence",
+    transmission: "Automatique",
+    color: "Noir",
+    category: "berline",
+    image: ciaz,
+    images: [ciaz],
+    description: "Berline spacieuse et économique.",
+    features: ["4 cylindres 1,5L", "105 ch", "5 places", "7 CV"]
+  },
+  {
+    id: 71,
+    brand: "Suzuki",
+    model: "Ertiga",
+    title: "Suzuki Ertiga",
+    year: 2023,
+    price: 13000000,
+    mileage: 0,
+    fuel: "Essence",
+    transmission: "Manuelle",
+    color: "Gris",
+    category: "monospace",
+    image: ertiga,
+    images: [ertiga],
+    description: "Monospace familial 7 places.",
+    features: ["4 cylindres 1,5L", "105 ch", "7 places", "8 CV"]
+  },
+  {
+    id: 72,
+    brand: "Suzuki",
+    model: "Grand Vitara",
+    title: "Suzuki Grand Vitara",
+    year: 2023,
+    price: 18000000,
+    mileage: 0,
+    fuel: "Essence",
+    transmission: "Automatique",
+    color: "Blanc",
+    category: "suv",
+    image: grandVitara,
+    images: [grandVitara],
+    description: "SUV robuste et polyvalent.",
+    features: ["4 cylindres 1,6L", "120 ch", "5 places", "10 CV"]
+  },
+  {
+    id: 73,
+    brand: "Suzuki",
+    model: "Jimny",
+    title: "Suzuki Jimny",
+    year: 2023,
+    price: 15000000,
+    mileage: 0,
+    fuel: "Essence",
+    transmission: "Manuelle",
+    color: "Vert",
+    category: "4x4",
+    image: jimny,
+    images: [jimny],
+    description: "4x4 compact et tout-terrain.",
+    features: ["4 cylindres 1,5L", "102 ch", "4 places", "7 CV"]
+  },
+  {
+    id: 74,
+    brand: "Suzuki",
+    model: "Super Carry",
+    title: "Suzuki Super Carry",
+    year: 2023,
+    price: 8000000,
+    mileage: 0,
+    fuel: "Essence",
+    transmission: "Manuelle",
+    color: "Blanc",
+    category: "utilitaire",
+    image: superCarry,
+    images: [superCarry],
+    description: "Utilitaire compact et robuste.",
+    features: ["4 cylindres 1,2L", "72 ch", "2 places", "5 CV"]
+  },
+  {
+    id: 75,
+    brand: "Suzuki",
+    model: "Suzuki1",
+    title: "Suzuki1",
+    year: 2023,
+    price: 9000000,
+    mileage: 0,
+    fuel: "Essence",
+    transmission: "Manuelle",
+    color: "Rouge",
+    category: "citadine",
+    image: suzuki1,
+    images: [suzuki1],
+    description: "Modèle citadin économique.",
+    features: ["3 cylindres 1,0L", "68 ch", "5 places", "5 CV"]
+  },
+  {
+    id: 76,
+    brand: "Suzuki",
+    model: "Suzuki2",
+    title: "Suzuki2",
+    year: 2023,
+    price: 9500000,
+    mileage: 0,
+    fuel: "Essence",
+    transmission: "Automatique",
+    color: "Bleu",
+    category: "citadine",
+    image: suzuki2,
+    images: [suzuki2],
+    description: "Modèle citadin moderne.",
+    features: ["3 cylindres 1,0L", "70 ch", "5 places", "5 CV"]
+  },
+  {
+    id: 77,
+    brand: "Suzuki",
+    model: "Suzuki G",
+    title: "Suzuki G",
+    year: 2023,
+    price: 10000000,
+    mileage: 0,
+    fuel: "Essence",
+    transmission: "Automatique",
+    color: "Gris",
+    category: "citadine",
+    image: suzukiG,
+    images: [suzukiG],
+    description: "Modèle citadin premium.",
+    features: ["3 cylindres 1,0L", "75 ch", "5 places", "6 CV"]
   }
 ];

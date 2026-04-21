@@ -1,26 +1,25 @@
 @import '../../styles/variables.css';
 
 .scroll-to-top {
-    outline: none !important;
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 50px;
-  height: 50px;
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
-  transition: all 0.3s ease;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.3s ease forwards;
+  outline: none !important;
+  position: fixed !important;
+  bottom: 30px !important;
+  right: 30px !important;
+  width: 50px !important;
+  height: 50px !important;
+  background: var(--primary-color) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 9999 !important;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3) !important;
+  transition: all 0.3s ease !important;
+  opacity: 1 !important;
+  animation: fadeInUp 0.3s ease forwards !important;
 }
 
 .scroll-to-top:hover {

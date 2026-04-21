@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ScrollToTop from '../ScrollToTop/ScrollToTop';
 import { cars } from '../../data/cars';
 import CatalogueList from './CatalogueList';
 import CatalogueCarCard from './CatalogueCarCard';
@@ -26,6 +27,7 @@ const CatalogueModel = () => {
       <div className="catalogue-main-container">
         <button className="catalogue-back-btn" onClick={() => setSelectedCar(null)}>&larr; Retour</button>
         <CatalogueDetails car={selectedCar} />
+        <ScrollToTop />
       </div>
     );
   }
@@ -44,6 +46,7 @@ const CatalogueModel = () => {
             </button>
           ))}
         </div>
+        <ScrollToTop />
       </div>
     );
   }
@@ -60,6 +63,7 @@ const CatalogueModel = () => {
             <CatalogueCarCard key={car.id} car={car} onClick={() => setSelectedCar(car)} />
           ))}
         </CatalogueList>
+        <ScrollToTop />
       </div>
     );
   }
@@ -75,6 +79,7 @@ const CatalogueModel = () => {
           </button>
         ))}
       </div>
+      <ScrollToTop />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import './VehicleCatalogue.css';
 
+
 // ===== IMAGES =====
 import catalogueImage from '../../../assets/images/catalogue_gamme_de_vehicule.png';
 
@@ -17,6 +18,12 @@ import teracarMotorsLogo from '../../../assets/images/Teracar_motors.png';
 
 import FordSection from '../Ford/FordSection.jsx';
 import HyundaiSection from '../Hyundai/HyundaiSection.jsx';
+import HyundaiSection2 from '../Hyundai2/HyundaiSection2.jsx';
+import ToyotaSection from '../Toyota/ToyotaSection.jsx';
+import ToyotaSection2 from '../Toyota2/ToyotaSection2.jsx';
+import SuzukiSection from '../Suzuki/SuzukiSection.jsx';
+import SuzukiSection2 from '../Suzuki2/SuzukiSection2.jsx';
+import MazdaSection from '../Mazda/MazdaSection.jsx';
 
 // ===== TABLE SPECS =====
 const SpecTable = ({ specs }) => (
@@ -37,6 +44,7 @@ const VehicleCard = ({ title, image, specs }) => (
     <div className="image-box">
       <img src={image} alt={title} />
     </div>
+    <ScrollToTop />
     <SpecTable specs={specs} />
   </div>
 );
@@ -59,7 +67,27 @@ const VehicleCatalogue = () => {
       {/* ===== SECTION HYUNDAI ===== */}
       <HyundaiSection />
 
-      {/* Ici tu pourras importer d'autres sections de marques comme <ToyotaSection /> etc. */}
+      {/* ===== SECTION HYUNDAI2 ===== */}
+      <HyundaiSection2 />
+
+
+      {/* ===== SECTION TOYOTA ===== */}
+      <ToyotaSection />
+
+
+      {/* ===== SECTION TOYOTA2 ===== */}
+      <ToyotaSection2 />
+
+
+      {/* ===== SECTION SUZUKI ===== */}
+      <SuzukiSection />
+
+
+      {/* ===== SECTION SUZUKI2 ===== */}
+      <SuzukiSection2 />
+
+      {/* ===== SECTION MAZDA ===== */}
+      <MazdaSection />
 
       {/* ===== FOOTER ===== */}
       <div className="catalogue-footer">
