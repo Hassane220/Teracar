@@ -25,9 +25,9 @@ const CatalogueModel = () => {
   if (selectedCar) {
     return (
       <div className="catalogue-main-container">
-        <button className="catalogue-back-btn" onClick={() => setSelectedCar(null)}>&larr; Retour</button>
+        {/* Bouton retour supprimé */}
         <CatalogueDetails car={selectedCar} />
-        <ScrollToTop />
+        {/* ScrollToTop supprimé */}
       </div>
     );
   }

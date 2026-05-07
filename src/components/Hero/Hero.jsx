@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import './hero.css';
+import './Hero.css';
 import { useNavigate } from 'react-router-dom';
-import car1 from '../../assets/images/car1.avif';
+import car1 from '../../assets/images/catalogue_gamme_de_vehicule.png';
 import car2 from '../../assets/images/car2.avif';
 import car3 from '../../assets/images/car3.jpeg';
 
@@ -27,7 +27,7 @@ const Hero = () => {
     {
       title: "Trouvez la",
       highlighted: "voiture parfaite",
-      subtitle: "pour votre style de vie",
+      subtitle: "",
       description: "Découvrez notre sélection exclusive de véhicules d'occasion certifiés et neufs avec les meilleures garanties du marché.",
       background: "linear-gradient(135deg, #6b2316ff 0%, #982404ff 100%)",
       image: car1,
@@ -64,6 +64,7 @@ const Hero = () => {
 
   return (
     <>
+      {/* Image brute de test supprimée */}
       <section
         id="accueil"
         className="hero"
@@ -72,26 +73,106 @@ const Hero = () => {
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          minHeight: '80vh',
-          height: '80vh',
+          minHeight: '88vh',
+          height: '88vh',
           width: '100%',
+          position: 'relative',
         } : {}}
       >
+        {/* Overlay desktop */}
+        {!isMobile && <div className="hero__overlay" />}
         {/* Mobile : on garde le slider classique */}
         {isMobile && (
           <div className="hero__slides">
+            {/* L'image test est retirée, affichage normal */}
+            {/* Slides dynamiques */}
             {slides.map((slide, index) => (
-              <div
-                key={index}
-                className={`hero__slide ${index === currentSlide ? 'hero__slide--active' : ''}`}
-                style={{
-                  backgroundImage: `url(${slide.image})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                }}
-              >
-                <div className="hero__mobile-overlay"></div>
-              </div>
+                <div
+                  key={index}
+                  className={`hero__slide hero__slide--${index} ${index === currentSlide ? 'hero__slide--active' : ''}`}
+                  style={{
+                    backgroundImage: `url(${slide.image})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    height: '100vh',
+                    minHeight: '100vh',
+                    width: '100%'
+                  }}
+                >
+                  <div className="hero__mobile-overlay"></div>
+                  {/* DEBUG: Affichage direct de l'image pour diagnostic */}
+                  <img
+                    src={slide.image}
+                    alt="slide visuelle"
+                    style={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                      zIndex: 99999,
+                      display: 'block',
+                      width: '300px',
+                      height: '180px',
+                      background: '#fff',
+                      border: '3px solid #222',
+                      boxShadow: '0 4px 16px rgba(0,0,0,0.18)',
+                    }}
+                  />
+                  {/* Texte et actions sur mobile */}
+                  {index === currentSlide && (
+                    <div className="hero__slide-content">
+                      <div className="slide__text">
+                        <div className="text__wrapper">
+                          <h1 className="hero__title">
+                            {slide.title} <span className="highlighted">{slide.highlighted}</span> {slide.subtitle}
+                          </h1>
+                          <p className="hero__description">{slide.description}</p>
+                        </div>
+                        <div className="hero__actions" style={{marginTop: '1.5rem', justifyContent: 'center'}}>
+                          <button
+                            className="btn btn--primary btn--large"
+                            style={{
+                              position: 'absolute',
+                              left: '50%',
+                              bottom: 80,
+                              transform: 'translateX(-50%)',
+                              zIndex: 99999,
+                              background: '#F6C700',
+                              color: '#222',
+                              border: '2px solid #222',
+                              padding: '1rem 2rem',
+                              fontSize: '1.2rem',
+                              marginBottom: '12px',
+                              borderRadius: '50px',
+                            }}
+                          >
+                            Explorer les modèles
+                          </button>
+                          <button
+                            className="btn btn--outline btn--large"
+                            style={{
+                              position: 'absolute',
+                              left: '50%',
+                              bottom: 20,
+                              transform: 'translateX(-50%)',
+                              zIndex: 99999,
+                              background: '#F6C700',
+                              color: '#222',
+                              border: '2px solid #222',
+                              padding: '1rem 2rem',
+                              fontSize: '1.2rem',
+                              marginBottom: '12px',
+                              borderRadius: '50px',
+                            }}
+                          >
+                            Prendre rendez-vous
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
             ))}
           </div>
         )}
@@ -110,9 +191,15 @@ const Hero = () => {
               <div className="slide__text" style={{textAlign: 'center', marginBottom: '1.5rem', maxWidth: '700px'}}>
                 <div className="text__wrapper">
                   <h1 className="hero__title">
-                    {slides[currentSlide].title}{' '}
-                    <span className="highlighted">{slides[currentSlide].highlighted}</span>{' '}
-                    {slides[currentSlide].subtitle}
+                    {currentSlide === 0 ? (
+                      <>
+                        {slides[0].title} <span className="highlighted">{slides[0].highlighted}</span><br />{slides[0].subtitle}
+                      </>
+                    ) : (
+                      <>
+                        {slides[currentSlide].title} <span className="highlighted">{slides[currentSlide].highlighted}</span> {slides[currentSlide].subtitle}
+                      </>
+                    )}
                   </h1>
                   <p className="hero__description">{slides[currentSlide].description}</p>
                 </div>
@@ -139,12 +226,7 @@ const Hero = () => {
         )}
       </section>
 
-      {isMobile && (
-        <div className="mobile__quick-actions">
-          <button className="mobile__action-btn mobile__action-btn--primary">📞 Appeler</button>
-          <button className="mobile__action-btn mobile__action-btn--secondary">💬 WhatsApp</button>
-        </div>
-      )}
+
     </>
   );
 };

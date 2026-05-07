@@ -1,8 +1,103 @@
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
+
+  // Convertit une image en dataURL (pour éviter les problèmes CORS)
+  function toDataUrl(url) {
+    return new Promise((resolve, reject) => {
+      const img = new window.Image();
+      img.crossOrigin = 'Anonymous';
+      img.onload = function () {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        resolve(canvas.toDataURL('image/jpeg'));
+      };
+      img.onerror = reject;
+      img.src = url;
+    });
+  }
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CarDetails.css';
 
 const CarDetails = ({ car, onClose }) => {
+    // Génération du PDF avec image principale et infos
+    const handleDownloadPDF = async () => {
+  try {
+    const pdf = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
+    const pageWidth = pdf.internal.pageSize.getWidth();
+
+    // Image principale
+    const imageElement = document.querySelector('.main-image img');
+    let imageHeight = 70;
+    let imageWidth = 120;
+    let imageY = 40;
+    let imageX = (pageWidth - imageWidth) / 2;
+
+    // Titre
+    pdf.setTextColor(0, 0, 0);
+    pdf.setFontSize(28);
+    pdf.setFont('helvetica', 'bold');
+    const title = `${car.brand || ''} ${car.model || ''} ${car.year || ''}`.trim();
+    pdf.text(title, pageWidth / 2, 30, { align: 'center' });
+
+    // Image véhicule
+    if (imageElement) {
+      const imgData = await toDataUrl(imageElement.src);
+      pdf.addImage(imgData, 'JPEG', imageX, imageY, imageWidth, imageHeight);
+    }
+
+    // 🔥 CLONE VERSION DESKTOP (solution au problème)
+    const originalElement = document.querySelector('.car-details-info');
+    let tableY = imageY + imageHeight + 30;
+
+    if (originalElement) {
+      const clonedElement = originalElement.cloneNode(true);
+
+      // Force rendu desktop
+      clonedElement.style.width = '1200px';
+      clonedElement.style.position = 'absolute';
+      clonedElement.style.left = '-9999px';
+      clonedElement.style.top = '0';
+      clonedElement.style.background = '#ffffff';
+      clonedElement.style.padding = '20px';
+
+      document.body.appendChild(clonedElement);
+
+      const canvas = await html2canvas(clonedElement, {
+        backgroundColor: '#ffffff',
+        scale: 2,
+        windowWidth: 1200
+      });
+
+      document.body.removeChild(clonedElement);
+
+      const imgData = canvas.toDataURL('image/png');
+
+      pdf.addImage(imgData, 'PNG', 10, tableY, pageWidth - 20, 0);
+
+      // Filigrane
+      const watermarkY = imageY + imageHeight + ((tableY - (imageY + imageHeight)) / 2);
+      pdf.saveGraphicsState();
+      pdf.setTextColor(245, 245, 245);
+      pdf.setFontSize(60);
+      pdf.setFont('helvetica', 'bold');
+      pdf.text('Teracar motors', pageWidth / 2, watermarkY, {
+        align: 'center'
+      });
+      pdf.restoreGraphicsState();
+    }
+
+    pdf.save(`Fiche_${car.brand || ''}_${car.model || ''}.pdf`);
+
+  } catch (err) {
+    alert('Erreur lors de la génération du PDF : ' + err);
+    console.error('Erreur PDF', err);
+  }
+};
   const [selectedImage, setSelectedImage] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
   const [showContactForm, setShowContactForm] = useState(false);
@@ -61,6 +156,12 @@ const CarDetails = ({ car, onClose }) => {
         </button>
       )}
 
+      {/* Bouton PDF */}
+      <div style={{ marginBottom: 16, textAlign: 'right', marginTop: 40 }}>
+        <button className="btn btn-primary" onClick={handleDownloadPDF}>
+          Télécharger la fiche PDF
+        </button>
+      </div>
       {/* Galerie d'images */}
       <div className="car-details-gallery">
         <div className="main-image">
@@ -91,138 +192,54 @@ const CarDetails = ({ car, onClose }) => {
 
       {/* Informations principales */}
       <div className="car-details-info">
-        <div className="car-details-header">
-          <h1>{car.brand} {car.model} {car.year}</h1>
-          {/* <div className="car-details-price"> 
-            <span className="price">{car.price.toLocaleString()} FCFA</span>
-            <span className="vat">TTC</span>
-          </div> */}
-        </div>
-
-        {/* Caractéristiques */}
-        <div className="car-details-specs">
-          <div className="specs-grid">
-            <div className="spec-item">
-              <span className="spec-label">Année</span>
-              <span className="spec-value">{car.year}</span>
-            </div>
-            <div className="spec-item">
-              <span className="spec-label">Kilométrage</span>
-              <span className="spec-value">{car.mileage.toLocaleString()} km</span>
-            </div>
-            <div className="spec-item">
-              <span className="spec-label">Carburant</span>
-              <span className="spec-value">{car.fuel}</span>
-            </div>
-            <div className="spec-item">
-              <span className="spec-label">Boîte</span>
-              <span className="spec-value">{car.transmission}</span>
-            </div>
-            <div className="spec-item">
-              <span className="spec-label">Couleur</span>
-              <span className="spec-value">{car.color}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Description */}
-        <div className="car-details-description">
-          <h2>Description</h2>
-          <p>{car.description}</p>
-        </div>
-
-        {/* Équipements */}
-        <div className="car-details-features">
-          <h2>Équipements</h2>
-          <ul className="features-list">
-            {car.features.map((feature, index) => (
-              <li key={index}>✓ {feature}</li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Vendeur */}
-        <div className="car-details-seller">
-          <h2>Vendeur</h2>
-          <div className="seller-card">
-            <div className="seller-info">
-              <h3>{car.seller.name}</h3>
-              <div className="seller-rating">
-                {'★'.repeat(Math.floor(car.seller.rating))}
-                {'☆'.repeat(5 - Math.floor(car.seller.rating))}
-                <span>({car.seller.rating}/5)</span>
-              </div>
-              <p className="seller-phone">📞 {car.seller.phone}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Actions */}
-        <div className="car-details-actions">
-          <button className="btn btn-primary" onClick={() => setShowContactForm(true)}>
-            Contacter
-          </button>
-          <button className="btn btn-outline" onClick={handleTestDrive}>
-            Essai gratuit
-          </button>
-        </div>
+        <h1>Détails du véhicule</h1>
+        <table className="car-details-table">
+          <tbody>
+            {car.brand && (
+              <tr><th>Marque</th><td>{car.brand}</td></tr>
+            )}
+            {car.model && (
+              <tr><th>Modèle</th><td>{car.model}</td></tr>
+            )}
+            {car.year != null && car.year !== '' && (
+              <tr><th>Année</th><td>{car.year}</td></tr>
+            )}
+            {(car.engine || car.motorisation) && (
+              <tr><th>Motorisation</th><td>{car.engine || car.motorisation}</td></tr>
+            )}
+            {car.transmission && (
+              <tr><th>Transmission</th><td>{car.transmission}</td></tr>
+            )}
+            {car.mileage != null && (
+              <tr><th>Kilométrage</th><td>{car.mileage.toLocaleString()} km</td></tr>
+            )}
+            {car.color && (
+              <tr><th>Couleur</th><td>{car.color}</td></tr>
+            )}
+            {car.fuel && (
+              <tr><th>Carburant</th><td>{car.fuel}</td></tr>
+            )}
+            {car.power != null && (
+              <tr><th>Puissance</th><td>{car.power}</td></tr>
+            )}
+            {car.doors != null && (
+              <tr><th>Portes</th><td>{car.doors}</td></tr>
+            )}
+            {car.seats != null && (
+              <tr><th>Places</th><td>{car.seats}</td></tr>
+            )}
+            {(car.features && car.features.length > 0) && (
+              <tr><th>Options/Équipements principaux</th><td><ul>{car.features.map((feature, idx) => (<li key={idx}>{feature}</li>))}</ul></td></tr>
+            )}
+            {(car.options && car.options.length > 0) && (
+              <tr><th>Options/Équipements principaux</th><td><ul>{car.options.map((opt, idx) => (<li key={idx}>{opt}</li>))}</ul></td></tr>
+            )}
+            {car.description && (
+              <tr><th>Description</th><td>{car.description}</td></tr>
+            )}
+          </tbody>
+        </table>
       </div>
-
-      {/* Formulaire de contact modal */}
-      {showContactForm && (
-        <div className="modal-overlay">
-          <div className="modal">
-            <div className="modal-header">
-              <h3>Contacter le vendeur</h3>
-              <button className="modal-close" onClick={() => setShowContactForm(false)}>
-                ×
-              </button>
-            </div>
-            <form onSubmit={handleContactSubmit} className="contact-form">
-              <div className="form-group">
-                <label>Nom complet *</label>
-                <input
-                  type="text"
-                  value={contactData.name}
-                  onChange={(e) => setContactData({...contactData, name: e.target.value})}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label>Email *</label>
-                <input
-                  type="email"
-                  value={contactData.email}
-                  onChange={(e) => setContactData({...contactData, email: e.target.value})}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label>Téléphone *</label>
-                <input
-                  type="tel"
-                  value={contactData.phone}
-                  onChange={(e) => setContactData({...contactData, phone: e.target.value})}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label>Message *</label>
-                <textarea
-                  value={contactData.message}
-                  onChange={(e) => setContactData({...contactData, message: e.target.value})}
-                  placeholder={`Bonjour, je suis intéressé par votre ${car.brand} ${car.model}...`}
-                  rows="4"
-                  required
-                />
-              </div>
-              <button type="submit" className="btn btn-primary">
-                Envoyer
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

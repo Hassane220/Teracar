@@ -137,9 +137,7 @@ const FeaturedCars = () => {
 
               {/* CONTENT */}
               <div className="car-card__content">
-                <span className="car-card__badge">{car.badge}</span>
-                <h3>{car.title}</h3>
-
+                {/* Affiche uniquement les détails essentiels du véhicule */}
                 <div className="car-card__meta">
                   <div>
                     <strong>Année</strong>

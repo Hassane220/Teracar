@@ -24,6 +24,9 @@ import ToyotaSection2 from '../Toyota2/ToyotaSection2.jsx';
 import SuzukiSection from '../Suzuki/SuzukiSection.jsx';
 import SuzukiSection2 from '../Suzuki2/SuzukiSection2.jsx';
 import MazdaSection from '../Mazda/MazdaSection.jsx';
+import NissanSection from '../Nissan/NissanSection.jsx';
+import PeugeotSection from '../Peugeot/PeugeotSection.jsx';
+import PeugeotSection2 from '../Peugeot2/PeugeotSection.jsx';
 
 // ===== TABLE SPECS =====
 const SpecTable = ({ specs }) => (
@@ -88,6 +91,15 @@ const VehicleCatalogue = () => {
 
       {/* ===== SECTION MAZDA ===== */}
       <MazdaSection />
+
+      {/* ===== SECTION NISSAN ===== */}
+      <NissanSection />
+
+      {/* ===== SECTION PEUGEOT ===== */}
+      <PeugeotSection />
+
+      {/* ===== SECTION PEUGEOT2 ===== */}
+      <PeugeotSection2 />
 
       {/* ===== FOOTER ===== */}
       <div className="catalogue-footer">

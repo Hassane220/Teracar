@@ -17,7 +17,7 @@ const Header = () => {
 
   return (
     <header className={`header ${isScrolled ? 'header--scrolled' : ''}`}>
-      <nav className="nav container">
+      <nav className="nav">
         {/* Logo avec image */}
         <div className="nav__logo">
           <a href="/" className="nav__logo-link" aria-label="Accueil">
@@ -31,7 +31,7 @@ const Header = () => {
             <svg className="contact__icon" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
             </svg>
-            <span>ABIDJAN COCODY BONOUMIN IMMEUBLE LE WALEBO</span>
+            <span className="hide-on-mobile">ABIDJAN COCODY BONOUMIN IMMEUBLE LE WALEBO</span>
           </div>
           
           <div className="contact__item">

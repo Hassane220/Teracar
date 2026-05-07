@@ -9,7 +9,7 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer__overlay"></div>
 
-      <div className="footer__container container">
+      <div className="footer__container">
         {/* CONTACT */}
         <div className="footer__col">
           <h4 className="footer__title">Contact Information</h4>
@@ -90,7 +90,7 @@ const Footer = () => {
       </div>
 
       {/* BOTTOM */}
-      <div className="footer__bottom container">
+      <div className="footer__bottom">
         <p>© Copyright 2025 Car Dealer</p>
         <div className="footer__bottom-links">
           <span>Privacy Policy</span>

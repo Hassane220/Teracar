@@ -1,3 +1,13 @@
+/* Masque l'élément sur mobile uniquement */
+.hide-on-mobile {
+  display: inline;
+}
+
+@media (max-width: 768px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+}
 @import '../../styles/variables.css';
 
 .header {
@@ -208,6 +218,7 @@
   .contact__icon {
     width: 12px;
     height: 12px;
+    visibility: hidden; /* Cache les icônes pour gagner de la place */
   }
   
   /* Priorité au téléphone - mettre en évidence */

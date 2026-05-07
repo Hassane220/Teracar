@@ -5,6 +5,10 @@ import { cars as carsData } from '../data/cars';
 
 const CarDetailsPage = () => {
   const { id } = useParams();
+  // Remonte en haut de la page à chaque affichage
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [id]);
   const navigate = useNavigate();
   const location = useLocation();
   const [car, setCar] = useState(null);
@@ -38,22 +42,16 @@ const CarDetailsPage = () => {
 
   return (
     <div className="car-details-page">
-      <div className="container">
-        <nav className="breadcrumb">
-          <button className="back-button" onClick={handleBack} style={{display:'flex',alignItems:'center',gap:'8px',fontSize:'1.1rem'}}>
-            <span style={{fontSize:'1.5em',lineHeight:1}}>&#8592;</span> Retour
-          </button>
-        </nav>
+      {/* Breadcrumb supprimé : bouton Retour retiré pour éviter la superposition */}
 
-        {car ? (
-          <CarDetails car={car} onClose={handleBack} />
-        ) : (
-          <div className="loading">
-            <div className="spinner"></div>
-            <p>Chargement des détails...</p>
-          </div>
-        )}
-      </div>
+      {car ? (
+        <CarDetails car={car} onClose={handleBack} />
+      ) : (
+        <div className="loading">
+          <div className="spinner"></div>
+          <p>Chargement des détails...</p>
+        </div>
+      )}
     </div>
   );
 };

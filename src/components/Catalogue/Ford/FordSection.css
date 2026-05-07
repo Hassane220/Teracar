@@ -21,8 +21,24 @@
 }
 /* Style spécifique à la section Ford. Tu peux personnaliser ici si besoin, ou laisser vide pour hériter du style global. */
 
+
+.ford-section .catalogue-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 .ford-section .catalogue-header img {
   height: 90px;
+  max-width: 100%;
+  width: auto;
+  display: block;
 }
 
 .ford-section .explorer,

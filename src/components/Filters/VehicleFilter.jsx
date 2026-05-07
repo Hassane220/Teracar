@@ -1,5 +1,7 @@
+
 import React, { useState } from 'react';
 import './VehicleFilter.css';
+import { cars } from '../../data/cars';
 
 const VehicleFilter = () => {
   // État pour les filtres
@@ -15,13 +17,19 @@ const VehicleFilter = () => {
     maxPrice: 0
   });
 
-  // Options pour les menus déroulants
-  const vehicleTypes = ['Tous les véhicules'];
+  // Options dynamiques pour les menus déroulants
   const certificationOptions = ['Certifié', 'Non certifié'];
   const conditionOptions = ['Neuf', 'Occasion'];
-  const yearOptions = ['1998', '2002', '2004', '2007', '2010', '2015', '2020', '2023'];
-  const makeOptions = ['Toyota', 'Honda', 'Ford', 'BMW', 'Mercedes', 'Audi'];
-  const modelOptions = ['Model S', 'Civic', 'F-150', '3 Series', 'C-Class', 'A4'];
+
+  // Générer dynamiquement les types de véhicules, marques, modèles, années
+  const vehicleTypes = ['Tous les véhicules', ...Array.from(new Set(cars.map(car => car.category).filter(Boolean)))];
+  const yearOptions = Array.from(new Set(cars.map(car => car.year))).sort((a, b) => b - a);
+  const makeOptions = Array.from(new Set(cars.map(car => car.brand))).sort();
+  // Les modèles dépendent de la marque sélectionnée
+  const filteredModels = filters.make
+    ? cars.filter(car => car.brand === filters.make).map(car => car.model)
+    : cars.map(car => car.model);
+  const modelOptions = Array.from(new Set(filteredModels)).sort();
   // ...existing code...
 
   const handleFilterChange = (filterName, value) => {
@@ -166,6 +174,7 @@ const VehicleFilter = () => {
                 className="filter-dropdown"
                 value={filters.model}
                 onChange={(e) => handleFilterChange('model', e.target.value)}
+                disabled={!filters.make && modelOptions.length === 0}
               >
                 <option value="">Modèle</option>
                 {modelOptions.map(model => (
