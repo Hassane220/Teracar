@@ -95,15 +95,11 @@
 }
 
 .car-details-close {
-  position: absolute;
-  top: 150px; /* décale plus bas sous le header */
-  left: 33px;
   background: none;
   border: none;
   font-size: 24px;
   cursor: pointer;
   color: #D90429;
-  z-index: 10;
   display: flex;
   align-items: center;
   gap: 8px;

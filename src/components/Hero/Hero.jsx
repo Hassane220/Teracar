@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './Hero.css';
 import { useNavigate } from 'react-router-dom';
-import car1 from '../../assets/images/catalogue_gamme_de_vehicule.png';
-import car2 from '../../assets/images/car2.avif';
-import car3 from '../../assets/images/car3.jpeg';
+import car1 from '../../assets/images/car_toyota_hero1.jpg';
+import car2 from '../../assets/images/car_nissan_hero2.jpg';
+import car3 from '../../assets/images/car_suzuki_hero3.jpg';
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -90,35 +90,14 @@ const Hero = () => {
                 <div
                   key={index}
                   className={`hero__slide hero__slide--${index} ${index === currentSlide ? 'hero__slide--active' : ''}`}
-                  style={{
-                    backgroundImage: `url(${slide.image})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                    height: '100vh',
-                    minHeight: '100vh',
-                    width: '100%'
-                  }}
                 >
-                  <div className="hero__mobile-overlay"></div>
-                  {/* DEBUG: Affichage direct de l'image pour diagnostic */}
                   <img
+                    className="hero__slide-img"
                     src={slide.image}
-                    alt="slide visuelle"
-                    style={{
-                      position: 'absolute',
-                      top: '50%',
-                      left: '50%',
-                      transform: 'translate(-50%, -50%)',
-                      zIndex: 99999,
-                      display: 'block',
-                      width: '300px',
-                      height: '180px',
-                      background: '#fff',
-                      border: '3px solid #222',
-                      boxShadow: '0 4px 16px rgba(0,0,0,0.18)',
-                    }}
+                    alt=""
+                    aria-hidden="true"
                   />
+                  <div className="hero__mobile-overlay"></div>
                   {/* Texte et actions sur mobile */}
                   {index === currentSlide && (
                     <div className="hero__slide-content">
@@ -129,44 +108,9 @@ const Hero = () => {
                           </h1>
                           <p className="hero__description">{slide.description}</p>
                         </div>
-                        <div className="hero__actions" style={{marginTop: '1.5rem', justifyContent: 'center'}}>
-                          <button
-                            className="btn btn--primary btn--large"
-                            style={{
-                              position: 'absolute',
-                              left: '50%',
-                              bottom: 80,
-                              transform: 'translateX(-50%)',
-                              zIndex: 99999,
-                              background: '#F6C700',
-                              color: '#222',
-                              border: '2px solid #222',
-                              padding: '1rem 2rem',
-                              fontSize: '1.2rem',
-                              marginBottom: '12px',
-                              borderRadius: '50px',
-                            }}
-                          >
+                        <div className="hero__actions" style={{marginTop: '1.5rem'}}>
+                          <button className="btn btn--primary btn--large" onClick={() => navigate('/catalogue-model-voiture')}>
                             Explorer les modèles
-                          </button>
-                          <button
-                            className="btn btn--outline btn--large"
-                            style={{
-                              position: 'absolute',
-                              left: '50%',
-                              bottom: 20,
-                              transform: 'translateX(-50%)',
-                              zIndex: 99999,
-                              background: '#F6C700',
-                              color: '#222',
-                              border: '2px solid #222',
-                              padding: '1rem 2rem',
-                              fontSize: '1.2rem',
-                              marginBottom: '12px',
-                              borderRadius: '50px',
-                            }}
-                          >
-                            Prendre rendez-vous
                           </button>
                         </div>
                       </div>
@@ -180,13 +124,13 @@ const Hero = () => {
         {!isMobile && (
           <>
             {/* Catalogue Button - always visible, top right */}
-            <button
+            {/* <button
               className="hero__catalog-button btn--catalog"
               onClick={() => navigate('/catalogue-model-voiture')}
             >
               <span className="catalog-icon">📚</span>
               <span className="catalog-text">Catalogue</span>
-            </button>
+            </button> */}
             <div className="hero__bottom-bar">
               <div className="slide__text" style={{textAlign: 'center', marginBottom: '1.5rem', maxWidth: '700px'}}>
                 <div className="text__wrapper">
@@ -218,8 +162,7 @@ const Hero = () => {
                 <button className="hero__control hero__control--next" onClick={nextSlide}>›</button>
               </div>
               <div className="hero__actions" style={{marginTop: '1.5rem'}}>
-                <button className="btn btn--primary btn--large">Explorer les modèles</button>
-                <button className="btn btn--outline btn--large">Prendre rendez-vous</button>
+                <button className="btn btn--primary btn--large" onClick={() => navigate('/catalogue-model-voiture')}>Explorer les modèles</button>
               </div>
             </div>
           </>

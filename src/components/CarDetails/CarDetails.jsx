@@ -144,21 +144,19 @@ const CarDetails = ({ car, onClose }) => {
 
   return (
     <div className="car-details">
-      {/* Bouton fermer pour modal */}
-      {onClose && (
-        <button className="car-details-close" onClick={onClose} aria-label="Retour">
-          <span className="car-details-back-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15 5L8 12L15 19" stroke="#D90429" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </span>
-          <span className="car-details-back-text">Retour</span>
-        </button>
-      )}
-
-      {/* Bouton PDF */}
-      <div style={{ marginBottom: 16, textAlign: 'right', marginTop: 40 }}>
-        <button className="btn btn-primary" onClick={handleDownloadPDF}>
+      {/* Boutons Retour + PDF sur la même ligne */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16, marginTop: 40 }}>
+        {onClose && (
+          <button className="car-details-close" onClick={onClose} aria-label="Retour">
+            <span className="car-details-back-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 5L8 12L15 19" stroke="#D90429" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </span>
+            <span className="car-details-back-text">Retour</span>
+          </button>
+        )}
+        <button className="btn btn-primary" onClick={handleDownloadPDF} style={{ marginLeft: 'auto' }}>
           Télécharger la fiche PDF
         </button>
       </div>

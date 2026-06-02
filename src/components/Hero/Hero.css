@@ -1,64 +1,11 @@
-@media (max-width: 1024px) {
-  .hero__slide img {
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    z-index: 9999 !important;
-    display: block !important;
-    width: 300px !important;
-    height: 180px !important;
-    background: #fff !important;
-    border: 3px solid #222 !important;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.18) !important;
-  }
-  .hero__actions .btn--primary, .hero__actions .btn--outline {
-    position: absolute !important;
-    left: 50% !important;
-    bottom: 40px !important;
-    transform: translateX(-50%) !important;
-    z-index: 9999 !important;
-    background: #F6C700 !important;
-    color: #222 !important;
-    border: 2px solid #222 !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.18) !important;
-    display: block !important;
-    min-width: 200px !important;
-    font-size: 1.2rem !important;
-    margin-bottom: 12px !important;
-  }
-}
-@media (max-width: 1024px) {
-  .hero__slide {
-    background-image: none !important;
-    background: #ff4444 !important;
-  }
-}
-/* === PATCH VISIBILITÉ HERO === */
-@media (max-width: 1024px) {
-  .hero__slide img {
-    display: block !important;
-    width: 100% !important;
-    max-width: 400px !important;
-    max-height: 220px !important;
-    margin: 0 auto 1.5rem auto !important;
-    background: #fff !important;
-    border-radius: 12px !important;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.12) !important;
-    position: relative !important;
-    z-index: 2 !important;
-  }
-  .hero__actions .btn--primary, .hero__actions .btn--outline {
-    background: #F6C700 !important;
-    color: #222 !important;
-    border: 2px solid #222 !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
-    z-index: 3 !important;
-  }
-}
-
 
 @import '../../styles/variables.css';
+
+/* Empêche le scroll horizontal (fix iOS Safari + layout global) */
+:root {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
 
 .hero__overlay {
   position: absolute;
@@ -83,10 +30,11 @@
   margin-top: 0;
   padding-top: 80px;
   overflow: hidden;
-  background: var(--primary-color); /* Rouge pro */
+  background: var(--primary-color);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  align-items: stretch;
 }
 .hero__bottom-bar {
   position: absolute;
@@ -501,11 +449,24 @@
   .hero__slide {
     height: 100vh;
     width: 100%;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
+    overflow: hidden;
   }
-  
+
+  .hero__slide .hero__slide-img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    object-fit: cover !important;
+    z-index: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    filter: none !important;
+    display: block !important;
+  }
+
   /* Overlay sombre */
   .hero__mobile-overlay {
     position: absolute;
@@ -513,7 +474,7 @@
     background: rgba(0, 0, 0, 0.55);
     z-index: 1;
   }
-  
+
   /* Contenu AU-DESSUS de l'image */
   .hero__slide-content {
     position: relative;
@@ -567,20 +528,37 @@
     margin-top: 0;
     min-height: 100vh;
     height: 100vh !important;
+    width: 100vw !important;
+    align-items: stretch !important;
   }
 
   .hero__slides {
     height: 100vh !important;
     min-height: 100vh !important;
+    width: 100% !important;
   }
 
   .hero__slide {
     height: 100vh !important;
     min-height: 100vh !important;
-    width: 100%;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
+    width: 100% !important;
+    overflow: hidden;
+  }
+
+  /* Override global.css debug patch: img { z-index: 99999 !important; border: 4px solid red !important; } */
+  .hero__slide .hero__slide-img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    object-fit: cover !important;
+    z-index: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    filter: none !important;
+    display: block !important;
   }
 
 
@@ -589,7 +567,7 @@
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0.55);
-    z-index: 0;
+    z-index: 1;
   }
 
   /* Contenu AU-DESSUS de l'image */
@@ -607,6 +585,7 @@
     max-width: 100%;
     text-align: center;
     padding: 0;
+    top: 0;
   }
 
   .text__wrapper {
@@ -615,6 +594,15 @@
 
   .hero__actions {
     justify-content: center;
+    margin-left: 0;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Contrer la règle globale de Footer.css qui cache ces classes sur mobile */
+  .hero__slide-content .btn--primary,
+  .hero__slide-content .btn--outline {
+    visibility: visible !important;
   }
 
   /* Image desktop totalement désactivée */

@@ -69,7 +69,7 @@ const SuzukiSection = () => {
         <div className="mosaic">
           <img src={multi} alt="multi" className="zoomable-image" />
         </div>
-        <div className="hero">
+        <div className="suzuki-hero">
           <img src={hero} alt="Suzuki Dzire" className="zoomable-image" />
         </div>
       </div>

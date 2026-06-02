@@ -118,16 +118,14 @@
   left: 0;
   width: 6px;
   height: 100%;
+  background: #b30000;
+}
 
-/* Harmonisation stricte explorer card Peugeot avec Ford/Hyundai */
 .explorer.card {
   max-width: 900px;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  box-sizing: border-box;
-}
-  background: #b30000;
 }
 .image-box img {
   width: 100%;
@@ -181,4 +179,29 @@
 .bottom-visual img {
   width: 100%;
   object-fit: cover;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .hero {
+    flex-direction: column;
+  }
+  .hero-img {
+    width: 100%;
+  }
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .peugeot-section {
+    padding: 16px;
+  }
+  .hero-title h1 {
+    font-size: 24px;
+  }
 }

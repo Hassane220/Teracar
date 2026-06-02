@@ -1,5 +1,6 @@
 import React from 'react';
 import './VehicleCatalogue.css';
+import ScrollToTop from '../../ScrollToTop/ScrollToTop';
 
 
 // ===== IMAGES =====
@@ -47,7 +48,6 @@ const VehicleCard = ({ title, image, specs }) => (
     <div className="image-box">
       <img src={image} alt={title} />
     </div>
-    <ScrollToTop />
     <SpecTable specs={specs} />
   </div>
 );
@@ -105,6 +105,7 @@ const VehicleCatalogue = () => {
       <div className="catalogue-footer">
         <img src={teracarMotorsLogo} alt="Teracar Motors" style={{ maxWidth: '100%', height: 'auto', display: 'block', margin: '0 auto' }} />
       </div>
+      <ScrollToTop />
     </div>
   );
 };

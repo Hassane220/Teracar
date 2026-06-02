@@ -6,6 +6,7 @@ import { cars } from '../data/cars';
 import SuzukiSection2 from '../components/Catalogue/Suzuki2/SuzukiSection2';
 
 import '../components/Catalogue/catalogue.css';
+import ScrollToTop from '../components/ScrollToTop/ScrollToTop';
 
 const CataloguePage = () => {
   const [showModelCatalogue, setShowModelCatalogue] = useState(false);

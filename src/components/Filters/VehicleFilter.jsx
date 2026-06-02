@@ -13,6 +13,8 @@ const VehicleFilter = () => {
     year: '',
     make: '',
     model: '',
+    fuel: '',
+    transmission: '',
     minPrice: '',
     maxPrice: 0
   });
@@ -25,12 +27,12 @@ const VehicleFilter = () => {
   const vehicleTypes = ['Tous les véhicules', ...Array.from(new Set(cars.map(car => car.category).filter(Boolean)))];
   const yearOptions = Array.from(new Set(cars.map(car => car.year))).sort((a, b) => b - a);
   const makeOptions = Array.from(new Set(cars.map(car => car.brand))).sort();
-  // Les modèles dépendent de la marque sélectionnée
+  const fuelOptions = Array.from(new Set(cars.map(car => car.fuel).filter(Boolean))).sort();
+  const transmissionOptions = Array.from(new Set(cars.map(car => car.transmission).filter(Boolean))).sort();
   const filteredModels = filters.make
     ? cars.filter(car => car.brand === filters.make).map(car => car.model)
     : cars.map(car => car.model);
   const modelOptions = Array.from(new Set(filteredModels)).sort();
-  // ...existing code...
 
   const handleFilterChange = (filterName, value) => {
     setFilters(prev => ({
@@ -53,13 +55,14 @@ const VehicleFilter = () => {
 
   const handleReset = () => {
     setFilters({
-      vehicleType: 'All vehicles',
+      vehicleType: 'Tous les véhicules',
       certification: '',
       condition: '',
       year: '',
       make: '',
       model: '',
-      location: '',
+      fuel: '',
+      transmission: '',
       minPrice: '',
       maxPrice: 0
     });
@@ -170,7 +173,7 @@ const VehicleFilter = () => {
                 ))}
               </select>
 
-              <select 
+              <select
                 className="filter-dropdown"
                 value={filters.model}
                 onChange={(e) => handleFilterChange('model', e.target.value)}
@@ -179,6 +182,28 @@ const VehicleFilter = () => {
                 <option value="">Modèle</option>
                 {modelOptions.map(model => (
                   <option key={model} value={model}>{model}</option>
+                ))}
+              </select>
+
+              <select
+                className="filter-dropdown"
+                value={filters.fuel}
+                onChange={(e) => handleFilterChange('fuel', e.target.value)}
+              >
+                <option value="">Carburant</option>
+                {fuelOptions.map(fuel => (
+                  <option key={fuel} value={fuel}>{fuel}</option>
+                ))}
+              </select>
+
+              <select
+                className="filter-dropdown"
+                value={filters.transmission}
+                onChange={(e) => handleFilterChange('transmission', e.target.value)}
+              >
+                <option value="">Transmission</option>
+                {transmissionOptions.map(t => (
+                  <option key={t} value={t}>{t}</option>
                 ))}
               </select>
             </div>
