@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './carCard.css';
+import './CarCard.css';
 
 const CarCard = ({ car }) => {
   const [isHovered, setIsHovered] = useState(false);

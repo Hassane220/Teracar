@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./RecentNews.css";
+import "./recentNews.css";
 
 import mainImg from "../../assets/images/car4.jpg";
 import img1 from "../../assets/images/car1.avif";

@@ -1,6 +1,6 @@
 import React from 'react';
 import CarCard from '../CarCard/CarCard';
-import './carlist.css';
+import './CarList.css';
 
 const CarList = ({ cars, title = "Nos Véhicules", subtitle }) => {
   return (
