@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./footer.css";
+import "./Footer.css";
 import imgLandCruiser from "../../assets/images/toyota/landcruiser300.png";
 import imgPatrol from "../../assets/images/nissan/patrolY62.png";
 import imgPeugeot from "../../assets/images/peugeot/3008.png";
