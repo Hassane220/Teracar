@@ -1,3 +1,5 @@
+@import '../../styles/variables.css';
+
 /* Masque l'élément sur mobile uniquement */
 .hide-on-mobile {
   display: inline;
@@ -8,7 +10,6 @@
     display: none !important;
   }
 }
-@import '../../styles/variables.css';
 
 .header {
   position: fixed;

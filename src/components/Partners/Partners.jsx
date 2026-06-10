@@ -3,7 +3,7 @@ import './partners.css';
 import partner1 from '../../assets/images/partners/Audi.png';
 import partner2 from '../../assets/images/partners/BMW.svg';
 import partner3 from '../../assets/images/partners/Mercedes.png';
-import partner4 from '../../assets/images/partners/volkswagen.png';
+import partner4 from '../../assets/images/partners/Volkswagen.png';
 import partner5 from '../../assets/images/partners/Ford.png';
 import partner6 from '../../assets/images/partners/Toyota.png';
 import partner7 from '../../assets/images/partners/Honda.png';
