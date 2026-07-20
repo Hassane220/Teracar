@@ -48,6 +48,20 @@
   gap: 2rem;
 }
 
+@media (max-width: 1024px) {
+  .car-list__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .car-list__grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
 .car-card {
   position: relative;
   border-radius: 18px;

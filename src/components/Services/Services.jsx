@@ -1,6 +1,5 @@
 import React from 'react';
 import './services.css';
-import ceoImage from '../../assets/images/CEO.jpeg';
 import carImage1 from '../../assets/images/car1.avif';
 import carImage2 from '../../assets/images/car2.avif';
 import carImage3 from '../../assets/images/car3.jpeg';
@@ -126,7 +125,7 @@ const Services = () => {
               
               <div className="quote__author">
                 <div className="author__image">
-                  <img src={ceoImage} alt="Aleesha Brown" />
+                  <div className="author__avatar">AB</div>
                 </div>
                 <div className="author__info">
                   <h4 className="author__name">Aleesha Brown</h4>

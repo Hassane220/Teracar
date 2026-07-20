@@ -246,6 +246,33 @@
   padding: 26px;
 }
 
+@media (max-width: 768px) {
+  .featured-cars {
+    padding: 40px 0;
+  }
+  .featured-cars__header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .featured-cars__header h2 {
+    font-size: 28px;
+  }
+  .featured-cars__filters {
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 4px;
+  }
+  .featured-cars__filters::-webkit-scrollbar {
+    display: none;
+  }
+  .featured-cars__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .car-card__badge {
   color: var(--primary-color) !important;
   font-size: 13px;

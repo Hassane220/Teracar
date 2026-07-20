@@ -1,244 +1,203 @@
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
-
-
-  // Convertit une image en dataURL (pour éviter les problèmes CORS)
-  function toDataUrl(url) {
-    return new Promise((resolve, reject) => {
-      const img = new window.Image();
-      img.crossOrigin = 'Anonymous';
-      img.onload = function () {
-        const canvas = document.createElement('canvas');
-        canvas.width = img.width;
-        canvas.height = img.height;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0);
-        resolve(canvas.toDataURL('image/jpeg'));
-      };
-      img.onerror = reject;
-      img.src = url;
-    });
-  }
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { cars as allCars } from '../../data/cars';
 import './CarDetails.css';
 
-const CarDetails = ({ car, onClose }) => {
-    // Génération du PDF avec image principale et infos
-    const handleDownloadPDF = async () => {
-  try {
-    const pdf = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
-    const pageWidth = pdf.internal.pageSize.getWidth();
-
-    // Image principale
-    const imageElement = document.querySelector('.main-image img');
-    let imageHeight = 70;
-    let imageWidth = 120;
-    let imageY = 40;
-    let imageX = (pageWidth - imageWidth) / 2;
-
-    // Titre
-    pdf.setTextColor(0, 0, 0);
-    pdf.setFontSize(28);
-    pdf.setFont('helvetica', 'bold');
-    const title = `${car.brand || ''} ${car.model || ''} ${car.year || ''}`.trim();
-    pdf.text(title, pageWidth / 2, 30, { align: 'center' });
-
-    // Image véhicule
-    if (imageElement) {
-      const imgData = await toDataUrl(imageElement.src);
-      pdf.addImage(imgData, 'JPEG', imageX, imageY, imageWidth, imageHeight);
-    }
-
-    // 🔥 CLONE VERSION DESKTOP (solution au problème)
-    const originalElement = document.querySelector('.car-details-info');
-    let tableY = imageY + imageHeight + 30;
-
-    if (originalElement) {
-      const clonedElement = originalElement.cloneNode(true);
-
-      // Force rendu desktop
-      clonedElement.style.width = '1200px';
-      clonedElement.style.position = 'absolute';
-      clonedElement.style.left = '-9999px';
-      clonedElement.style.top = '0';
-      clonedElement.style.background = '#ffffff';
-      clonedElement.style.padding = '20px';
-
-      document.body.appendChild(clonedElement);
-
-      const canvas = await html2canvas(clonedElement, {
-        backgroundColor: '#ffffff',
-        scale: 2,
-        windowWidth: 1200
-      });
-
-      document.body.removeChild(clonedElement);
-
-      const imgData = canvas.toDataURL('image/png');
-
-      pdf.addImage(imgData, 'PNG', 10, tableY, pageWidth - 20, 0);
-
-      // Filigrane
-      const watermarkY = imageY + imageHeight + ((tableY - (imageY + imageHeight)) / 2);
-      pdf.saveGraphicsState();
-      pdf.setTextColor(245, 245, 245);
-      pdf.setFontSize(60);
-      pdf.setFont('helvetica', 'bold');
-      pdf.text('Teracar motors', pageWidth / 2, watermarkY, {
-        align: 'center'
-      });
-      pdf.restoreGraphicsState();
-    }
-
-    pdf.save(`Fiche_${car.brand || ''}_${car.model || ''}.pdf`);
-
-  } catch (err) {
-    alert('Erreur lors de la génération du PDF : ' + err);
-    console.error('Erreur PDF', err);
-  }
+const STATUS_CONFIG = {
+  'Disponible': { color: 'var(--status-available)', label: 'Disponible' },
+  'Réservé':    { color: 'var(--status-reserved)',  label: 'Réservé' },
+  'Vendu':      { color: 'var(--status-sold)',       label: 'Vendu' },
 };
-  const [selectedImage, setSelectedImage] = useState(0);
-  const [isFavorite, setIsFavorite] = useState(false);
-  const [showContactForm, setShowContactForm] = useState(false);
-  const [contactData, setContactData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: ''
-  });
 
-  const handleContactSubmit = (e) => {
-    e.preventDefault();
-    console.log('Message envoyé:', contactData);
-    alert('Message envoyé avec succès !');
-    setShowContactForm(false);
-    setContactData({ name: '', email: '', phone: '', message: '' });
-  };
+const SPECS_MAP = [
+  { key: 'fuel',         label: 'Carburant' },
+  { key: 'transmission', label: 'Transmission' },
+  { key: 'color',        label: 'Couleur' },
+  { key: 'year',         label: 'Année' },
+  { key: 'mileage',      label: 'Kilométrage', format: v => `${v.toLocaleString('fr-FR')} km` },
+];
 
-  const handleTestDrive = () => {
-    alert('Demande d\'essai enregistrée !');
-  };
+const CarDetails = ({ car, onClose, showPrices = false }) => {
+  const navigate = useNavigate();
+  const [selectedImg, setSelectedImg] = useState(0);
 
-  const handleShare = async () => {
-    try {
-      await navigator.share({
-        title: `${car.brand} ${car.model}`,
-        text: `Découvrez cette ${car.brand} ${car.model} ${car.year} à ${car.price}€`,
-        url: window.location.href,
-      });
-    } catch (err) {
-      navigator.clipboard.writeText(window.location.href);
-      alert('Lien copié !');
-    }
-  };
+  if (!car) return null;
 
-  if (!car) {
-    return (
-      <div className="car-details-loading">
-        <div className="spinner"></div>
-        <p>Chargement...</p>
-      </div>
-    );
-  }
+  const status = STATUS_CONFIG[car.status] || STATUS_CONFIG['Disponible'];
+  const images = car.images && car.images.length > 0 ? car.images : [car.image];
+
+  // Similar vehicles: same category, exclude current
+  const similar = allCars
+    .filter(c => c.id !== car.id && c.category === car.category)
+    .slice(0, 3);
+
+  const waText = encodeURIComponent(
+    `Bonjour, je suis intéressé par le ${car.title}`
+  );
+  const waLink = `https://wa.me/2250770770770?text=${waText}`;
 
   return (
-    <div className="car-details">
-      {/* Boutons Retour + PDF sur la même ligne */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16, marginTop: 40 }}>
-        {onClose && (
-          <button className="car-details-close" onClick={onClose} aria-label="Retour">
-            <span className="car-details-back-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15 5L8 12L15 19" stroke="#D90429" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </span>
-            <span className="car-details-back-text">Retour</span>
-          </button>
-        )}
-        <button className="btn btn-primary" onClick={handleDownloadPDF} style={{ marginLeft: 'auto' }}>
-          Télécharger la fiche PDF
-        </button>
-      </div>
-      {/* Galerie d'images */}
-      <div className="car-details-gallery">
-        <div className="main-image">
-          <img 
-            src={car.images[selectedImage]} 
-            alt={`${car.brand} ${car.model}`}
-          />
-          {/* <button 
-            className="favorite-button"
-            onClick={() => setIsFavorite(!isFavorite)}
-          >
-            {isFavorite ? '❤️' : '🤍'}
-          </button> */}
-        </div>
-        
-        <div className="image-thumbnails">
-          {car.images.map((img, index) => (
-            <button
-              key={index}
-              className={`thumbnail ${selectedImage === index ? 'active' : ''}`}
-              onClick={() => setSelectedImage(index)}
+    <article className="tcm-details">
+
+      {/* Breadcrumb */}
+      <nav className="tcm-details__breadcrumb" aria-label="Fil d'Ariane">
+        <Link to="/">Accueil</Link>
+        <span>/</span>
+        <Link to="/catalogue">Catalogue</Link>
+        <span>/</span>
+        <span>{car.title}</span>
+      </nav>
+
+      <div className="tcm-details__layout">
+
+        {/* ---- Gallery + Description ---- */}
+        <div className="tcm-details__gallery-col">
+          {/* Main image */}
+          <div className="tcm-details__main-img">
+            <span
+              className="tcm-details__status-badge"
+              style={{ background: car.mileage === 0 ? 'var(--accent)' : 'rgba(26,26,26,0.9)' }}
             >
-              <img src={img} alt={`Vue ${index + 1}`} />
-            </button>
-          ))}
+              {car.mileage === 0 ? 'NEUF' : 'OCCASION'}
+            </span>
+            <img
+              src={images[selectedImg]}
+              alt={`${car.brand} ${car.model}`}
+            />
+          </div>
+
+          {/* Thumbnails */}
+          {images.length > 1 && (
+            <div className="tcm-details__thumbs">
+              {images.map((img, i) => (
+                <button
+                  key={i}
+                  className={`tcm-details__thumb${selectedImg === i ? ' tcm-details__thumb--active' : ''}`}
+                  onClick={() => setSelectedImg(i)}
+                  aria-label={`Image ${i + 1}`}
+                >
+                  <img src={img} alt={`Vue ${i + 1}`} />
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Description */}
+          {car.description && (
+            <div className="tcm-details__description">
+              <div className="tcm-details__desc-title">Description</div>
+              <p>{car.description}</p>
+
+              {/* Specs grid */}
+              <div className="tcm-details__specs-grid">
+                {SPECS_MAP.map(({ key, label, format }) => {
+                  const val = car[key];
+                  if (val == null || val === '') return null;
+                  return (
+                    <div key={key} className="tcm-details__spec-item">
+                      <span className="tcm-details__spec-label">{label}</span>
+                      <span className="tcm-details__spec-value">
+                        {format ? format(val) : val}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* ---- Side Panel ---- */}
+        <div className="tcm-details__side">
+          <div className="tcm-details__side-meta">
+            {car.brand} · {car.category} · {car.year}
+          </div>
+          <h1 className="tcm-details__side-title">{car.title}</h1>
+
+          <div className="tcm-details__price" style={{ color: status.color }}>
+            {showPrices && car.price
+              ? `${(car.price / 1000000).toFixed(0)} 000 000 FCFA`
+              : 'Prix sur demande'
+            }
+          </div>
+          <p className="tcm-details__price-note">
+            Contactez-nous pour connaître le tarif et les options de financement
+          </p>
+
+          {/* Status */}
+          <div className="tcm-details__status-row" style={{ color: status.color }}>
+            <span className="tcm-details__status-dot" style={{ background: status.color }} />
+            {status.label}
+          </div>
+
+          {/* CTAs */}
+          <div className="tcm-details__ctas">
+            <Link to="/contact" className="tcm-details__cta tcm-details__cta--rdv">
+              Prendre rendez-vous
+            </Link>
+            <a href={waLink} target="_blank" rel="noopener noreferrer" className="tcm-details__cta tcm-details__cta--wa">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <path d="M21 11.5a8.4 8.4 0 01-12.2 7.4L3 20l1.1-5.6A8.4 8.4 0 1121 11.5z"/>
+              </svg>
+              Discuter sur WhatsApp
+            </a>
+            <a href="tel:0770770770" className="tcm-details__cta tcm-details__cta--call">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.5 0 1 .5 1 1V20c0 .5-.5 1-1 1-9.4 0-17-7.6-17-17 0-.5.5-1 1-1h3.5c.5 0 1 .5 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.2 2.2z"/>
+              </svg>
+              Appeler le concessionnaire
+            </a>
+          </div>
+
+          {/* Features / Included */}
+          {car.features && car.features.length > 0 && (
+            <div className="tcm-details__included">
+              <div className="tcm-details__included-title">Ce qui est inclus</div>
+              <div className="tcm-details__included-list">
+                {car.features.map((f, i) => (
+                  <div key={i} className="tcm-details__included-item">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--status-available)" strokeWidth="2.4" aria-hidden="true">
+                      <path d="M20 6L9 17l-5-5"/>
+                    </svg>
+                    {f}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Agency info */}
+          <div className="tcm-details__agency">
+            <div className="tcm-details__included-title">Agence</div>
+            <div className="tcm-details__agency-info">
+              Immeuble Le Walebo<br />
+              Cocody Bonoumin, Abidjan<br />
+              07 70 77 07 70
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Informations principales */}
-      <div className="car-details-info">
-        <h1>Détails du véhicule</h1>
-        <table className="car-details-table">
-          <tbody>
-            {car.brand && (
-              <tr><th>Marque</th><td>{car.brand}</td></tr>
-            )}
-            {car.model && (
-              <tr><th>Modèle</th><td>{car.model}</td></tr>
-            )}
-            {car.year != null && car.year !== '' && (
-              <tr><th>Année</th><td>{car.year}</td></tr>
-            )}
-            {(car.engine || car.motorisation) && (
-              <tr><th>Motorisation</th><td>{car.engine || car.motorisation}</td></tr>
-            )}
-            {car.transmission && (
-              <tr><th>Transmission</th><td>{car.transmission}</td></tr>
-            )}
-            {car.mileage != null && (
-              <tr><th>Kilométrage</th><td>{car.mileage.toLocaleString()} km</td></tr>
-            )}
-            {car.color && (
-              <tr><th>Couleur</th><td>{car.color}</td></tr>
-            )}
-            {car.fuel && (
-              <tr><th>Carburant</th><td>{car.fuel}</td></tr>
-            )}
-            {car.power != null && (
-              <tr><th>Puissance</th><td>{car.power}</td></tr>
-            )}
-            {car.doors != null && (
-              <tr><th>Portes</th><td>{car.doors}</td></tr>
-            )}
-            {car.seats != null && (
-              <tr><th>Places</th><td>{car.seats}</td></tr>
-            )}
-            {(car.features && car.features.length > 0) && (
-              <tr><th>Options/Équipements principaux</th><td><ul>{car.features.map((feature, idx) => (<li key={idx}>{feature}</li>))}</ul></td></tr>
-            )}
-            {(car.options && car.options.length > 0) && (
-              <tr><th>Options/Équipements principaux</th><td><ul>{car.options.map((opt, idx) => (<li key={idx}>{opt}</li>))}</ul></td></tr>
-            )}
-            {car.description && (
-              <tr><th>Description</th><td>{car.description}</td></tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-    </div>
+      {/* Similar vehicles */}
+      {similar.length > 0 && (
+        <div className="tcm-details__similar">
+          <h2 className="tcm-details__similar-title">Véhicules similaires</h2>
+          <div className="tcm-details__similar-grid">
+            {similar.map(c => (
+              <Link key={c.id} to={`/cars/${c.id}`} className="tcm-details__similar-card">
+                <div className="tcm-details__similar-img">
+                  <img src={c.image} alt={c.title} loading="lazy" />
+                </div>
+                <div className="tcm-details__similar-info">
+                  <div className="tcm-details__similar-name">{c.title}</div>
+                  <div className="tcm-details__similar-price">Prix sur demande</div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+    </article>
   );
 };
 

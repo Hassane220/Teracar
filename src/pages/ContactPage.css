@@ -1,0 +1,176 @@
+/* ============================================================
+   TERACAR MOTORS — ContactPage
+   ============================================================ */
+
+.tcm-contact {
+  padding: 36px 40px 56px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.tcm-contact__layout {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* Breadcrumb */
+.tcm-contact__breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--text-muted); margin-bottom: 16px;
+}
+.tcm-contact__breadcrumb a { color: var(--text-muted); transition: color var(--transition-fast); }
+.tcm-contact__breadcrumb a:hover { color: var(--text-primary); }
+.tcm-contact__breadcrumb span:last-child { color: #d7d7db; }
+
+.tcm-contact__title { font-size: 38px; letter-spacing: -0.02em; margin-bottom: 10px; }
+.tcm-contact__sub { font-size: 15px; color: var(--text-secondary); margin-bottom: 32px; max-width: 480px; line-height: 1.7; }
+
+/* Details */
+.tcm-contact__details {
+  display: flex; flex-direction: column; gap: 20px; margin-bottom: 28px;
+}
+.tcm-contact__detail {
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.tcm-contact__detail-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: var(--accent-dim); border: 1px solid var(--accent-dim-border);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.tcm-contact__detail-label {
+  font-size: 11px; color: var(--text-muted); text-transform: uppercase;
+  letter-spacing: .1em; margin-bottom: 3px; font-family: var(--font-mono);
+}
+.tcm-contact__detail-val {
+  font-size: 14px; color: var(--text-secondary); line-height: 1.5;
+}
+a.tcm-contact__detail-val:hover { color: var(--accent-hover); }
+
+/* Map */
+.tcm-contact__map {
+  border-radius: 14px; overflow: hidden;
+  border: 1px solid var(--border-subtle); height: 200px;
+}
+.tcm-contact__map iframe {
+  width: 100%; height: 100%; border: 0;
+  filter: grayscale(1) invert(.9) contrast(.9); display: block;
+}
+
+/* Form card */
+.tcm-contact__form-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 32px;
+}
+.tcm-contact__form-title {
+  font-size: 22px; letter-spacing: -.02em; margin-bottom: 20px;
+}
+
+/* Type tabs */
+.tcm-contact__type-tabs {
+  display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap;
+}
+.tcm-contact__type-tab {
+  padding: 8px 16px;
+  border: 1px solid var(--border-inputs);
+  border-radius: var(--radius-pill);
+  font-size: 13px; font-weight: 500; color: var(--text-secondary);
+  cursor: pointer; background: transparent;
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+.tcm-contact__type-tab:hover {
+  border-color: var(--accent); color: var(--text-primary);
+}
+.tcm-contact__type-tab--active {
+  background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600;
+}
+
+/* Form */
+.tcm-contact__form {
+  display: flex; flex-direction: column; gap: 18px;
+}
+.tcm-contact__row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+}
+.tcm-contact__field {
+  display: flex; flex-direction: column; gap: 7px;
+}
+.tcm-contact__field label {
+  font-size: 13px; font-weight: 600; color: var(--text-secondary);
+}
+.tcm-contact__required { color: var(--accent); }
+
+.tcm-contact__field input,
+.tcm-contact__field select,
+.tcm-contact__field textarea {
+  background: transparent;
+  border: 1px solid var(--border-inputs);
+  border-radius: 9px;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  transition: border-color var(--transition-fast);
+  resize: none;
+}
+.tcm-contact__field input::placeholder,
+.tcm-contact__field textarea::placeholder {
+  color: var(--text-muted);
+}
+.tcm-contact__field input:focus,
+.tcm-contact__field select:focus,
+.tcm-contact__field textarea:focus {
+  outline: none; border-color: var(--accent);
+}
+.tcm-contact__field select option { background: #1a1a1d; }
+.tcm-contact__input--error { border-color: var(--accent) !important; }
+.tcm-contact__error {
+  font-size: 12px; color: var(--accent-hover);
+}
+
+.tcm-contact__submit {
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  padding: 14px 24px;
+  background: var(--accent); color: #fff;
+  border-radius: var(--radius-pill);
+  font-weight: 700; font-size: 15px;
+  transition: background var(--transition-fast);
+  margin-top: 4px;
+}
+.tcm-contact__submit:hover { background: #b8181f; }
+
+/* Success state */
+.tcm-contact__success {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 16px; padding: 80px 40px; text-align: center;
+}
+.tcm-contact__success-icon {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: rgba(94,230,168,.12); border: 1.5px solid rgba(94,230,168,.3);
+  display: flex; align-items: center; justify-content: center;
+}
+.tcm-contact__success h1 { font-size: 30px; }
+.tcm-contact__success p {
+  font-size: 15px; color: var(--text-secondary); max-width: 440px; line-height: 1.7;
+}
+.tcm-contact__success-btn {
+  display: inline-flex; align-items: center;
+  padding: 13px 28px; background: var(--accent); color: #fff;
+  border-radius: var(--radius-pill); font-weight: 700; font-size: 14.5px;
+  margin-top: 8px; transition: background var(--transition-fast);
+}
+.tcm-contact__success-btn:hover { background: #b8181f; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .tcm-contact__layout { grid-template-columns: 1fr; gap: 32px; }
+  .tcm-contact { padding: 24px 20px 40px; }
+}
+@media (max-width: 640px) {
+  .tcm-contact__title { font-size: 28px; }
+  .tcm-contact__row { grid-template-columns: 1fr; }
+  .tcm-contact__form-card { padding: 20px; }
+}

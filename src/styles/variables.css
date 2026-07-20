@@ -1,42 +1,79 @@
+/* ============================================================
+   TERACAR MOTORS — Design Tokens
+   Dark : "Nuit Rouge" (default)
+   Light: "Jour Blanc"
+   ============================================================ */
+
 :root {
-  /* Couleurs */
-  --primary-color: #D90429; /* rouge principal dynamique */
-  --primary-dark: #B71C1C; /* rouge foncé pour hover, accents */
-  --secondary-color: #F44336; /* rouge clair pour backgrounds légers */
-  --accent-color: #F6C700; /* doré élégant */
-  --dark-color: #222; /* gris foncé moderne */
-  --light-color: #fff3f3; /* rouge très clair */
-  --white: #fff;
-  --gray-100: #f1f5f9;
-  --gray-200: #e2e8f0;
-  --gray-300: #cbd5e1;
-  
-  /* Typographie */
-  --font-family: 'Inter', sans-serif;
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  --font-size-3xl: 1.875rem;
-  --font-size-4xl: 2.25rem;
-  
-  /* Espacements */
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  --spacing-2xl: 3rem;
-  
-  /* Bordures & Ombres */
-  --border-radius: 8px;
-  --border-radius-lg: 12px;
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  
-  /* Transitions */
-  --transition: all 0.3s ease;
-  --transition-fast: all 0.15s ease;
+  /* --- Backgrounds --- */
+  --bg-main:    #0b0b0d;
+  --bg-card:    #141417;
+  --bg-sidebar: #0e0e10;
+  --bg-hover:   rgba(255, 255, 255, 0.04);
+
+  /* --- Borders --- */
+  --border-subtle:  rgba(255, 255, 255, 0.08);
+  --border-default: rgba(255, 255, 255, 0.12);
+  --border-inputs:  rgba(255, 255, 255, 0.16);
+
+  /* --- Text --- */
+  --text-primary:   #f2f2f4;
+  --text-secondary: #c7c7cd;
+  --text-muted:     #8a8a90;
+  --text-dimmed:    #6c6c72;
+
+  /* --- Brand / Accent --- */
+  --accent:              #d21f28;
+  --accent-hover:        #ff3b42;
+  --accent-dim:          rgba(210, 31, 40, 0.14);
+  --accent-dim-border:   rgba(210, 31, 40, 0.3);
+
+  /* --- Status --- */
+  --status-available: #5ee6a8;
+  --status-reserved:  #f4b740;
+  --status-sold:      #a2a2a8;
+
+  /* --- External --- */
+  --whatsapp: #25D366;
+
+  /* --- Typography --- */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body:    'Manrope', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  /* --- Radii --- */
+  --radius-sm:   6px;
+  --radius-md:   9px;
+  --radius-card: 14px;
+  --radius-pill: 999px;
+
+  /* --- Z-index scale --- */
+  --z-dropdown: 10;
+  --z-sticky:   100;
+  --z-overlay:  200;
+  --z-modal:    300;
+  --z-toast:    400;
+
+  /* --- Transitions --- */
+  --transition-card: transform 0.25s ease-out, border-color 0.25s ease-out;
+  --transition-fast: 0.15s ease-out;
+}
+
+/* ============================================================
+   Thème clair — "Jour Blanc"
+   ============================================================ */
+[data-theme="light"] {
+  --bg-main:    #f5f5f7;
+  --bg-card:    #ffffff;
+  --bg-sidebar: #ebebee;
+  --bg-hover:   rgba(0, 0, 0, 0.04);
+
+  --border-subtle:  rgba(0, 0, 0, 0.08);
+  --border-default: rgba(0, 0, 0, 0.13);
+  --border-inputs:  rgba(0, 0, 0, 0.18);
+
+  --text-primary:   #0d0d0f;
+  --text-secondary: #3c3c42;
+  --text-muted:     #6a6a72;
+  --text-dimmed:    #9a9aa2;
 }

@@ -17,13 +17,13 @@
 }
 
 /* ===== HEADER ===== */
-.header {
+.hyundai2 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.header img {
+.hyundai2 .header img {
   height: 80px;
 }
 

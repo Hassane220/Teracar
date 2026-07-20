@@ -1,176 +1,140 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './Hero.css';
-import { useNavigate } from 'react-router-dom';
-import car1 from '../../assets/images/car_toyota_hero1.jpg';
-import car2 from '../../assets/images/car_nissan_hero2.jpg';
-import car3 from '../../assets/images/car_suzuki_hero3.jpg';
+import hero1 from '../../assets/images/car_toyota_hero1.jpg';
+import hero2 from '../../assets/images/car_nissan_hero2.jpg';
+import hero3 from '../../assets/images/car_suzuki_hero3.jpg';
+
+const SLIDES = [hero1, hero2, hero3];
+const INTERVAL = 7000;
 
 const Hero = () => {
-  const navigate = useNavigate();
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [current, setCurrent] = useState(0);
+  const [prev, setPrev] = useState(null);
 
-  // ✅ MODIFICATION ICI UNIQUEMENT
-  // Initialisation correcte dès le premier rendu
-  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 1024);
-
-  // Détecter la taille de l'écran (INCHANGÉ)
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 1024);
-    };
-
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    const timer = setInterval(() => {
+      setCurrent(c => {
+        setPrev(c);
+        return (c + 1) % SLIDES.length;
+      });
+    }, INTERVAL);
+    return () => clearInterval(timer);
   }, []);
 
-  const slides = [
-    {
-      title: "Trouvez la",
-      highlighted: "voiture parfaite",
-      subtitle: "",
-      description: "Découvrez notre sélection exclusive de véhicules d'occasion certifiés et neufs avec les meilleures garanties du marché.",
-      background: "linear-gradient(135deg, #6b2316ff 0%, #982404ff 100%)",
-      image: car1,
-    },
-    {
-      title: "Conduisez",
-      highlighted: "l'excellence",
-      subtitle: "sur toutes les routes",
-      description: "Des véhicules premium rigoureusement inspectés pour des performances et une sécurité optimales.",
-      background: "linear-gradient(135deg, #ac2b0aff 0%, #781204ff 100%)",
-      image: car2,
-    },
-    {
-      title: "L'élégance",
-      highlighted: "automobile",
-      subtitle: "à portée de main",
-      description: "Un service personnalisé pour vous accompagner dans l'acquisition de votre véhicule de rêve.",
-      background: "linear-gradient(135deg, #c71c09ff 0%, #e73b14ff 100%)",
-      image: car3,
+  const goTo = (i) => {
+    if (i === current) return;
+    setPrev(current);
+    setCurrent(i);
+  };
+
+  const touchStart = React.useRef(null);
+
+  const onTouchStart = (e) => { touchStart.current = e.touches[0].clientX; };
+  const onTouchEnd = (e) => {
+    if (touchStart.current === null) return;
+    const diff = touchStart.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {
+      goTo(diff > 0
+        ? (current + 1) % SLIDES.length
+        : (current - 1 + SLIDES.length) % SLIDES.length
+      );
     }
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [slides.length]);
-
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
-  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  const goToSlide = (index) => setCurrentSlide(index);
+    touchStart.current = null;
+  };
 
   return (
-    <>
-      {/* Image brute de test supprimée */}
-      <section
-        id="accueil"
-        className="hero"
-        style={!isMobile ? {
-          backgroundImage: `url(${slides[currentSlide].image})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          minHeight: '88vh',
-          height: '88vh',
-          width: '100%',
-          position: 'relative',
-        } : {}}
+    <section
+      className="tcm-hero"
+      aria-label="Accueil — Teracar Motors"
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+    >
+      {/* Slides */}
+      {SLIDES.map((src, i) => (
+        <div
+          key={i}
+          className={`tcm-hero__bg ${i === current ? 'tcm-hero__bg--active' : i === prev ? 'tcm-hero__bg--prev' : ''}`}
+          style={{ backgroundImage: `url(${src})` }}
+          aria-hidden="true"
+        />
+      ))}
+
+      {/* Gradient overlay */}
+      <div className="tcm-hero__overlay" aria-hidden="true" />
+
+      {/* Red radial glow */}
+      <div className="tcm-hero__glow" aria-hidden="true" />
+
+      {/* Content */}
+      <div className="tcm-hero__content">
+        <div className="tcm-hero__badge">
+          <span className="tcm-hero__badge-dot" aria-hidden="true" />
+          Concessionnaire multimarque · Abidjan
+        </div>
+
+        <h1 className="tcm-hero__title">
+          Trouvez la<br />
+          voiture <span className="tcm-hero__title-accent">parfaite</span>
+        </h1>
+
+        <p className="tcm-hero__sub">
+          Plus de 80 véhicules neufs et d'occasion certifiés — Toyota, Nissan,
+          Peugeot, Ford et plus. Garantie et financement sur place.
+        </p>
+
+        <div className="tcm-hero__actions">
+          <Link to="/catalogue" className="tcm-hero__btn tcm-hero__btn--primary">
+            Explorer les modèles
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6"/>
+            </svg>
+          </Link>
+          <Link to="/contact" className="tcm-hero__btn tcm-hero__btn--outline">
+            Prendre rendez-vous
+          </Link>
+        </div>
+
+      </div>
+
+      {/* Prev / Next arrows */}
+      <button
+        className="tcm-hero__arrow tcm-hero__arrow--prev"
+        onClick={() => goTo((current - 1 + SLIDES.length) % SLIDES.length)}
+        aria-label="Slide précédente"
       >
-        {/* Overlay desktop */}
-        {!isMobile && <div className="hero__overlay" />}
-        {/* Mobile : on garde le slider classique */}
-        {isMobile && (
-          <div className="hero__slides">
-            {/* L'image test est retirée, affichage normal */}
-            {/* Slides dynamiques */}
-            {slides.map((slide, index) => (
-                <div
-                  key={index}
-                  className={`hero__slide hero__slide--${index} ${index === currentSlide ? 'hero__slide--active' : ''}`}
-                >
-                  <img
-                    className="hero__slide-img"
-                    src={slide.image}
-                    alt=""
-                    aria-hidden="true"
-                  />
-                  <div className="hero__mobile-overlay"></div>
-                  {/* Texte et actions sur mobile */}
-                  {index === currentSlide && (
-                    <div className="hero__slide-content">
-                      <div className="slide__text">
-                        <div className="text__wrapper">
-                          <h1 className="hero__title">
-                            {slide.title} <span className="highlighted">{slide.highlighted}</span> {slide.subtitle}
-                          </h1>
-                          <p className="hero__description">{slide.description}</p>
-                        </div>
-                        <div className="hero__actions" style={{marginTop: '1.5rem'}}>
-                          <button className="btn btn--primary btn--large" onClick={() => navigate('/catalogue-model-voiture')}>
-                            Explorer les modèles
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-            ))}
-          </div>
-        )}
-        {/* Desktop : barre de contrôle et boutons en bas */}
-        {!isMobile && (
-          <>
-            {/* Catalogue Button - always visible, top right */}
-            {/* <button
-              className="hero__catalog-button btn--catalog"
-              onClick={() => navigate('/catalogue-model-voiture')}
-            >
-              <span className="catalog-icon">📚</span>
-              <span className="catalog-text">Catalogue</span>
-            </button> */}
-            <div className="hero__bottom-bar">
-              <div className="slide__text" style={{textAlign: 'center', marginBottom: '1.5rem', maxWidth: '700px'}}>
-                <div className="text__wrapper">
-                  <h1 className="hero__title">
-                    {currentSlide === 0 ? (
-                      <>
-                        {slides[0].title} <span className="highlighted">{slides[0].highlighted}</span><br />{slides[0].subtitle}
-                      </>
-                    ) : (
-                      <>
-                        {slides[currentSlide].title} <span className="highlighted">{slides[currentSlide].highlighted}</span> {slides[currentSlide].subtitle}
-                      </>
-                    )}
-                  </h1>
-                  <p className="hero__description">{slides[currentSlide].description}</p>
-                </div>
-              </div>
-              <div className="hero__controls">
-                <button className="hero__control hero__control--prev" onClick={prevSlide}>‹</button>
-                <div className="hero__indicators">
-                  {slides.map((_, index) => (
-                    <button
-                      key={index}
-                      className={`hero__indicator ${index === currentSlide ? 'hero__indicator--active' : ''}`}
-                      onClick={() => goToSlide(index)}
-                    />
-                  ))}
-                </div>
-                <button className="hero__control hero__control--next" onClick={nextSlide}>›</button>
-              </div>
-              <div className="hero__actions" style={{marginTop: '1.5rem'}}>
-                <button className="btn btn--primary btn--large" onClick={() => navigate('/catalogue-model-voiture')}>Explorer les modèles</button>
-              </div>
-            </div>
-          </>
-        )}
-      </section>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+      <button
+        className="tcm-hero__arrow tcm-hero__arrow--next"
+        onClick={() => goTo((current + 1) % SLIDES.length)}
+        aria-label="Slide suivante"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
 
-
-    </>
+      {/* Slide indicators — centered at bottom */}
+      <div className="tcm-hero__dots" role="tablist" aria-label="Diaporama">
+        {SLIDES.map((_, i) => (
+          <button
+            key={i}
+            className={`tcm-hero__dot${i === current ? ' tcm-hero__dot--active' : ''}`}
+            onClick={() => goTo(i)}
+            role="tab"
+            aria-selected={i === current}
+            aria-label={`Slide ${i + 1}`}
+          >
+            {i === current && (
+              <span key={current} className="tcm-hero__dot-progress" />
+            )}
+          </button>
+        ))}
+      </div>
+    </section>
   );
 };
 

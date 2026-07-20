@@ -1,717 +1,275 @@
+/* ============================================================
+   TERACAR MOTORS — Hero Carousel
+   ============================================================ */
 
-@import '../../styles/variables.css';
-
-/* Empêche le scroll horizontal (fix iOS Safari + layout global) */
-:root {
-  overflow-x: hidden;
-  max-width: 100vw;
-}
-
-.hero__overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 90vh;
-  background: rgba(0,0,0,0.35);
-  z-index: 1;
-  pointer-events: none;
-}
-/* Supprime le contour bleu (focus) sur les indicateurs du Hero */
-.hero__indicator:focus {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-.hero {
+.tcm-hero {
   position: relative;
-  min-height: 90vh;
-  height: 90vh;
-  margin-top: 0;
-  padding-top: 80px;
+  height: 560px;
   overflow: hidden;
-  background: var(--primary-color);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: stretch;
+  isolation: isolate;
 }
-.hero__bottom-bar {
+
+/* ---- Slides ---- */
+.tcm-hero__bg {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.35);
-  padding: 2rem 0 12rem 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  z-index: 2;
-  padding-left: 12rem;
-}
-
-/* ===== BOUTON CATALOGUE ===== */
-.hero__catalog-button {
-  position: absolute;
-  top: 80px;
-  right: 30px;
-  z-index: 20;
-}
-
-.btn--catalog {
-    outline: none !important;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
-  padding: 12px 24px;
-  border-radius: 50px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-  white-space: nowrap;
-  margin-right: 4rem;
-}
-
-.btn--catalog:hover {
-  background: rgba(255, 255, 255, 0.25);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.catalog-icon {
-  font-size: 1.2em;
-}
-
-.catalog-text {
-  font-size: var(--font-size-sm);
-}
-
-/* ===== SLIDES ===== */
-.hero__slides {
-  position: relative;
-  height: 90vh;
-}
-
-.hero__slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 90vh;
-  opacity: 0;
-  transform: translateX(50px);
-  transition: opacity 1s ease, transform 1s ease;
-  pointer-events: none;
-}
-
-.hero__slide--active {
-  opacity: 1;
-  transform: translateX(0);
-  pointer-events: all;
-  z-index: 10 !important;
-}
-
-.hero__slide-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 100%;
-  /* padding: 0 4rem; */
-  padding: 0 7rem 0 2rem;
-  position: relative;
-  z-index: 2;
-}
-
-/* ===== TEXTE DES SLIDES ===== */
-.slide__text {
-  flex: 1;
-  max-width: 600px;
-  color: var(--white);
-  animation: slideInLeft 1s ease-out;
-  padding-right: 1rem; /* Réduit pour laisser plus de place à l'image */
-  position: relative;
-  top: -30px; /* Décalage vers le haut */
-}
-
-.text__wrapper {
-  padding: 1rem 0 0 4rem;
-  text-align: left;
-}
-
-.hero__title {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.highlighted {
-  color: var(--accent-color);
-  display: inline-block;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-}
-
-.hero__description {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  margin-bottom: 2.5rem;
-  opacity: 0.9;
-  line-height: 1.6;
-  max-width: 90%;
-}
-
-/* ===== IMAGE DES SLIDES (AGRANDIE) ===== */
-.slide__image {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  animation: slideInRight 1s ease-out;
-  padding-left: 6rem; /* Décale l'image plus à droite */
-}
-
-.image__container {
-  width: min(700px, 55vw); /* AUGMENTÉ: de 600px à 700px, 45vw à 55vw */
-  height: min(500px, 50vh); /* AUGMENTÉ: de 400px à 500px, 40vh à 50vh */
+  inset: 0;
   background-size: cover;
   background-position: center;
-  border-radius: 20px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-  transform: perspective(1000px) rotateY(-15deg);
-  transition: transform 0.5s ease;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+  will-change: transform, opacity;
 }
 
-.image__container:hover {
-  transform: perspective(1000px) rotateY(0deg);
+.tcm-hero__bg--active {
+  opacity: 1;
+  animation: tcm-kb 14s ease-in-out forwards;
 }
 
-.image__overlay {
+.tcm-hero__bg--prev {
+  opacity: 0;
+}
+
+/* Cinematic gradient left-to-right */
+.tcm-hero__overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: linear-gradient(
-    45deg,
-    rgba(0, 0, 0, 0.4) 0%,
-    rgba(0, 0, 0, 0) 50%,
-    rgba(0, 0, 0, 0.4) 100%
+    90deg,
+    rgba(11, 11, 13, 0.88) 0%,
+    rgba(11, 11, 13, 0.65) 42%,
+    rgba(11, 11, 13, 0.18) 100%
+  );
+  z-index: 1;
+}
+
+[data-theme="light"] .tcm-hero__overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(20, 20, 24, 0.80) 0%,
+    rgba(20, 20, 24, 0.50) 42%,
+    rgba(20, 20, 24, 0.10) 100%
   );
 }
 
-/* ===== ACTIONS ===== */
-.hero__actions {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  animation: fadeInUp 1s ease-out 0.3s both;
-  margin-left: 4rem;
-}
-
-.btn--primary, .btn--outline {
-  padding: 0.875rem 1.75rem;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.btn--primary {
-  background: var(--accent-color);
-  color: white;
-  border: none;
-}
-
-.btn--outline {
-  background: transparent;
-  color: white;
-  border: 2px solid white;
-}
-
-.btn--primary:hover {
-  background: linear-gradient(90deg, #f6c700 0%, #ffe066 100%);
-  color: #23272f;
-  transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 8px 24px rgba(246, 199, 0, 0.18);
-  border: 1px solid #ffe066;
-}
-
-.btn--outline:hover {
-  background: linear-gradient(90deg, rgba(255,255,255,0.18) 0%, rgba(246,199,0,0.12) 100%);
-  color: #f6c700;
-  border: 2px solid #f6c700;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ===== CONTRÔLES (CENTRÉS VERTICALEMENT) ===== */
-.hero__controls {
+/* Red radial glow top-left */
+.tcm-hero__glow {
   position: absolute;
-  top: 50%; /* CENTRÉ VERTICALEMENT */
-  left: 0;
-  right: 0;
-  transform: translateY(-50%); /* Centrage vertical */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 clamp(40px, 8vw, 100px);
-  z-index: 10;
-}
-
-.hero__control {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  width: clamp(50px, 10vw, 60px); /* Légèrement plus grand */
-  height: clamp(50px, 10vw, 60px); /* Légèrement plus grand */
+  top: -140px;
+  left: -120px;
+  width: 520px;
+  height: 520px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin: -5rem;
-
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-.hero__control:focus {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-.hero__control:hover {
-  background: rgba(255, 255, 255, 0.25);
-  transform: scale(1.1);
-}
-
-.control__icon {
-  width: clamp(24px, 5vw, 28px); /* Légèrement plus grand */
-  height: clamp(24px, 5vw, 28px); /* Légèrement plus grand */
-  stroke-width: 2;
-  color: white;
-}
-
-/* ===== INDICATEURS (DÉPLACÉS EN BAS) ===== */
-.hero__indicators {
-  display: flex;
-  gap: clamp(8px, 2vw, 12px);
-  position: absolute;
-  left: 0;
-  right: 0;
-  /* bottom: 32px; */
-  top: 17rem;
-  justify-content: center;
-  z-index: 100;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-  visibility: visible !important;
-}
-
-.hero__indicator {
-  width: 56px;
-  height: 2px;
-  border-radius: 8px;
-  background: #e0e0e0;
-  border: none;
-  cursor: pointer;
-  transition: none;
-  position: relative;
-  box-shadow: none;
-}
-
-/* Plus aucun effet au survol */
-.hero__indicator:hover {
-  background: #e0e0e0;
-  box-shadow: none;
-  transform: none;
-}
-
-.hero__indicator--active {
-  background: #bdbdbd;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero__indicator--active::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  background: #c71c09;
-  border-radius: 8px;
-  animation: hero-indicator-progress 5s linear forwards;
+  background: radial-gradient(circle, rgba(210, 31, 40, 0.32) 0%, transparent 65%);
+  filter: blur(8px);
+  pointer-events: none;
   z-index: 1;
 }
 
-@keyframes hero-indicator-progress {
-  0% {
-    width: 0%;
-  }
-  100% {
-    width: 100%;
-  }
+/* Content */
+.tcm-hero__content {
+  position: relative;
+  z-index: 2;
+  padding: 66px 40px 66px 80px;
+  max-width: 660px;
 }
 
-.hero__indicator--active::before {
-  content: none;
+/* Badge */
+.tcm-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 12.5px;
+  color: #d7d7db;
+  margin-bottom: 26px;
+  backdrop-filter: blur(6px);
 }
 
-/* ===== TIMER (SUPPRIMÉ OU DÉPLACÉ) ===== */
-/* Le timer est masqué car les indicateurs sont maintenant en bas */
-.hero__timer {
-  display: none; /* Masqué pour simplifier */
+.tcm-hero__badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  animation: tcm-ping 2s ease-in-out infinite;
 }
 
-/* ===== ACTIONS MOBILE ===== */
-.mobile__quick-actions {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  right: 20px;
+/* Title */
+.tcm-hero__title {
+  font-size: clamp(40px, 5vw, 62px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin: 0 0 20px;
+  color: #f2f2f4;
+}
+
+.tcm-hero__title-accent {
+  color: var(--accent-hover);
+}
+
+/* Subtitle */
+.tcm-hero__sub {
+  font-size: 17px;
+  line-height: 1.7;
+  color: #c7c7cd;
+  max-width: 460px;
+  margin: 0 0 32px;
+}
+
+/* Actions */
+.tcm-hero__actions {
   display: flex;
-  gap: 10px;
-  z-index: 1000;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-.mobile__action-btn {
-  flex: 1;
-  padding: 15px;
-  border-radius: 50px;
-  border: none;
-  font-weight: 600;
-  font-size: 1rem;
+.tcm-hero__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 14px 26px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 14.5px;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.tcm-hero__btn--primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.tcm-hero__btn--primary:hover {
+  background: #b8181f;
+}
+
+.tcm-hero__btn--outline {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #f2f2f4;
+}
+
+.tcm-hero__btn--outline:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+/* ---- Prev / Next arrows ---- */
+.tcm-hero__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(11, 11, 13, 0.45);
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  backdrop-filter: blur(6px);
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
   cursor: pointer;
-  transition: transform 0.3s ease;
 }
 
-.mobile__action-btn:active {
-  transform: scale(0.95);
+.tcm-hero__arrow--prev { left: 20px; }
+.tcm-hero__arrow--next { right: 20px; }
+
+.tcm-hero__arrow:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-50%) scale(1.08);
 }
 
-.mobile__action-btn--primary {
-  background: var(--accent-color);
-  color: white;
+/* ---- Navigation dots ---- */
+.tcm-hero__dots {
+  position: absolute;
+  bottom: 72px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 
-.mobile__action-btn--secondary {
-  background: white;
-  color: var(--dark-color);
+.tcm-hero__dot {
+  position: relative;
+  width: 32px;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.25);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background 0.3s;
 }
 
-/* =========== RESPONSIVE BREAKPOINTS =========== */
-
-/* === TABLETTE (768px - 1024px) === */
-/* === TABLETTE (768px - 1024px) — COMPORTEMENT IDENTIQUE AU MOBILE === */
-/* === TABLETTE : image plein hero (sans toucher au desktop) === */
-/* === TABLETTE (769px - 1024px) === */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .hero {
-    margin-top: 0;
-    min-height: 100vh;
-  }
-  
-  .hero__slides {
-    height: 100vh;
-  }
-  
-  .hero__slide {
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
-  }
-
-  .hero__slide .hero__slide-img {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    max-width: none !important;
-    object-fit: cover !important;
-    z-index: 0 !important;
-    border: none !important;
-    background: transparent !important;
-    filter: none !important;
-    display: block !important;
-  }
-
-  /* Overlay sombre */
-  .hero__mobile-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.55);
-    z-index: 1;
-  }
-
-  /* Contenu AU-DESSUS de l'image */
-  .hero__slide-content {
-    position: relative;
-    z-index: 2;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 2rem;
-  }
-  
-  .slide__text {
-    max-width: 100%;
-    text-align: center;
-    padding: 0;
-  }
-  
-  .text__wrapper {
-    padding: 0;
-    max-width: 80%;
-  }
-  
-  .hero__actions {
-    justify-content: center;
-  }
-  
-  /* Cacher l'image desktop */
-  .slide__image {
-    display: none !important;
-  }
-  
-  /* Cacher le bouton catalogue sur tablette aussi */
-  .hero__catalog-button {
-    display: none;
-  }
-  .hero__control{
-    visibility: hidden;
-  }
-  
-  .stat__item {
-    padding: 1.5rem 0rem;
-  }
+.tcm-hero__dot--active {
+  background: rgba(255, 255, 255, 0.35);
 }
 
+.tcm-hero__dot-progress {
+  position: absolute;
+  inset: 0;
+  left: 0;
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  animation: tcm-progress 7s linear forwards;
+}
 
-/* === MOBILE (< 768px) === */
+/* ---- Responsive ---- */
 @media (max-width: 768px) {
-
-
-  .hero {
-    margin-top: 0;
-    min-height: 100vh;
-    height: 100vh !important;
-    width: 100vw !important;
-    align-items: stretch !important;
+  .tcm-hero {
+    height: 480px;
   }
 
-  .hero__slides {
-    height: 100vh !important;
-    min-height: 100vh !important;
-    width: 100% !important;
+  .tcm-hero__content {
+    padding: 48px 20px;
   }
 
-  .hero__slide {
-    height: 100vh !important;
-    min-height: 100vh !important;
-    width: 100% !important;
-    overflow: hidden;
-  }
-
-  /* Override global.css debug patch: img { z-index: 99999 !important; border: 4px solid red !important; } */
-  .hero__slide .hero__slide-img {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    max-width: none !important;
-    object-fit: cover !important;
-    z-index: 0 !important;
-    border: none !important;
-    background: transparent !important;
-    filter: none !important;
-    display: block !important;
-  }
-
-
-  /* Overlay sombre */
-  .hero__mobile-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.55);
-    z-index: 1;
-  }
-
-  /* Contenu AU-DESSUS de l'image */
-  .hero__slide-content {
-    position: relative;
-    z-index: 2;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 1.5rem;
-  }
-
-  .slide__text {
-    max-width: 100%;
-    text-align: center;
-    padding: 0;
-    top: 0;
-  }
-
-  .text__wrapper {
-    padding: 0;
-  }
-
-  .hero__actions {
-    justify-content: center;
-    margin-left: 0;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  /* Contrer la règle globale de Footer.css qui cache ces classes sur mobile */
-  .hero__slide-content .btn--primary,
-  .hero__slide-content .btn--outline {
-    visibility: visible !important;
-  }
-
-  /* Image desktop totalement désactivée */
-  .slide__image {
-    display: none !important;
-  }
-}
-
-
-/* === TRÈS PETIT MOBILE (< 375px) === */
-@media (max-width: 375px) {
-  .hero__title {
-    font-size: 1.5rem;
-  }
-  
-  .hero__description {
-    font-size: 0.875rem;
-  }
-  
-  .hero__actions {
-    gap: 10px;
-  }
-  
-  .btn--primary, .btn--outline {
-    padding: 0.75rem 1.5rem;
-    font-size: 0.875rem;
-  }
-  
-  .hero__controls {
-    padding: 0 1rem;
-  }
-  
-  .hero__control {
-    width: 40px;
-    height: 40px;
-  }
-  
-  .control__icon {
-    width: 20px;
-    height: 20px;
-  }
-  
-  .image__container {
-    height: 180px;
-  }
-  
-  .hero__slide-content {
-    padding: 60px 1rem 140px;
-  }
-}
-
-/* === ORIENTATION PAYSAGE MOBILE === */
-@media (max-height: 500px) and (orientation: landscape) {
-  .hero {
-    min-height: 120vh;
-  }
-  
-  .hero__slide-content {
-    flex-direction: row;
-    padding-top: 40px;
-    padding-bottom: 60px;
-    padding-left: 3rem;
-    padding-right: 3rem;
-  }
-  
-  .slide__text {
-    max-width: 50%;
-    margin-bottom: 0;
-    padding-right: 1rem; /* Réduit en paysage */
-  }
-  
-  .slide__image {
-    max-width: 45%;
-    padding-left: 1rem; /* Réduit en paysage */
-  }
-  
-  .image__container {
-    height: 200px; /* Ajusté en paysage */
-  }
-  
-  .hero__controls {
-    padding: 0 3rem;
-  }
-  
-  .mobile__quick-actions {
+  .tcm-hero__arrow {
     display: none;
   }
+
+  .tcm-hero__title {
+    font-size: clamp(36px, 8vw, 48px);
+  }
+
+  .tcm-hero__sub {
+    font-size: 15px;
+  }
+
+  .tcm-hero__btn {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
 }
 
-/* === ACCESSIBILITÉ === */
+@media (max-width: 480px) {
+  .tcm-hero__actions {
+    flex-direction: column;
+  }
+
+  .tcm-hero__btn {
+    justify-content: center;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .hero__slide,
-  .slide__text,
-  .slide__image,
-  .hero__actions,
-  .hero__indicator--active::before,
-  .timer__fill,
-  .highlighted,
-  .btn--catalog:hover,
-  .hero__control:hover,
-  .btn--primary:hover,
-  .btn--outline:hover,
-  .mobile__action-btn:active {
+  .tcm-hero__bg {
     animation: none;
     transition: none;
-    transform: none;
   }
-  
-  .image__container {
-    transform: perspective(1000px) rotateY(0deg);
+  .tcm-hero__badge-dot {
+    animation: none;
   }
 }

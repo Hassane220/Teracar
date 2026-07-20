@@ -91,13 +91,13 @@
 }
 
 /* ===== HEADER ===== */
-.header {
+.toyota2 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.header img {
+.toyota2 .header img {
   height: 80px;
 }
 

@@ -1,0 +1,92 @@
+.tcm-settings-admin__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tcm-settings-admin__setting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.tcm-settings-admin__setting-title {
+  font: 700 15px/1.2 'Space Grotesk', sans-serif;
+  margin-bottom: 6px;
+}
+
+.tcm-settings-admin__setting-desc {
+  font-size: 13.5px;
+  color: #a2a2a8;
+  line-height: 1.6;
+}
+
+.tcm-settings-admin__warning { color: #f4b740; }
+
+.tcm-settings-admin__toggle {
+  width: 48px;
+  height: 26px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.16);
+  border: none;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  transition: background .25s;
+}
+
+.tcm-settings-admin__toggle--on { background: #d21f28; }
+
+.tcm-settings-admin__toggle-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform .25s;
+  display: block;
+}
+
+.tcm-settings-admin__toggle--on .tcm-settings-admin__toggle-knob {
+  transform: translateX(22px);
+}
+
+.tcm-settings-admin__info-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.tcm-settings-admin__field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.tcm-settings-admin__field label {
+  font-size: 12px;
+  color: #8a8a90;
+}
+
+.tcm-settings-admin__field input,
+.tcm-settings-admin__field textarea {
+  padding: 11px 13px;
+  background: #0b0b0d;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 8px;
+  color: #f2f2f4;
+  font: 13.5px 'Manrope', sans-serif;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color .2s;
+}
+
+.tcm-settings-admin__field input:focus,
+.tcm-settings-admin__field textarea:focus { border-color: #d21f28; }
+
+@media (max-width: 600px) {
+  .tcm-settings-admin__info-fields { grid-template-columns: 1fr; }
+}

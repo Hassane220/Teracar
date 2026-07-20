@@ -1,0 +1,86 @@
+.tcm-leads__filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tcm-leads__filter-btn {
+  padding: 7px 14px;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 999px;
+  background: transparent;
+  color: #c7c7cd;
+  font: 13px 'Manrope', sans-serif;
+  cursor: pointer;
+  transition: all .18s;
+}
+
+.tcm-leads__filter-btn--active {
+  background: #d21f28;
+  border-color: #d21f28;
+  color: #fff;
+  font-weight: 600;
+}
+
+.tcm-leads__cols {
+  grid-template-columns: 1.4fr 1.2fr .8fr .8fr .6fr;
+}
+
+.tcm-leads__detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.tcm-leads__detail-message {
+  grid-column: 1 / -1;
+}
+
+.tcm-leads__contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 13.5px;
+  color: #c7c7cd;
+}
+
+.tcm-leads__message-bubble {
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.tcm-leads__message-bubble--in {
+  background: #141417;
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.tcm-leads__message-meta {
+  font-size: 11px;
+  color: #5ee6a8;
+  margin-bottom: 6px;
+}
+
+.tcm-leads__message-text {
+  font-size: 13.5px;
+  color: #c7c7cd;
+  line-height: 1.6;
+}
+
+.tcm-leads__detail-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 12px;
+}
+
+.tcm-leads__whatsapp-btn {
+  padding: 12px 24px;
+  background: #25D366;
+  color: #0b0b0d;
+  border-radius: 9px;
+  font-weight: 700;
+  font-size: 13.5px;
+  text-decoration: none;
+  transition: background .18s;
+}
+
+.tcm-leads__whatsapp-btn:hover { background: #1db954; }

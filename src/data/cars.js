@@ -1008,7 +1008,7 @@ export const cars = [
     features: ["5 places", "1.5L", "120 ch", "Apple CarPlay", "Caméra"]
   },
   {
-    id: 11,
+    id: 78,
     brand: "Volkswagen",
     model: "Golf 8",
     title: "Volkswagen Golf 8 R-Line",
@@ -1025,7 +1025,7 @@ export const cars = [
     features: ["Digital Cockpit", "Park Assist", "Jantes alliage"]
   },
   {
-    id: 12,
+    id: 79,
     brand: "Kia",
     model: "Sportage",
     title: "Kia Sportage GT Line",

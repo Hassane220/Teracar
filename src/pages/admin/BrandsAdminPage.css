@@ -1,0 +1,64 @@
+.tcm-brands-admin__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.tcm-brands-admin__card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px !important;
+}
+
+.tcm-brands-admin__logo-wrap {
+  width: 52px;
+  height: 40px;
+  background: #fff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.tcm-brands-admin__logo-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.tcm-brands-admin__initials {
+  font: 700 14px 'Space Grotesk', sans-serif;
+  color: #141417;
+}
+
+.tcm-brands-admin__name {
+  font: 600 14px/1.2 'Space Grotesk', sans-serif;
+}
+
+.tcm-brands-admin__count {
+  font-size: 12px;
+  color: #8a8a90;
+  margin-top: 3px;
+}
+
+.tcm-brands-admin__edit-btn {
+  margin-left: auto;
+  background: none;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 6px;
+  color: #c7c7cd;
+  font: 12px 'Manrope', sans-serif;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all .18s;
+  flex-shrink: 0;
+}
+
+.tcm-brands-admin__edit-btn:hover {
+  border-color: #ff3b42;
+  color: #ff3b42;
+}

@@ -1,0 +1,105 @@
+.tcm-add-vehicle__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.tcm-add-vehicle__section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tcm-add-vehicle__section--full {
+  grid-column: 1 / -1;
+}
+
+.tcm-add-vehicle__fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.tcm-add-vehicle__field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.tcm-add-vehicle__field--full {
+  grid-column: 1 / -1;
+}
+
+.tcm-add-vehicle__field label {
+  font-size: 12px;
+  color: #8a8a90;
+}
+
+.tcm-add-vehicle__field input,
+.tcm-add-vehicle__field select {
+  padding: 11px 13px;
+  background: #0b0b0d;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 8px;
+  color: #f2f2f4;
+  font: 13.5px 'Manrope', sans-serif;
+  outline: none;
+  transition: border-color .2s;
+}
+
+.tcm-add-vehicle__field input:focus,
+.tcm-add-vehicle__field select:focus { border-color: #d21f28; }
+
+.tcm-add-vehicle__status-group {
+  display: flex;
+  gap: 8px;
+}
+
+.tcm-add-vehicle__status-btn {
+  flex: 1;
+  padding: 9px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 8px;
+  color: #c7c7cd;
+  font: 13px 'Manrope', sans-serif;
+  cursor: pointer;
+  transition: all .18s;
+}
+
+.tcm-add-vehicle__status-btn--active {
+  background: #d21f28;
+  border-color: #d21f28;
+  color: #fff;
+  font-weight: 600;
+}
+
+.tcm-add-vehicle__textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background: #0b0b0d;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 8px;
+  color: #f2f2f4;
+  font: 13.5px/1.6 'Manrope', sans-serif;
+  outline: none;
+  resize: vertical;
+  box-sizing: border-box;
+  transition: border-color .2s;
+}
+
+.tcm-add-vehicle__textarea:focus { border-color: #d21f28; }
+.tcm-add-vehicle__textarea::placeholder { color: #6c6c72; }
+
+.tcm-add-vehicle__actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .tcm-add-vehicle__grid { grid-template-columns: 1fr; }
+  .tcm-add-vehicle__section--full { grid-column: 1; }
+  .tcm-add-vehicle__fields { grid-template-columns: 1fr; }
+  .tcm-add-vehicle__actions { grid-column: 1; }
+}

@@ -1,0 +1,131 @@
+.tcm-vehicles-admin__filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.tcm-vehicles-admin__search {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 14px;
+  background: #141417;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 8px;
+  color: #f2f2f4;
+  font: 13.5px 'Manrope', sans-serif;
+  outline: none;
+  transition: border-color .2s;
+}
+
+.tcm-vehicles-admin__search:focus { border-color: #d21f28; }
+.tcm-vehicles-admin__search::placeholder { color: #6c6c72; }
+
+.tcm-vehicles-admin__select {
+  padding: 10px 14px;
+  background: #141417;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 8px;
+  color: #f2f2f4;
+  font: 13px 'Manrope', sans-serif;
+  outline: none;
+  cursor: pointer;
+}
+
+.tcm-vehicles-admin__bulk {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(210,31,40,.08);
+  border: 1px solid rgba(210,31,40,.2);
+  border-radius: 10px;
+  margin-bottom: 16px;
+  font-size: 13.5px;
+  flex-wrap: wrap;
+}
+
+.tcm-vehicles-admin__cols {
+  grid-template-columns: 40px 2fr 1fr .7fr 1fr 1.2fr 1fr;
+}
+
+.tcm-vehicles-admin__check-wrap {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.tcm-vehicles-admin__checkbox {
+  width: 15px;
+  height: 15px;
+  accent-color: #d21f28;
+  cursor: pointer;
+}
+
+.tcm-vehicles-admin__car-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tcm-vehicles-admin__car-thumb {
+  width: 48px;
+  height: 34px;
+  background: #fff;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.tcm-vehicles-admin__car-thumb img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.tcm-vehicles-admin__actions {
+  display: flex;
+  gap: 12px;
+}
+
+.tcm-vehicles-admin__action-btn {
+  background: none;
+  border: none;
+  color: #c7c7cd;
+  font: 12.5px 'Manrope', sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 0;
+  transition: color .15s;
+}
+
+.tcm-vehicles-admin__action-btn:hover { color: #f2f2f4; }
+
+.tcm-vehicles-admin__action-btn--delete { color: #ff3b42; }
+.tcm-vehicles-admin__action-btn--delete:hover { color: #ff6b70; }
+
+.tcm-vehicles-admin__empty {
+  padding: 32px;
+  text-align: center;
+  color: #8a8a90;
+  font-size: 14px;
+}
+
+.tcm-vehicles-admin__count {
+  margin-top: 12px;
+  font-size: 12.5px;
+  color: #8a8a90;
+  text-align: right;
+}
+
+@media (max-width: 900px) {
+  .tcm-vehicles-admin__cols {
+    grid-template-columns: 40px 1fr 1fr 1fr 1fr;
+  }
+  .tcm-vehicles-admin__cols > *:nth-child(5),
+  .tcm-vehicles-admin__cols > *:nth-child(6) { display: none; }
+}

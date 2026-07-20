@@ -172,3 +172,17 @@
     margin: auto;
   }
 }
+
+@media (max-width: 768px) {
+  .updates {
+    padding: 60px 20px;
+  }
+
+  .updates__content h2 {
+    font-size: 28px;
+  }
+
+  .updates__features {
+    margin: 40px auto 0;
+  }
+}

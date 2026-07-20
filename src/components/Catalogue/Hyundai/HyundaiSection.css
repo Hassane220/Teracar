@@ -92,3 +92,35 @@
   box-shadow: 0 8px 32px rgba(30,41,59,0.13);
   z-index: 2;
 }
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hyundai-section .expedition {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hyundai-section .expedition .right {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .hyundai-section .expedition {
+    grid-template-columns: 1fr;
+  }
+  .hyundai-section .expedition .left {
+    display: block;
+  }
+  .hyundai-section .expedition .right {
+    grid-column: auto;
+    width: 100%;
+  }
+  .hyundai-section .expedition .right img {
+    width: 100%;
+    height: auto;
+  }
+}

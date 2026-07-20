@@ -1,92 +1,130 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink, Link } from 'react-router-dom';
+import { useTheme } from '../../context/ThemeContext';
 import './Header.css';
-import logo from '../../assets/images/teracar.png'; // Chemin vers votre logo
+
+const NAV_LINKS = [
+  { to: '/',         label: 'Accueil',  end: true },
+  { to: '/catalogue', label: 'Catalogue' },
+  { to: '/marques',  label: 'Marques' },
+  { to: '/services', label: 'Services' },
+  { to: '/contact',  label: 'Contact' },
+];
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { theme, toggle } = useTheme();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+  // Close menu on route change
+  useEffect(() => {
+    setMenuOpen(false);
   }, []);
 
   return (
-    <header className={`header ${isScrolled ? 'header--scrolled' : ''}`}>
-      <nav className="nav">
-        {/* Logo avec image */}
-        <div className="nav__logo">
-          <a href="/" className="nav__logo-link" aria-label="Accueil">
-            <img src={logo} alt="Premium Auto" className="logo__image" />
+    <>
+      <header className={`tcm-header${scrolled ? ' tcm-header--scrolled' : ''}`}>
+        <div className="tcm-header__inner">
+
+          {/* Logo */}
+          <Link to="/" className="tcm-header__logo" aria-label="Teracar Motors — Accueil">
+            <div className="tcm-header__logo-mark">TM</div>
+            <div className="tcm-header__logo-text">
+              <span className="tcm-header__logo-name">TERACAR MOTORS</span>
+              <span className="tcm-header__logo-tagline">L'automobile à votre image</span>
+            </div>
+          </Link>
+
+          {/* Desktop nav */}
+          <nav className="tcm-header__nav" aria-label="Navigation principale">
+            {NAV_LINKS.map(({ to, label, end }) => (
+              <NavLink
+                key={to}
+                to={to}
+                end={end}
+                className={({ isActive }) =>
+                  `tcm-header__link${isActive ? ' tcm-header__link--active' : ''}`
+                }
+              >
+                {label}
+              </NavLink>
+            ))}
+          </nav>
+
+          {/* Theme toggle */}
+          <button
+            className="tcm-header__theme-toggle"
+            onClick={toggle}
+            aria-label={theme === 'dark' ? 'Passer en mode clair' : 'Passer en mode sombre'}
+            title={theme === 'dark' ? 'Mode clair' : 'Mode sombre'}
+          >
+            {theme === 'dark' ? (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <circle cx="12" cy="12" r="5"/>
+                <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+              </svg>
+            ) : (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
+            )}
+          </button>
+
+          {/* Phone CTA */}
+          <a href="tel:0770770770" className="tcm-header__phone">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#d21f28" aria-hidden="true">
+              <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.5 0 1 .5 1 1V20c0 .5-.5 1-1 1-9.4 0-17-7.6-17-17 0-.5.5-1 1-1h3.5c.5 0 1 .5 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.2 2.2z"/>
+            </svg>
+            07 70 77 07 70
           </a>
+
+          {/* Hamburger */}
+          <button
+            className={`tcm-header__burger${menuOpen ? ' tcm-header__burger--open' : ''}`}
+            onClick={() => setMenuOpen(v => !v)}
+            aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+            aria-expanded={menuOpen}
+          >
+            <span /><span /><span />
+          </button>
+
         </div>
+      </header>
 
-        {/* Infos de contact */}
-        <div className="nav__contact">
-          <div className="contact__item contact__item--address">
-            <svg className="contact__icon" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+      {/* Mobile overlay */}
+      <div
+        className={`tcm-mobile-overlay${menuOpen ? ' tcm-mobile-overlay--open' : ''}`}
+        aria-hidden={!menuOpen}
+      >
+        <nav className="tcm-mobile-overlay__nav" aria-label="Menu mobile">
+          {NAV_LINKS.map(({ to, label, end }) => (
+            <NavLink
+              key={to}
+              to={to}
+              end={end}
+              className={({ isActive }) =>
+                `tcm-mobile-overlay__link${isActive ? ' tcm-mobile-overlay__link--active' : ''}`
+              }
+              onClick={() => setMenuOpen(false)}
+            >
+              {label}
+            </NavLink>
+          ))}
+          <a href="tel:0770770770" className="tcm-mobile-overlay__phone">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.5 0 1 .5 1 1V20c0 .5-.5 1-1 1-9.4 0-17-7.6-17-17 0-.5.5-1 1-1h3.5c.5 0 1 .5 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.2 2.2z"/>
             </svg>
-            <span>ABIDJAN COCODY BONOUMIN IMMEUBLE LE WALEBO</span>
-          </div>
-
-          <div className="contact__item contact__item--email">
-            <svg className="contact__icon" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/>
-            </svg>
-            <span>SUPPORT@TERACAR-MOTORS.COM</span>
-          </div>
-
-          <div className="contact__item contact__item--phone">
-            <svg className="contact__icon" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-            </svg>
-            <a href="tel:0770770770" className="contact__phone-link">07 70 77 07 70</a>
-          </div>
-        </div>
-
-        {/* Menu mobile (seulement pour le responsive) */}
-        <div className={`nav__mobile-menu ${isMenuOpen ? 'nav__mobile-menu--open' : ''}`}>
-          <div className="mobile__contact">
-            <div className="contact__item">
-              <svg className="contact__icon" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-              </svg>
-              <span>123 Avenue des Champs, Paris</span>
-            </div>
-            
-            <div className="contact__item">
-              <svg className="contact__icon" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/>
-              </svg>
-              <span>SUPPORT@TERACAR-MOTORS.COM</span>
-            </div>
-            
-            <div className="contact__item">
-              <svg className="contact__icon" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-              </svg>
-              <span>07 70 77 07 70</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Menu mobile toggle */}
-        <button 
-          className={`nav__toggle ${isMenuOpen ? 'nav__toggle--open' : ''}`}
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </nav>
-    </header>
+            07 70 77 07 70
+          </a>
+        </nav>
+      </div>
+    </>
   );
 };
 

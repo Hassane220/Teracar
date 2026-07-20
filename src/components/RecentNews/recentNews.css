@@ -150,3 +150,18 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 768px) {
+  .news {
+    padding: 60px 20px;
+  }
+  .news__header {
+    margin-bottom: 40px;
+  }
+  .news__header h2 {
+    font-size: 28px;
+  }
+  .news__grid {
+    gap: 30px;
+  }
+}

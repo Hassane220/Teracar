@@ -49,3 +49,22 @@
   background: var(--primary-color);
   color: #fff;
 }
+
+@media (max-width: 640px) {
+  .catalogue-main-container {
+    padding: 1.5rem 1rem;
+  }
+  .catalogue-back-btn {
+    position: static;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .vehicle-type-btn {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    width: 100%;
+    text-align: center;
+  }
+}

@@ -1,0 +1,63 @@
+/* ============================================================
+   TERACAR MOTORS — SearchResultsPage
+   ============================================================ */
+
+.tcm-search {
+  padding: 36px 40px 56px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.tcm-search__breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--text-muted); margin-bottom: 12px;
+}
+.tcm-search__breadcrumb a { color: var(--text-muted); transition: color var(--transition-fast); }
+.tcm-search__breadcrumb a:hover { color: var(--text-primary); }
+.tcm-search__breadcrumb span:last-child { color: #d7d7db; }
+
+.tcm-search__title { font-size: 34px; letter-spacing: -0.02em; margin-bottom: 12px; }
+
+.tcm-search__active {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;
+}
+.tcm-search__filter-tag {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+  color: var(--accent-hover);
+  border: 1px solid var(--accent-dim-border);
+  padding: 4px 10px; border-radius: var(--radius-sm);
+  background: var(--accent-dim);
+}
+
+.tcm-search__count {
+  font-size: 14px; color: var(--text-muted); margin-bottom: 28px;
+}
+.tcm-search__count strong { color: var(--text-primary); font-weight: 700; }
+
+.tcm-search__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+/* Empty state */
+.tcm-search__empty {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 14px; padding: 72px 20px; text-align: center;
+}
+.tcm-search__empty h2 { font-size: 24px; }
+.tcm-search__empty p { font-size: 15px; color: var(--text-secondary); max-width: 400px; line-height: 1.7; }
+.tcm-search__empty-btn {
+  display: inline-flex; align-items: center;
+  padding: 13px 28px;
+  background: var(--accent); color: #fff;
+  border-radius: var(--radius-pill); font-weight: 700; font-size: 14.5px;
+  margin-top: 8px; transition: background var(--transition-fast);
+}
+.tcm-search__empty-btn:hover { background: #b8181f; }
+
+@media (max-width: 768px) {
+  .tcm-search { padding: 24px 20px 40px; }
+  .tcm-search__title { font-size: 26px; }
+  .tcm-search__grid { grid-template-columns: 1fr; }
+}

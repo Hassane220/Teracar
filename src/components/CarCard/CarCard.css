@@ -1,91 +1,150 @@
-@import '../../styles/variables.css';
+/* ============================================================
+   TERACAR MOTORS — CarCard (unified)
+   ============================================================ */
 
-/* Suppression du fond blanc sur la card */
-.car-card {
-  background: none;
-  border-radius: var(--border-radius-lg);
+.tcm-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
   overflow: hidden;
-  box-shadow: var(--shadow);
-  transition: var(--transition);
+  transition: transform 0.28s ease-out, border-color 0.28s ease-out, box-shadow 0.28s ease-out;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 }
 
-/* Suppression du fond blanc au hover */
-.car-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
-  background: none !important;
+.tcm-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent-hover);
+  box-shadow: 0 12px 40px rgba(210, 31, 40, 0.18), 0 4px 16px rgba(0,0,0,0.4);
 }
 
-.car-card__image {
+/* Image area */
+.tcm-card__img-wrap {
   position: relative;
-  height: 200px;
-  overflow: hidden;
-}
-
-.car-card__image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: var(--transition);
-}
-
-
-.car-card:hover .car-card__image img {
-  transform: scale(1.05);
-  background: none !important;
-}
-
-.car-card__badge {
-  position: absolute;
-  top: var(--spacing-md);
-  left: var(--spacing-md);
-  background: var(--accent-color);
-  color: var(--white);
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--border-radius);
-  font-size: var(--font-size-xs);
-  font-weight: 600;
-}
-
-.car-card__content {
-  padding: var(--spacing-lg);
-}
-
-.car-card__title {
-  font-size: var(--font-size-lg);
-  font-weight: 600;
-  margin-bottom: var(--spacing-sm);
-  color: var(--dark-color);
-}
-
-.car-card__price {
-  font-size: var(--font-size-xl);
-  font-weight: 700;
-  color: var(--primary-color);
-  margin-bottom: var(--spacing-md);
-}
-
-.car-card__details {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-lg);
-}
-
-.car-card__detail {
+  height: 168px;
+  background: linear-gradient(180deg, #fff, #eef0f2);
   display: flex;
   align-items: center;
-  gap: var(--spacing-xs);
-  font-size: var(--font-size-sm);
-  color: var(--secondary-color);
-}
-
-.car-card__detail i {
-  color: var(--primary-color);
-  width: 16px;
-}
-
-.car-card__button {
-  width: 100%;
   justify-content: center;
+  padding: 14px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.tcm-card__img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.4s ease-out;
+}
+
+.tcm-card:hover .tcm-card__img {
+  transform: scale(1.07);
+}
+
+.tcm-card__badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 9px;
+  border-radius: var(--radius-sm);
+  line-height: 1;
+}
+
+/* Body */
+.tcm-card__body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.tcm-card__meta {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 3px;
+  text-transform: capitalize;
+}
+
+.tcm-card__title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+/* Features */
+.tcm-card__features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.tcm-card__feature {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-default);
+  padding: 5px 8px;
+  border-radius: var(--radius-sm);
+  line-height: 1;
+}
+
+/* Status */
+.tcm-card__status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.tcm-card__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Footer */
+.tcm-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: auto;
+}
+
+.tcm-card__price {
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.tcm-card__cta {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: color var(--transition-fast);
+}
+
+.tcm-card:hover .tcm-card__cta {
+  color: var(--accent-hover);
 }

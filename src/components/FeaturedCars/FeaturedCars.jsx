@@ -86,7 +86,7 @@ const FeaturedCars = () => {
               exigences les plus élevées.
             </p>
           </div>
-          <button className="btn-primary" onClick={() => navigate('/catalogue-complet')}>Voir tout le catalogue</button>
+          <button className="btn-primary" onClick={() => navigate('/catalogue-model-voiture')}>Voir tout le catalogue</button>
         </div>
 
         {/* FILTERS */}

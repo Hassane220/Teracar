@@ -1,0 +1,59 @@
+/* ============================================================
+   TERACAR MOTORS — MobileNav (bottom floating pill)
+   ============================================================ */
+
+.tcm-mobile-nav {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: var(--z-overlay);
+  background: rgba(20, 20, 23, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-pill);
+  padding: 8px 12px;
+  gap: 4px;
+}
+
+.tcm-mobile-nav__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  color: var(--text-muted);
+  transition: color var(--transition-fast), background var(--transition-fast);
+  min-width: 56px;
+}
+
+.tcm-mobile-nav__item--active,
+.tcm-mobile-nav__item:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.tcm-mobile-nav__item--active {
+  color: var(--accent-hover);
+}
+
+.tcm-mobile-nav__icon {
+  display: block;
+  line-height: 0;
+}
+
+.tcm-mobile-nav__label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Only show on mobile */
+@media (max-width: 768px) {
+  .tcm-mobile-nav {
+    display: flex;
+  }
+}
