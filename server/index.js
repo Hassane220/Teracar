@@ -1,8 +1,6 @@
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { mkdirSync } from 'fs';
 
 import authRouter     from './routes/auth.js';
 import vehiclesRouter from './routes/vehicles.js';
@@ -11,16 +9,15 @@ import settingsRouter from './routes/settings.js';
 import usersRouter    from './routes/users.js';
 import brandsRouter   from './routes/brands.js';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
-// Ensure uploads directory exists
-mkdirSync(join(__dirname, '../public/uploads'), { recursive: true });
-
 const app = express();
 
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+const allowedOrigins = [
+  'http://localhost:5173',
+  process.env.FRONTEND_URL,
+].filter(Boolean);
+
+app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(express.json());
-app.use('/uploads', express.static(join(__dirname, '../public/uploads')));
 
 app.use('/api/auth',     authRouter);
 app.use('/api/vehicles', vehiclesRouter);

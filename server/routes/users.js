@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import bcrypt from 'bcryptjs';
-import db from '../db.js';
+import supabase from '../db.js';
 import { requireAuth } from '../middleware/auth.js';
 
 const router = Router();
@@ -8,41 +8,55 @@ const router = Router();
 const sanitize = u => ({ id: u.id, name: u.name, email: u.email, role: u.role, status: u.status, can_delete: u.can_delete, created_at: u.created_at });
 
 // Admin — list users
-router.get('/', requireAuth, (req, res) => {
-  res.json(db.prepare('SELECT * FROM users ORDER BY id').all().map(sanitize));
+router.get('/', requireAuth, async (req, res) => {
+  const { data, error } = await supabase.from('users').select('*').order('id');
+  if (error) return res.status(500).json({ error: error.message });
+  res.json(data.map(sanitize));
 });
 
 // Admin — invite user
-router.post('/', requireAuth, (req, res) => {
+router.post('/', requireAuth, async (req, res) => {
   const { name, email, role, password } = req.body;
   if (!name || !email) return res.status(400).json({ error: 'Nom et email requis' });
   const hash = bcrypt.hashSync(password || 'teracar2026', 10);
-  try {
-    const r = db.prepare('INSERT INTO users (name, email, password, role, status) VALUES (?, ?, ?, ?, ?)').run(name, email, hash, role || 'Vendeur', 'Invité — en attente');
-    res.status(201).json(sanitize(db.prepare('SELECT * FROM users WHERE id = ?').get(r.lastInsertRowid)));
-  } catch {
-    res.status(409).json({ error: 'Email déjà utilisé' });
-  }
+
+  const { data, error } = await supabase.from('users').insert({
+    name, email, password: hash,
+    role: role || 'Vendeur',
+    status: 'Invité — en attente',
+  }).select().single();
+
+  if (error) return res.status(409).json({ error: 'Email déjà utilisé' });
+  res.status(201).json(sanitize(data));
 });
 
 // Admin — update user
-router.put('/:id', requireAuth, (req, res) => {
-  const { name, email, role, status, password } = req.body;
-  const user = db.prepare('SELECT * FROM users WHERE id = ?').get(req.params.id);
-  if (!user) return res.status(404).json({ error: 'Utilisateur introuvable' });
+router.put('/:id', requireAuth, async (req, res) => {
+  const { data: user, error: fetchErr } = await supabase.from('users').select('*').eq('id', req.params.id).single();
+  if (fetchErr) return res.status(404).json({ error: 'Utilisateur introuvable' });
 
-  const newPassword = password ? bcrypt.hashSync(password, 10) : user.password;
-  db.prepare('UPDATE users SET name=?, email=?, role=?, status=?, password=? WHERE id=?')
-    .run(name || user.name, email || user.email, role || user.role, status || user.status, newPassword, req.params.id);
-  res.json(sanitize(db.prepare('SELECT * FROM users WHERE id = ?').get(req.params.id)));
+  const { name, email, role, status, password } = req.body;
+  const updates = {
+    name: name || user.name,
+    email: email || user.email,
+    role: role || user.role,
+    status: status || user.status,
+    password: password ? bcrypt.hashSync(password, 10) : user.password,
+  };
+
+  const { data, error } = await supabase.from('users').update(updates).eq('id', req.params.id).select().single();
+  if (error) return res.status(500).json({ error: error.message });
+  res.json(sanitize(data));
 });
 
 // Admin — delete user
-router.delete('/:id', requireAuth, (req, res) => {
-  const user = db.prepare('SELECT * FROM users WHERE id = ?').get(req.params.id);
-  if (!user) return res.status(404).json({ error: 'Utilisateur introuvable' });
+router.delete('/:id', requireAuth, async (req, res) => {
+  const { data: user, error: fetchErr } = await supabase.from('users').select('*').eq('id', req.params.id).single();
+  if (fetchErr) return res.status(404).json({ error: 'Utilisateur introuvable' });
   if (!user.can_delete) return res.status(403).json({ error: 'Cet utilisateur ne peut pas être supprimé' });
-  db.prepare('DELETE FROM users WHERE id = ?').run(req.params.id);
+
+  const { error } = await supabase.from('users').delete().eq('id', req.params.id);
+  if (error) return res.status(500).json({ error: error.message });
   res.json({ ok: true });
 });
 
