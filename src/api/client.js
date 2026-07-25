@@ -54,7 +54,10 @@ export const api = {
 
   // ── Vehicles (public) ────────────────────────────────────────────────────
   getVehicles: async (params = {}) => {
-    const { data, error } = await buildVehicleQuery(params);
+    const { admin, ...rest } = params;
+    let query = buildVehicleQuery(rest);
+    if (!admin) query = query.not('image', 'is', null).not('image', 'eq', '');
+    const { data, error } = await query;
     if (error) throw new Error(error.message);
     return data;
   },

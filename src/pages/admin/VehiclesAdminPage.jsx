@@ -21,7 +21,7 @@ export default function VehiclesAdminPage() {
 
   const load = () => {
     setLoading(true);
-    api.getVehicles().then(data => { setCars(data); setLoading(false); }).catch(() => setLoading(false));
+    api.getVehicles({ admin: true }).then(data => { setCars(data); setLoading(false); }).catch(() => setLoading(false));
   };
 
   useEffect(() => { load(); }, []);

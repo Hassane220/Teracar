@@ -17,7 +17,7 @@ export default function DashboardPage() {
   const [leads, setLeads] = useState([]);
 
   useEffect(() => {
-    api.getVehicles().then(setVehicles).catch(() => {});
+    api.getVehicles({ admin: true }).then(setVehicles).catch(() => {});
     api.getLeads().then(setLeads).catch(() => {});
   }, []);
 
