@@ -28,6 +28,9 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          VITE_SUPABASE_URL: https://jepvinodlmttwqcvonie.supabase.co
+          VITE_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImplcHZpbm9kbG10dHdxY3ZvbmllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ2MjkyNjYsImV4cCI6MjEwMDIwNTI2Nn0.W5m3wgRrT8rGusSJxoV_sEiGtfJtzxv3NRVuw1KVJD4
 
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
